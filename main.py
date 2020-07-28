@@ -349,6 +349,6 @@ class Menu_principal(Frame):
         super().__init__(root)
         self.config(bg="white")
         self.grid(column=0, row=0)
-        label = Label(self, bg="white", text="Menu Principal").pack()
+        label = Label(self, bg="white", text="Menu").pack()
 
 Interfaz().mainloop()
