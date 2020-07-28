@@ -1,0 +1,39 @@
+
+Título: Sanosil desinfectants for life
+
+Versión: 1.0.0
+
+Colores: Verde claro #2ECC71 y blanco #FFFFFF
+
+Outline de ventanas de interfaz gráfica
+	
+	- Ventana de inicialización                                                          ----    Listo   -----
+	- Selección de usuario (User, service, admin)                                        ----    Listo   -----
+	- Contraseña (Teclado numérico)							     ----    Listo   -----
+	- Menú principal (Con información esencial)                                          ---- En proceso -----
+		- Mensajes de error (En caso de existir)				     ---- En proceso -----
+	- Configuración (Administrador)							     ---- En proceso -----
+		- User settings								     ---- En proceso -----
+		- Ventana de configuración de valores (Teclado numérico virtual)	     ---- En proceso -----
+		- Configuración programada (Semanalmente)				     ---- En proceso -----
+		- Configuración programada (Horario)					     ---- En proceso -----
+	- Ventana de test de hardware							     ---- En proceso -----
+	- Configuración de fecha y hora							     ---- En proceso -----
+	- Configuración de lenguaje							     ---- En proceso -----
+	- Configuración de red								     ---- En proceso -----
+	- Configuración de correo							     ---- En proceso -----
+	- Screen saver dormido (Ojos)							     ---- En proceso -----
+	- Screen saver despierto (Ojos)							     ---- En proceso -----
+	- Diagnostics (Temperatura, humedad, flow rate)					     ---- En proceso -----
+	- Event logger (Log files)							     ---- En proceso -----
+
+Funciones
+	
+	- Prueba de vida								     ---- En proceso ----
+	- Log file									     ---- En proceso ----
+	- Volumen a sanitizar								     ---- En proceso ----
+	- Medición de mililitros							     ---- En proceso ----
+	- Medición de temperatura y humedad						     ---- En proceso ----
+	- Modo de operación de la máquina (Normal, step, testing, manual)		     ---- En proceso ----
+	- Timer antes de operación (Para permitir a la gente salir de la habitación)	     ---- En proceso ----
+	- Usb log files									     ---- En proceso ----
