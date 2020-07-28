@@ -38,8 +38,8 @@ class Interfaz(Tk):
         #                       self.winfo_screenheight()))
         self.geometry("800x400")
 
-        # Home(self).tkraise()
-        Inicio(self).tkraise()
+        Home(self).tkraise()
+        # Inicio(self).tkraise()
 # -----------------------------------------------------------------------------
 
 # ---------------------- Ventana de inicialización ----------------------------
