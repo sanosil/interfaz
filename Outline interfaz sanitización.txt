@@ -10,8 +10,10 @@ Outline de ventanas de interfaz gráfica
 	- Ventana de inicialización                                                          ----    Listo   -----
 	- Selección de usuario (User, service, admin)                                        ----    Listo   -----
 	- Contraseña (Teclado numérico)							     ----    Listo   -----
+   F1
 	- Menú principal (Con información esencial)                                          ---- En proceso -----
 		- Mensajes de error (En caso de existir)				     ---- En proceso -----
+   F2: CONF
 	- Configuración (Administrador)							     ---- En proceso -----
 		- User settings								     ---- En proceso -----
 		- Ventana de configuración de valores (Teclado numérico virtual)	     ---- En proceso -----
@@ -22,9 +24,12 @@ Outline de ventanas de interfaz gráfica
 	- Configuración de lenguaje							     ---- En proceso -----
 	- Configuración de red								     ---- En proceso -----
 	- Configuración de correo							     ---- En proceso -----
+   CONFIGURACION ADICIONAL
 	- Screen saver dormido (Ojos)							     ---- En proceso -----
 	- Screen saver despierto (Ojos)							     ---- En proceso -----
+   F3
 	- Diagnostics (Temperatura, humedad, flow rate)					     ---- En proceso -----
+   F4
 	- Event logger (Log files)							     ---- En proceso -----
 
 Funciones
