@@ -10,7 +10,7 @@
 
 # --------- Paquetes necesarios para el funcionamiento ------------------------
 from tkinter import *
-import home
+import home, inicio
 import time
 # import RPi.GPIO as GPIO
 # -----------------------------------------------------------------------------
@@ -40,7 +40,8 @@ class Interfaz(Tk):
         #                       self.winfo_screenheight()))
         self.geometry("800x400")
 
-        home.Home(self).tkraise()
+        # home.Home(self).tkraise()
+        inicio.Inicio(self).tkraise()
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------

@@ -1,4 +1,3 @@
-
 from tkinter import *
 import inicio
 
@@ -9,10 +8,10 @@ class Menu_principal(Frame):
         self.root = root
         self.mensaje = ""
         self.current_state = 0
-        self.current_menu = "Principal"
+        self.current_menu  = menu
         self.timer = 0
         self.state = ("Normal", "Step", "Testing", "Manual")
-        self.funcs = ["START/STOP", "CONF", "DIAG", "LOG"]
+        self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu), ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
         self.menu_buttons = []
         # Metodos
         self.config(bg="white")
@@ -21,15 +20,18 @@ class Menu_principal(Frame):
         self.create_widgets(self.current_menu)
 
     def create_widgets(self, menu):
-        if menu == "Principal":
-            self.menu = Frame(self, bg="white", bd=2, relief=SOLID)
-            self.menu.grid(column=0, row=0)
 
-            for func in self.funcs:
-                self.menu_button_principal(func)
+        self.menu = Frame(self, bg="white")
+        self.menu.grid(column=0, row=0)
 
-            self.main_container = Frame(self, bg="white")
-            self.main_container.grid(column=0, row=1)
+        for func, command in self.funcs:
+            self.menu_button_principal(func, command)
+
+        self.main_container = Frame(self, bg="white")
+        self.main_container.grid(column=0, row=1)
+
+        if menu == "START/STOP":
+
             # Imagenes del boton de encendido
             self.start_button_pause = PhotoImage(
                 file="images//off.png").subsample(6)
@@ -39,16 +41,23 @@ class Menu_principal(Frame):
             self.start_button_frame = Frame(self.main_container, bg="white")
             self.start_button_frame.pack(side=LEFT, pady=(10,10))
 
+            self.start_button_label = Label(self.start_button_frame,
+                bg="white", text=self.state[0], font=self.root.myFont)
+
             if self.current_state == 0:
                 self.start_button = Label(self.start_button_frame, bg="white",
                     image=self.start_button_pause)
                 self.start_button.bind("<Button-1>", self.activate)
                 self.start_button.pack(side=TOP)
-                self.start_button_label = Label(self.start_button_frame,
-                    bg="white", text=self.state[0], font=self.root.myFont)
+
                 self.start_button_label.pack(side=BOTTOM)
             else:
-                self.start_button.config(image=self.start_button_active)
+                self.start_button = Label(self.start_button_frame, bg="white",
+                    image=self.start_button_active)
+                self.start_button.bind("<Button-1>", self.activate)
+                self.start_button.pack(side=TOP)
+
+                self.start_button_label.pack(side=BOTTOM)
 
             # Frame para las imagenes de los menus
             self.visual_menus_frame = Frame(self.main_container, bg="white")
@@ -59,9 +68,9 @@ class Menu_principal(Frame):
             self.log_icon = PhotoImage(file="images//log.png").subsample(6)
 
             self.visual_menus_list = (
-                (self.funcs[1], self.conf_icon, self.conf_menu),
-                (self.funcs[2], self.diag_icon, self.diag_menu),
-                (self.funcs[3], self.log_icon, self.log_menu)
+                (self.funcs[1][0], self.conf_icon, self.conf_menu),
+                (self.funcs[2][0], self.diag_icon, self.diag_menu),
+                (self.funcs[3][0], self.log_icon, self.log_menu)
             )
 
             for text, image, func in self.visual_menus_list:
@@ -74,13 +83,23 @@ class Menu_principal(Frame):
         elif menu == "LOG":
             pass
 
-    def conf_menu(self):
+    def clear(self, frame):
+        for l in frame.grid_slaves():
+            l.destroy()
+
+    def start_menu(self, event=None):
         pass
 
-    def diag_menu(self):
+    def conf_menu(self, event=None):
+        self.current_menu = "CONF"
+        self.clear(self)
+        self.create_widgets(self.current_menu)
         pass
 
-    def log_menu(self):
+    def diag_menu(self, event=None):
+        pass
+
+    def log_menu(self, event=None):
         pass
 
     def visual_menus(self, text, image, func):
@@ -96,16 +115,24 @@ class Menu_principal(Frame):
 
     def activate(self, event):
         if self.current_state == 0:
+            # self.start_button.config(image=self.start_button_active)
             self.current_state = 1
         else:
+            # self.start_button.config(image=self.start_button_pause)
             self.current_state = 0
 
+        self.clear(self)
         self.create_widgets(self.current_menu)
 
-    def menu_button_principal(self, text):
-        self.menu_buttons.append(Button(self.menu, fg="white", width=19,
-            bg=self.root.color, font=self.root.myFont, text=text).pack(
-            fill=BOTH, side=LEFT, expand=YES))
+    def menu_button_principal(self, text, func):
+        if text == self.current_menu:
+            self.menu_buttons.append(Button(self.menu, fg="white", width=19,
+                bg="#60FEA3", font=self.root.myFont, text=text,
+                command=func).pack(fill=BOTH, side=LEFT, expand=YES))
+        else:
+            self.menu_buttons.append(Button(self.menu, fg="white", width=19,
+                bg=self.root.color, font=self.root.myFont, text=text,
+                command=func).pack(fill=BOTH, side=LEFT, expand=YES))
 
     def menu_button(self, text):
         pass

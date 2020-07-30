@@ -1,5 +1,5 @@
 from tkinter import *
-import menu_principal
+import menu_principal, inicio
 
 # ---------------------- Teclado númerico password ----------------------------
 class Teclado(Frame):
@@ -92,7 +92,7 @@ class Teclado(Frame):
 
     def volver(self):
         self.grid_forget()
-        Inicio(self.root).tkraise()
+        inicio.Inicio(self.root).tkraise()
 
     def tecla(self, cont, contenedor, width=5):
         contenedor_tecla = Frame(contenedor, bg="white")
@@ -119,11 +119,11 @@ class Teclado(Frame):
         if self.root.passwords[self.title] == self.pass_try:
             self.espacio.config(bg="blue")
             self.root.sesion = self.title
-            self.after(500, self.acceso)
+            self.after(50, self.acceso)
         else:
             self.espacio.config(bg="red")
             self.mensaje.pack(expand=YES, fill=BOTH)
-            self.after(2000, self.normal)
+            self.after(1000, self.normal)
 
     def normal(self):
         self.espacio.config(bg="black")
@@ -131,5 +131,5 @@ class Teclado(Frame):
 
     def acceso(self):
         self.grid_forget()
-        menu_principal.Menu_principal(self.root, "Principal").tkraise()
+        menu_principal.Menu_principal(self.root, "START/STOP").tkraise()
 # ---------------- Termina ventana de teclado numérico ------------------------
