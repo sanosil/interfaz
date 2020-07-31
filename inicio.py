@@ -18,7 +18,7 @@ class Inicio(Frame):
         }
         self.sel_label = Label(self.user_container, bg="white",
                     font=("Verdana", 18, "bold"), text="Seleccione\nusuario")
-        self.sel_label.grid(column=1, row=0, padx=(100, 100), pady=(50, 50))
+        self.sel_label.grid(column=1, row=0, padx=(100, 100), pady=(50, 100))
 
         # Usuario Administrador
         self.frame_admin = Frame(self.user_container, bg="white", takefocus=1,

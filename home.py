@@ -14,14 +14,14 @@ class Home(Frame):
         self.count = 0
         self.gam = 1  # Color gamma de la imagen
         self.version = Label(self, bg="white", fg="#444444",text="Version 1.0.0",
-                            font=("Verdana", 18), anchor=S)
+                            font=("Verdana", 22), anchor=S)
         self.version.grid(column=0, row=1)
         # Logo de la empresa
         self.logo_file = PhotoImage(file="images//logo.png").subsample(2)
         # Widget del logo
         self.logo = Label(self, bg="white", image=self.logo_file)
         self.logo.image = self.logo_file  # Keep the reference
-        self.logo.grid(column=0, row=0, padx=100, pady=100)
+        self.logo.grid(column=0, row=0, padx=100, pady=150)
         self.welcome = Label(self, bg="white", text="BIENVENIDO",
                             fg="white", font=("Verdana", 40, "bold"))
         self.after(3000, self.animacion)
@@ -46,7 +46,7 @@ class Home(Frame):
             self.grid_forget()
             #----------------------------------
             # Se añade un nuevo elemento al frame
-            self.welcome.grid(column=0, row=0, padx=200, pady=150)
+            self.welcome.grid(column=0, row=0, padx=200, pady=180)
             # Se inicia la animación dos
             self.after(1000, self.animacion_dos)
 # -----------------------------------------------------------------------------

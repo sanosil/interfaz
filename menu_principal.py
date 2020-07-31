@@ -86,11 +86,12 @@ class Menu_principal(Frame):
             self.barra_inferior.grid(column=0, row=2, sticky="NW")
 
                 # ----------------- Mensaje de alertas ------------------------
-            self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color, bd=2,
-                relief=SOLID)
+            self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color,
+            bd=2, relief=SOLID)
             self.alertas_frame.pack()
             self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
-                fg="white", font=self.root.myFont, text=self.mensaje).pack(padx=5, pady=5)
+                fg="white", font=self.root.myFont, text=self.mensaje).pack(
+                padx=5, pady=5)
                 # -------------------------------------------------------------
             # -----------------------------------------------------------------
         # ------------------ Termina menu START/STOP --------------------------
@@ -128,7 +129,7 @@ class Menu_principal(Frame):
 
     def visual_menus(self, text, image, func):
         frame_button = Frame(self.visual_menus_frame, bg="white")
-        frame_button.pack(side=TOP)
+        frame_button.pack(side=TOP, pady=10)
         button = Label(frame_button, bg="white",
             image=image)
         button.bind("<Button-1>", func)
@@ -152,11 +153,11 @@ class Menu_principal(Frame):
         if text == self.current_menu:
             self.menu_buttons.append(Button(self.menu, fg="white", width=19,
                 bg="#60FEA3", font=self.root.myFont, text=text, relief=FLAT,
-                command=func).pack(fill=BOTH, side=LEFT, expand=YES))
+                command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
         else:
             self.menu_buttons.append(Button(self.menu, fg="white", width=19,
                 bg=self.root.color, font=self.root.myFont, text=text,
-                command=func).pack(fill=BOTH, side=LEFT, expand=YES))
+                command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
     def menu_button(self, text):
         pass

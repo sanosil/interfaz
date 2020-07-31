@@ -15,6 +15,11 @@ class Teclado(Frame):
         self.contenedor = Frame(self, bg="white")  # color de fondo contenedor
         self.contenedor.grid(column=0, row=0)  # Se pone en fame teclado
 
+        # Frame de espacio
+        self.espacio_2 = Frame(self.contenedor, height=60, relief=RIDGE, bd=3, bg="gray")
+        self.espacio_2.pack(side=TOP, expand=YES, fill=BOTH)
+
+        # First row of buttons
         self.rowa = Frame(self.contenedor, bg="white")
         self.rowa.pack(side=TOP, expand=YES, fill=BOTH)
 
