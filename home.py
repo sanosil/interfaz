@@ -43,8 +43,7 @@ class Home(Frame):
         # Valor alternativo de la condicional
         else:
             # Se borran los elementos del frame
-            self.version.grid_forget()
-            self.logo.grid_forget()
+            self.grid_forget()
             #----------------------------------
             # Se añade un nuevo elemento al frame
             self.welcome.grid(column=0, row=0, padx=200, pady=150)
@@ -54,6 +53,7 @@ class Home(Frame):
 
 # -------------------- Animación dos ------------------------------------------
     def animacion_dos(self):
+        self.grid(column=0, row=0)
         self.welcome.config(fg=self.colores[self.count - 1])
         if self.count > 0:
             self.count = self.count - 1
@@ -64,13 +64,13 @@ class Home(Frame):
 # -----------------------------------------------------------------------------
 # ----------------------- Animación tres --------------------------------------
     def animacion_tres(self):
-        self.welcome.config(fg=self.colores[self.count])
         if self.count < 8:
+            self.welcome.config(fg=self.colores[self.count])
             self.count = self.count + 1
+            if self.count == 8:
+                    self.welcome.grid_forget()
             self.after(100, self.animacion_tres)
         else:
-            self.welcome.config(fg="white")
-            self.welcome.grid_forget()
             self.grid_forget()
             inicio.Inicio(self.root).tkraise()
 # -----------------------------------------------------------------------------
