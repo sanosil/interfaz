@@ -20,7 +20,7 @@ class Teclado(Frame):
 
         # Boton regresar
         self.volver = Button(self.rowa, text="Regresar",
-                font=self.myFont, activebackground="white", bg=root.color,
+                font=self.myFont, activebackground="white", bg="gray",
                 command=self.volver)
         self.volver.pack(side=LEFT, fill=BOTH, expand=YES)
 
@@ -39,7 +39,7 @@ class Teclado(Frame):
         # --------------------------------------------------------------------
 
         # --------------------- Tecla borrar ---------------------------------
-        self.del_tecla = Button(self.rowa, background=root.color, text = "DEL",
+        self.del_tecla = Button(self.rowa, background="yellow", text = "DEL",
             font=self.myFont, command=self.borrar)
         self.del_tecla.pack(side=RIGHT, expand=YES, fill=BOTH)
         # --------------------------------------------------------------------

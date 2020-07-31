@@ -40,8 +40,8 @@ class Interfaz(Tk):
         #                       self.winfo_screenheight()))
         self.geometry("800x400")
 
-        # home.Home(self).tkraise()
-        inicio.Inicio(self).tkraise()
+        home.Home(self).tkraise()
+        # inicio.Inicio(self).tkraise()
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------

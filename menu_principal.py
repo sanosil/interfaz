@@ -6,7 +6,7 @@ class Menu_principal(Frame):
         super().__init__(root)
         # Variables
         self.root = root
-        self.mensaje = ""
+        self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.current_state = 0
         self.current_menu  = menu
         self.timer = 0
@@ -81,7 +81,18 @@ class Menu_principal(Frame):
             for text, image, func in self.visual_menus_list:
                 self.visual_menus(text, image, func)
             # -----------------------------------------------------------------
+            # ------------------ Barra inferior -------------------------------
+            self.barra_inferior = Frame(self, bg="white")
+            self.barra_inferior.grid(column=0, row=2, sticky="NW")
 
+                # ----------------- Mensaje de alertas ------------------------
+            self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color, bd=2,
+                relief=SOLID)
+            self.alertas_frame.pack()
+            self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
+                fg="white", font=self.root.myFont, text=self.mensaje).pack(padx=5, pady=5)
+                # -------------------------------------------------------------
+            # -----------------------------------------------------------------
         # ------------------ Termina menu START/STOP --------------------------
 
         # --------------------------- Menu CONF -------------------------------
@@ -140,7 +151,7 @@ class Menu_principal(Frame):
     def menu_button_principal(self, text, func):
         if text == self.current_menu:
             self.menu_buttons.append(Button(self.menu, fg="white", width=19,
-                bg="#60FEA3", font=self.root.myFont, text=text,
+                bg="#60FEA3", font=self.root.myFont, text=text, relief=FLAT,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES))
         else:
             self.menu_buttons.append(Button(self.menu, fg="white", width=19,
