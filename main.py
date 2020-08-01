@@ -35,7 +35,7 @@ class Interfaz(Tk):
 
         self.actualizar()
         home.Home(self).tkraise()
-        inicio.Inicio(self).tkraise()
+        # inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.myFont = ("Verdana", 12)
