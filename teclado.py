@@ -3,7 +3,7 @@ import menu_principal, inicio
 
 # ---------------------- Teclado númerico password ----------------------------
 class Teclado(Frame):
-    def __init__(self, root, titulo=None):
+    def __init__(self, root, titulo=None, titulo_teclado=None):
         super().__init__(root)
         self.root = root  # Ventana principal
         self.color = "ivory3"
@@ -16,8 +16,10 @@ class Teclado(Frame):
         self.contenedor.grid(column=0, row=0)  # Se pone en fame teclado
 
         # Frame de espacio
-        self.espacio_2 = Frame(self.contenedor, height=60, relief=RIDGE, bd=3, bg="gray")
+        self.espacio_2 = Frame(self.contenedor, height=70, bg="white")
         self.espacio_2.pack(side=TOP, expand=YES, fill=BOTH)
+
+        self.titulo_teclado = Label(self.espacio_2, bg="white", font=("Verdana", 25), text=titulo_teclado).pack()
 
         # First row of buttons
         self.rowa = Frame(self.contenedor, bg="white")

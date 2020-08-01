@@ -13,6 +13,9 @@ from tkinter import *
 import home, inicio
 import time
 # import RPi.GPIO as GPIO
+# import board
+# import os
+# import adafruit_dht
 # -----------------------------------------------------------------------------
 
 
@@ -20,6 +23,21 @@ import time
 class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
+        self.rasp_variables()
+        self.variables()
+
+        self.title("Sanosil 1.0.0")  # Título de la interfaz
+        self.overrideredirect(True)  # Se elimina la barra superior
+        self.config(bg="white")
+        self.geometry("800x480")
+        # self.geometry("%dx%d" % (self.winfo_screenwidth(),
+        #                       self.winfo_screenheight()))
+
+        self.actualizar()
+        home.Home(self).tkraise()
+        inicio.Inicio(self).tkraise()
+
+    def variables(self):
         self.myFont = ("Verdana", 12)
         self.color = "#2ECC71"
         self.sesion = ""
@@ -32,16 +50,32 @@ class Interfaz(Tk):
             self.usernames[1]: "SERVICE", self.usernames[2]: "1234",
             self.usernames[3]: "1234", self.usernames[4]:"1234"
         }
-        self.title("Sanosil 1.0.0")  # Título de la interfaz
-        self.overrideredirect(True)  # Se elimina la barra superior
-        self.config(bg="white")
 
-        # self.geometry("%dx%d" % (self.winfo_screenwidth(),
-        #                       self.winfo_screenheight()))
-        self.geometry("800x480")
+    def actualizar_temp_humedad(self):
+        try:
+            self.temp_dht = dhtDevice.temperature
+            self.humidity_dht = dhtDevice.humidity
 
-        # home.Home(self).tkraise()
-        inicio.Inicio(self).tkraise()
+        except RuntimeError as error:
+            print(error)
+
+        self.after(2000, actualizar)
+
+    def rasp_variables(self):
+        self.dhtDevice = adafruit_dht.DHT11(board.D16)
+        GPIO.setmode(GPIO.BCM)
+        self.bomba_entrada = 26
+        self.bomba_salida = 20
+        self.ch3 = 21
+        self.flotador = 12
+        self.voltaje = (5, 6)
+
+    def shutdown(self):
+         os.system("sudo shutdown -h now")
+
+    # Prender y apagar pines en la raspberry
+    def pin_on(self, ch, s):
+         GPIO.output(ch, s)
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------
