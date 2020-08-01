@@ -44,6 +44,7 @@ class Home(Frame):
         else:
             # Se borran los elementos del frame
             self.grid_forget()
+            self.version.grid_forget()
             #----------------------------------
             # Se añade un nuevo elemento al frame
             self.welcome.grid(column=0, row=0, padx=200, pady=180)
