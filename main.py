@@ -55,7 +55,6 @@ class Interfaz(Tk):
         try:
             self.temp_dht = dhtDevice.temperature
             self.humidity_dht = dhtDevice.humidity
-
         except RuntimeError as error:
             print(error)
 
