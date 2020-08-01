@@ -33,7 +33,7 @@ class Interfaz(Tk):
         # self.geometry("%dx%d" % (self.winfo_screenwidth(),
         #                       self.winfo_screenheight()))
 
-        self.actualizar()
+        self.actualizar_temp_humedad()
         home.Home(self).tkraise()
         # inicio.Inicio(self).tkraise()
 
@@ -58,7 +58,7 @@ class Interfaz(Tk):
         except RuntimeError as error:
             print(error)
 
-        self.after(2000, actualizar)
+        self.after(2000, self.actualizar_temp_humedad)
 
     def rasp_variables(self):
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
