@@ -53,7 +53,7 @@ class Interfaz(Tk):
 
     def actualizar_temp_humedad(self):
         try:
-            self.temp_dht = self.htDevice.temperature
+            self.temp_dht = self.dhtDevice.temperature
             self.humidity_dht = self.dhtDevice.humidity
         except RuntimeError as error:
             print(error)
