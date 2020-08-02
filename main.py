@@ -73,8 +73,8 @@ class Interfaz(Tk):
          os.system("sudo shutdown -h now")
 
     # Prender y apagar pines en la raspberry
-    def pin_on(self, ch, s):
-         GPIO.output(ch, s)
+    # def pin_on(self, ch, s):
+    #      GPIO.output(ch, s)
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------
