@@ -64,7 +64,7 @@ class Teclado(Frame):
                 ("A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"),
                 ("Z", "X", "C", "V", "B", "N", "M", "Enter")
         )
-        self.width = 5
+        self.width = 4
         self.rowb = Frame(self.contenedor, bg="white")
         for num in range(9):
             self.tecla(num+1, self.rowb, self.width)
@@ -101,7 +101,7 @@ class Teclado(Frame):
         self.grid_forget()
         inicio.Inicio(self.root).tkraise()
 
-    def tecla(self, cont, contenedor, width=5):
+    def tecla(self, cont, contenedor, width=4):
         contenedor_tecla = Frame(contenedor, bg="white")
         if cont == "Enter":
             tecla = Button(contenedor_tecla, activebackground="white",
