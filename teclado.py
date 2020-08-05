@@ -11,9 +11,9 @@ class Teclado(Frame):
         self.config(bg="white")  # Fondo del frame del teclado
         self.pass_try = ""
         self.grid(column=0, row=0)  # Se pone el teclado en pantalla
-        self.myFont = ("Verdana", 17)
+        self.myFont = ("Verdana", 22)  # Fuente de letra
         self.contenedor = Frame(self, bg="white")  # color de fondo contenedor
-        self.contenedor.grid(column=0, row=0)  # Se pone en fame teclado
+        self.contenedor.grid(column=0, row=0, padx=(3,0))  # Se pone en fame teclado
 
         # Frame de espacio
         self.espacio_2 = Frame(self.contenedor, height=70, bg="white")
@@ -51,12 +51,12 @@ class Teclado(Frame):
         self.del_tecla.pack(side=RIGHT, expand=YES, fill=BOTH)
         # --------------------------------------------------------------------
 
-        # Frame de espacio
-        self.espacio = Frame(self.contenedor, height=60, relief=RIDGE, bd=3, bg="black")
+        # Frame de contraseña correcta o incorrecta
+        self.espacio = Frame(self.contenedor, height=59, relief=RIDGE, bd=3, bg="black")
         self.espacio.pack(side=TOP, expand=YES, fill=BOTH)
 
         self.mensaje = Label(self.espacio, text="Contraseña incorrecta",
-            bg="red", font=("Verdana", 30))
+            bg="red", font=("Verdana", 31))
         # ----------------
 
         self.teclas = (
@@ -64,7 +64,7 @@ class Teclado(Frame):
                 ("A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"),
                 ("Z", "X", "C", "V", "B", "N", "M", "Enter")
         )
-        self.width = 4
+        self.width = 2
         self.rowb = Frame(self.contenedor, bg="white")
         for num in range(9):
             self.tecla(num+1, self.rowb, self.width)

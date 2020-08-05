@@ -79,7 +79,7 @@ class Inicio(Frame):
                         font=self.root.myFont, text="Contraseña:")
         self.pass_label.grid(column=0, row=0, padx=(0, 30))
         self.password = Entry(self.container_pass, fg="gray",
-            font=self.root.myFont, width=60)
+            font=("Verdana", 20), width=30)
         self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
         self.password.bind("<Button-1>", self.teclado)
         self.password.grid(column=1, row=0)
@@ -88,7 +88,7 @@ class Inicio(Frame):
         self.usuario = user
         self.password.delete(0, 100)
         self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
-        frame.focus_set()
+        frame.focus_set()        
 
     def teclado(self, event):
         self.grid_forget()

@@ -31,20 +31,21 @@ class Menu_principal(Frame):
         self.main_container.grid(column=0, row=1)
         # --------------------------- Menu START/STOP ------------------------
         if menu == "START/STOP":
-            # ----------- Boton de iniciado ----------------------------------
+            # ----------- Boton de inicio de secuencia -----------------------
+            
             # Imagenes del boton de encendido
             self.start_button_pause = PhotoImage(
                 file="images//off.png").subsample(6)
             self.start_button_active = PhotoImage(
                 file="images//on.png").subsample(6)
-
+            # Frame del botón de inicio
             self.start_button_frame = Frame(self.main_container, bg="white")
             self.start_button_frame.pack(anchor="n", side=LEFT, pady=(10,10))
-
+            # Texto del botón de iniciado
             self.start_button_label = Label(self.start_button_frame,
                 bg="white", text=self.state[0], font=self.root.myFont)
             self.start_button_label.pack(side=BOTTOM)
-
+            # Dependiendo del estado actual del botón es la imagen que se pone
             if self.current_state == 0:
                 self.start_button = Label(self.start_button_frame, bg="white",
                     image=self.start_button_pause)
@@ -59,7 +60,7 @@ class Menu_principal(Frame):
             # -----------------------------------------------------------------
 
             # ----------------------- Seccion central -------------------------
-            self.centro = Frame(self.main_container, bg="white", width=600)
+            self.centro = Frame(self.main_container, bg="white", width=550)
             self.centro.pack(side=LEFT, expand=YES)
             # -----------------------------------------------------------------
 
@@ -140,6 +141,7 @@ class Menu_principal(Frame):
 
     def activate(self, event):
         if self.current_state == 0:
+            self.quit()
             # self.start_button.config(image=self.start_button_active)
             self.current_state = 1
         else:
@@ -151,11 +153,11 @@ class Menu_principal(Frame):
 
     def menu_button_principal(self, text, func):
         if text == self.current_menu:
-            self.menu_buttons.append(Button(self.menu, fg="white", width=19,
+            self.menu_buttons.append(Button(self.menu, fg="white", width=18,
                 bg="#60FEA3", font=self.root.myFont, text=text, relief=FLAT,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
         else:
-            self.menu_buttons.append(Button(self.menu, fg="white", width=19,
+            self.menu_buttons.append(Button(self.menu, fg="white", width=18,
                 bg=self.root.color, font=self.root.myFont, text=text,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
