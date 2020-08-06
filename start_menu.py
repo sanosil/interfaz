@@ -5,9 +5,7 @@ class Start_menu(Frame):
         super().__init__(root)
         self.root = root
         self.root_frame = root_frame
-        self.timer = 0
 
-        self.mensaje = "STATUS: LISTO PARA OPERAR"
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
@@ -20,7 +18,7 @@ class Start_menu(Frame):
         # Frame del botón de inicio
         self.start_button_frame = Frame(self.frame_timer_y_encendido,
             bg="white")
-        self.start_button_frame.pack(anchor="w", side=TOP, pady=(10,10))
+        self.start_button_frame.pack(anchor="w", side=TOP, pady=(10,80))
         # Texto del botón de iniciado
         self.start_button_label = Label(self.start_button_frame,
             bg="white", fg=self.root.color, text=root_frame.state[0],
@@ -44,7 +42,14 @@ class Start_menu(Frame):
         self.timerFrame = Frame(self.frame_timer_y_encendido,
             bg="white")
         self.timerFrame.pack(side=BOTTOM)
-        self.timer_icon = Label(self.timerFrame, bg="white", image=self.timer_image).pack(side=LEFT)
+        self.timer_icon = Label(self.timerFrame, bg="white",
+            image=self.timer_image).pack(side=TOP)
+        self.timer_label = Label(self.timerFrame, bg="white")
+        self.timer_label.pack(side=BOTTOM)
+        if self.root_frame.timer == 0:
+            self.timer_label.config(text="Timer off", fg="red")
+        else:
+            self.timer_label.config(text="Timer on", fg="#2ECC71")
         # -----------------------------------------------------------------
 
         # ----------------------- Seccion central -------------------------
@@ -78,16 +83,24 @@ class Start_menu(Frame):
             # ************* Mensaje de alertas ***************************
         self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color,
         bd=2, relief=SOLID)
-        self.alertas_frame.pack(side=LEFT)
+        self.alertas_frame.pack(side=TOP, anchor="w")
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
-            fg="white", font=self.root.myFont, text=self.mensaje).pack(
-            padx=5, pady=5)
+            fg="white", font=self.root.myFont, text=self.root_frame.mensaje).pack(
+            padx=100, pady=5)
             # ************************************************************
-            # ************* Sesión **************************************
-        self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="blue",
+            # ************* Volumen a sanitizar *************************
+        self.volumen_frame = Frame(self.barra_inferior, bd=2, bg="gray",
             relief=SOLID)
-        self.sesion_frame.pack(side=LEFT)
-        self.sesion = Label(self.sesion_frame, bg="blue", fg="white",
+        self.volumen_frame.pack(side=LEFT, anchor="w")
+        self.volumen_label = Label(self.volumen_frame, bg="gray", fg="white",
+            font=self.root.myFont, text="Volumen: %d m3" % self.root_frame.vol)
+        self.volumen_label.pack(padx=30, pady=5)
+            # ***********************************************************
+            # ************* Sesión **************************************
+        self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
+            relief=SOLID)
+        self.sesion_frame.pack(side=BOTTOM, anchor="w")
+        self.sesion = Label(self.sesion_frame, bg="gray", fg="white",
             font=self.root.myFont, text=self.root.sesion).pack(padx=30, pady=5)
             # ***********************************************************
 

@@ -6,8 +6,11 @@ class Menu_principal(Frame):
         super().__init__(root)
         # Variables
         self.root = root
+        self.timer = 0
+        self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.current_menu  = menu
         self.current_state = 0
+        self.vol = 0
         self.state = ("Normal", "Step", "Testing", "Manual")
         self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu), ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
         self.menu_buttons = []
@@ -70,9 +73,6 @@ class Menu_principal(Frame):
                 bg=self.root.color, font=self.root.myFont, text=text,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
-    def menu_button(self, text):
-        pass
-
     def cambiar_sesion(self):
         self.grid_forget()
         self.root.sesion = ""
@@ -87,6 +87,6 @@ class Root(Tk):
         self.sesion = "Admin"
         self.myFont = ("Verdana", 12)
         self.color = "#2ECC71"
-        Menu_principal(self, "START/STOP").tkraise()
+        Menu_principal(self, "START/STOP")
 
 Root().mainloop()
