@@ -86,7 +86,7 @@ class Start_menu(Frame):
         self.alertas_frame.pack(side=TOP, anchor="w")
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
             fg="white", font=self.root.myFont, text=self.root_frame.mensaje).pack(
-            padx=100, pady=5)
+            padx=(5, 200), pady=10)
             # ************************************************************
             # ************* Volumen a sanitizar *************************
         self.volumen_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -94,14 +94,14 @@ class Start_menu(Frame):
         self.volumen_frame.pack(side=LEFT, anchor="w")
         self.volumen_label = Label(self.volumen_frame, bg="gray", fg="white",
             font=self.root.myFont, text="Volumen: %d m3" % self.root_frame.vol)
-        self.volumen_label.pack(padx=30, pady=5)
+        self.volumen_label.pack(padx=30, pady=10)
             # ***********************************************************
             # ************* Sesión **************************************
         self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
             relief=SOLID)
         self.sesion_frame.pack(side=BOTTOM, anchor="w")
         self.sesion = Label(self.sesion_frame, bg="gray", fg="white",
-            font=self.root.myFont, text=self.root.sesion).pack(padx=30, pady=5)
+            font=self.root.myFont, text=self.root.sesion).pack(padx=30, pady=10)
             # ***********************************************************
 
         # -----------------------------------------------------------------
