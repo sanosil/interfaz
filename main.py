@@ -57,17 +57,25 @@ class Interfaz(Tk):
              self.humidity_dht = self.dhtDevice.humidity
          except RuntimeError as error:
              print(error)
-    
+
          self.after(2000, self.actualizar_temp_humedad)
-    
+
     def rasp_variables(self):
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
-        GPIO.setmode(GPIO.BCM)
         self.bomba_entrada = 26
         self.bomba_salida = 20
+        self.ch1 = 26
+        self.ch2 = 20
         self.ch3 = 21
+        self.ch = (self.ch1, self.ch2, self.ch3)
         self.flotador = 12
         self.voltaje = (5, 6)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.flotador, GPIO.IN)
+        GPIO.setup(self.voltaje, GPIO.OUT)
+        GPIO.setup(self.ch, GPIO.OUT)
+
+        self.pin_on(self.ch, 1)
 
     def shutdown(self):
          os.system("sudo shutdown -h now")

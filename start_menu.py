@@ -122,9 +122,11 @@ class Start_menu(Frame):
         if self.root_frame.current_state == 0:
             self.start_button.config(image=self.start_button_active)
             self.root_frame.current_state = 1
+            self.root.pin_on(self.root.ch3, 0)
         else:
             self.start_button.config(image=self.start_button_pause)
             self.root_frame.current_state = 0
+            self.root.pin_on(self.root.ch3, 1)
 
         self.root_frame.clear(self)
         self.root_frame.create_widgets(self.root_frame.current_menu)

@@ -83,7 +83,7 @@ class Root(Tk):
         super().__init__()
         self.config(bg="white")
         self.overrideredirect(1)
-        self.geometry("800x480")
+        self.geometry("770x495")
         self.sesion = "Admin"
         self.myFont = ("Verdana", 12)
         self.color = "#2ECC71"
