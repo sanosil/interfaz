@@ -6,6 +6,7 @@ class Inicio(Frame):
     def __init__(self, root):
         super().__init__(root)
         self.config(bg="white")
+        print("entro")
         self.root = root
         self.usuario = "Admin"
         self.grid(column=0, row=0)
@@ -88,7 +89,7 @@ class Inicio(Frame):
         self.usuario = user
         self.password.delete(0, 100)
         self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
-        frame.focus_set()        
+        frame.focus_set()
 
     def teclado(self, event):
         self.grid_forget()
