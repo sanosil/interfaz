@@ -86,7 +86,7 @@ class Start_menu(Frame):
         self.alertas_frame.pack(side=TOP, anchor="w")
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
             fg="white", font=self.root.myFont, text=self.root_frame.mensaje).pack(
-            padx=(5, 200), pady=10)
+            padx=(5, 400), pady=10)
             # ************************************************************
             # ************* Volumen a sanitizar *************************
         self.volumen_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -99,11 +99,21 @@ class Start_menu(Frame):
             # ************* Sesión **************************************
         self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
             relief=SOLID)
-        self.sesion_frame.pack(side=BOTTOM, anchor="w")
+        self.sesion_frame.pack(side=LEFT)
         self.sesion = Label(self.sesion_frame, bg="gray", fg="white",
-            font=self.root.myFont, text=self.root.sesion).pack(padx=30, pady=10)
+            font=self.root.myFont, text=self.root.sesion).pack(side=LEFT,
+            padx=(30, 200), pady=10)
+        self.tiempo_a_sanitizar = Label(self.sesion_frame, bg="gray",
+            fg="white", font=self.root.myFont,
+            text="Tiempo: %d s" % self.root_frame.tiempo_sanitizacion)
+        self.tiempo_a_sanitizar.pack(side=RIGHT, padx=(40,10))
             # ***********************************************************
-
+            # *********** Cerrar sesión *********************************
+        self.boton_cerrar_sesion = Button(self.barra_inferior, fg="white",
+            bg="red", bd=2, relief=SOLID, font=self.root.myFont,
+            text="Cerrar sesión", command=self.root_frame.cambiar_sesion)
+        self.boton_cerrar_sesion.pack(side=BOTTOM, ipady=8, ipadx=4)
+            # ***********************************************************
         # -----------------------------------------------------------------
     # --------------------------- Funciones --------------------------------
     def visual_menus(self, text, image, func):

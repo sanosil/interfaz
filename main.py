@@ -39,7 +39,7 @@ class Interfaz(Tk):
 
     def variables(self):
         self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"
+        self.color = "#2ECC71"        
         self.sesion = ""
         # Usernames
         self.usernames = ("Admin", "Service", "Operador 1", "Operador 2",

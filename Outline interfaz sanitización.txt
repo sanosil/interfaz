@@ -11,8 +11,8 @@ Outline de ventanas de interfaz gráfica
 	- Selección de usuario (User, service, admin)                                        ----    Listo   -----
 	- Contraseña (Teclado numérico)							     ----    Listo   -----
    F1
-	- Menú principal (Con información esencial)                                          ---- En proceso -----
-		- Mensajes de error (En caso de existir)				     ---- En proceso -----
+	- Menú principal (Con información esencial)                                          ----    Listo   -----
+		- Mensajes de error (En caso de existir)				     ----    Listo   -----
    F2: CONF
 	- Configuración (Administrador)							     ---- En proceso -----
 		- User settings								     ---- En proceso -----

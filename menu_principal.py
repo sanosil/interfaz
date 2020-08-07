@@ -11,6 +11,7 @@ class Menu_principal(Frame):
         self.current_menu  = menu
         self.current_state = 0
         self.vol = 0
+        self.tiempo_sanitizacion = 0        
         self.state = ("Normal", "Step", "Testing", "Manual")
         self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu), ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
         self.menu_buttons = []
