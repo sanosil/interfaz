@@ -38,6 +38,11 @@ class Interfaz(Tk):
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
+        self.h = "00"
+        self.min = "00"
+        self.d = 7
+        self.mes = 8
+        self.a = 2020
         self.myFont = ("Verdana", 12)
         self.color = "#2ECC71"
         self.sesion = ""

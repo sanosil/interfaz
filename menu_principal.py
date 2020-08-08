@@ -1,6 +1,6 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-import inicio
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -78,17 +78,22 @@ class Menu_principal(Frame):
     def cambiar_sesion(self):
         self.grid_forget()
         self.root.sesion = ""
-        inicio.Inicio(self.root).tkraise()
+        # inicio.Inicio(self.root).tkraise()
 
-# class Root(Tk):
-#     def __init__(self):
-#         super().__init__()
-#         self.config(bg="white")
-#         self.overrideredirect(1)
-#         self.geometry("770x495")
-#         self.sesion = "Admin"
-#         self.myFont = ("Verdana", 12)
-#         self.color = "#2ECC71"
-#         Menu_principal(self, "START/STOP")
-#
-# Root().mainloop()
+class Root(Tk):
+    def __init__(self):
+        super().__init__()
+        self.config(bg="white")
+        self.overrideredirect(1)
+        self.geometry("770x495")
+        self.sesion = "Admin"
+        self.myFont = ("Verdana", 12)
+        self.color = "#2ECC71"
+        self.h = "00"
+        self.min = "00"
+        self.d = 7
+        self.mes = 8
+        self.a = 2020
+        Menu_principal(self, "START/STOP")
+
+Root().mainloop()

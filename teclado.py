@@ -80,18 +80,13 @@ class Teclado(Frame):
         self.rowd = Frame(self.contenedor, bg="white")
         self.rowd.pack(side=TOP, expand=YES, fill=BOTH)
 
-        self.left_image = PhotoImage(file="images//left.png").subsample(8)
-        self.right_image = PhotoImage(file="images//right.png").subsample(8)
-
-        self.boton_izquierda = Button(self.rowd, image=self.left_image,
-                bg=self.color)
+        self.boton = Button(self.rowd, bg=self.color, text="     ")
+        self.boton2 = Button(self.rowd, bg=self.color, text="     ")
         self.space_bar = Button(self.rowd, text="Espacio", font=self.myFont,
                 bg=self.color, command=self.space)
-        self.boton_derecha = Button(self.rowd, image=self.right_image,
-                bg=self.color)
-        self.boton_izquierda.pack(side=LEFT, expand=YES, fill=BOTH)
+        self.boton.pack(side=LEFT, expand=YES, fill=BOTH)
         self.space_bar.pack(side=LEFT, expand=YES, fill=BOTH)
-        self.boton_derecha.pack(side=LEFT, expand=YES, fill=BOTH)
+        self.boton2.pack(side=RIGHT, expand=YES, fill=BOTH)
 
     def space(self):
         self.pass_try = self.pass_try + " "

@@ -21,7 +21,7 @@ class Start_menu():
         # Texto del botón de iniciado
         self.start_button_label = Label(self.start_button_frame,
             bg="white", fg=self.root.color, text=root_frame.state[3],
-            font=("Verdana", 12, "bold"))
+            font=self.root.myFont)
         self.start_button_label.pack(side=BOTTOM)
         # Dependiendo del estado actual del botón es la imagen que se pone
         if root_frame.current_state == 0:
@@ -44,7 +44,8 @@ class Start_menu():
         self.timerFrame.pack(side=BOTTOM)
         self.timer_icon = Label(self.timerFrame, bg="white",
             image=self.timer_image).pack(side=TOP)
-        self.timer_label = Label(self.timerFrame, bg="white")
+        self.timer_label = Label(self.timerFrame, bg="white",
+            font=self.root.myFont)
         self.timer_label.pack(side=BOTTOM)
         if self.root_frame.timer == 0:
             self.timer_label.config(text="Timer off", fg="red")
@@ -53,7 +54,7 @@ class Start_menu():
         # -----------------------------------------------------------------
 
         # ----------------------- Seccion central -------------------------
-        self.centro = Frame(root_frame.main_container, bg="white", width=550)
+        self.centro = Frame(root_frame.main_container, bg="white", width=560)
         self.centro.pack(side=LEFT, expand=YES)
         # -----------------------------------------------------------------
 
@@ -85,8 +86,8 @@ class Start_menu():
         bd=2, relief=SOLID)
         self.alertas_frame.pack(side=TOP, anchor="w")
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
-            fg="white", font=self.root.myFont, text=self.root_frame.mensaje).pack(
-            padx=(5, 400), pady=10)
+            fg="white", font=self.root.myFont, text=self.root_frame.mensaje)
+        self.alertas_label.pack(padx=(5, 400), pady=10)
             # ************************************************************
             # ************* Volumen a sanitizar *************************
         self.volumen_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -114,6 +115,7 @@ class Start_menu():
             text="Cerrar sesión", command=self.root_frame.cambiar_sesion)
         self.boton_cerrar_sesion.pack(side=BOTTOM, ipady=8, ipadx=4)
             # ***********************************************************
+
         # -----------------------------------------------------------------
     # --------------------------- Funciones --------------------------------
     def visual_menus(self, text, image, func):
@@ -127,17 +129,21 @@ class Start_menu():
             text=text)
         button_label.pack(side=BOTTOM)
 
-    def activate(self, event):
+    def activate(self, event=None):
         # self.root.destroy()
         if self.root_frame.current_state == 0:
             self.start_button.config(image=self.start_button_active)
+            self.start_button_label.config(fg=self.root.color)
             self.root_frame.current_state = 1
-            self.root.pin_on(self.root.ch3, 0)
+            self.root_frame.mensaje = "STATUS: OPERANDO"
+            self.alertas_label.config(text=self.root_frame.mensaje)
+            # self.root.pin_on(self.root.ch3, 0)
         else:
             self.start_button.config(image=self.start_button_pause)
+            self.start_button_label.config(fg="red")
             self.root_frame.current_state = 0
-            self.root.pin_on(self.root.ch3, 1)
+            self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
+            self.alertas_label.config(text=self.root_frame.mensaje)
+            # self.root.pin_on(self.root.ch3, 1)
 
-        self.root_frame.clear(self.root_frame)
-        self.root_frame.create_widgets(self.root_frame.current_menu)
 # ------------------ Termina menu START/STOP --------------------------
