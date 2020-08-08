@@ -11,11 +11,10 @@
 # --------- Paquetes necesarios para el funcionamiento ------------------------
 from tkinter import *
 import home, inicio
-import time
-import RPi.GPIO as GPIO
-import board
-import os
-import adafruit_dht
+# import RPi.GPIO as GPIO
+# import board
+# import os
+# import adafruit_dht
 # -----------------------------------------------------------------------------
 
 
@@ -32,17 +31,11 @@ class Interfaz(Tk):
         # self.geometry("800x480")
         self.geometry("%dx%d" % (self.winfo_screenwidth(),
                               self.winfo_screenheight()))
-
         self.actualizar_temp_humedad()
         home.Home(self).tkraise()
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
-        self.h = "00"
-        self.min = "00"
-        self.d = 7
-        self.mes = 8
-        self.a = 2020
         self.myFont = ("Verdana", 12)
         self.color = "#2ECC71"
         self.sesion = ""

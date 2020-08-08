@@ -88,12 +88,7 @@ class Root(Tk):
         self.geometry("770x495")
         self.sesion = "Admin"
         self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"
-        self.h = "00"
-        self.min = "00"
-        self.d = 7
-        self.mes = 8
-        self.a = 2020
+        self.color = "#2ECC71"        
         Menu_principal(self, "START/STOP")
 
 Root().mainloop()
