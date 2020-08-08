@@ -1,5 +1,5 @@
 from tkinter import *
 
-class Diag_menu(Frame):
+class Diag_menu():
     def __init__(self, root, root_frame):
-        super().__init__(root)
+        pass

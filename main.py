@@ -34,12 +34,12 @@ class Interfaz(Tk):
                               self.winfo_screenheight()))
 
         self.actualizar_temp_humedad()
-        # home.Home(self).tkraise()
-        inicio.Inicio(self).tkraise()
+        home.Home(self).tkraise()
+        # inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"        
+        self.color = "#2ECC71"
         self.sesion = ""
         # Usernames
         self.usernames = ("Admin", "Service", "Operador 1", "Operador 2",

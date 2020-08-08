@@ -1,5 +1,6 @@
 from tkinter import *
-import inicio, start_menu, conf_menu, diag_menu, log_menu
+import start_menu, conf_menu, diag_menu, log_menu
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -11,7 +12,7 @@ class Menu_principal(Frame):
         self.current_menu  = menu
         self.current_state = 0
         self.vol = 0
-        self.tiempo_sanitizacion = 0        
+        self.tiempo_sanitizacion = 0
         self.state = ("Normal", "Step", "Testing", "Manual")
         self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu), ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
         self.menu_buttons = []
@@ -30,18 +31,18 @@ class Menu_principal(Frame):
             self.menu_button_principal(func, command)
         # Contenedor principal del menú seleccionado
         self.main_container = Frame(self, bg="white")
-        self.main_container.grid(column=0, row=1)
+        self.main_container.grid(column=0, row=1, sticky="w")
         # --------------------------- Menu START/STOP ------------------------
         if menu == "START/STOP":
             start_menu.Start_menu(self.root, self)
         # --------------------------- Menu CONF -------------------------------
         elif menu == "CONF":
-            pass
+            conf_menu.Conf_menu(self.root, self)
         # ------------------ Termina menu CONF -------------------------------
         elif menu == "DIAG":
-            pass
+            diag_menu.Diag_menu(self.root, self)
         elif menu == "LOG":
-            pass
+            log_menu.Log_menu(self.root, self)
 
     def clear(self, frame):
         for l in frame.grid_slaves():
@@ -79,15 +80,15 @@ class Menu_principal(Frame):
         self.root.sesion = ""
         inicio.Inicio(self.root).tkraise()
 
-class Root(Tk):
-    def __init__(self):
-        super().__init__()
-        self.config(bg="white")
-        self.overrideredirect(1)
-        self.geometry("770x495")
-        self.sesion = "Admin"
-        self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"
-        Menu_principal(self, "START/STOP")
-
-Root().mainloop()
+# class Root(Tk):
+#     def __init__(self):
+#         super().__init__()
+#         self.config(bg="white")
+#         self.overrideredirect(1)
+#         self.geometry("770x495")
+#         self.sesion = "Admin"
+#         self.myFont = ("Verdana", 12)
+#         self.color = "#2ECC71"
+#         Menu_principal(self, "START/STOP")
+#
+# Root().mainloop()

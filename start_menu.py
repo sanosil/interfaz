@@ -1,15 +1,14 @@
 from tkinter import *
 
-class Start_menu(Frame):
+class Start_menu():
     def __init__(self, root, root_frame):
-        super().__init__(root)
         self.root = root
         self.root_frame = root_frame
 
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
-        self.frame_timer_y_encendido.pack(anchor="n", side=LEFT, pady=(10,10))
+        self.frame_timer_y_encendido.pack(anchor="n", side=LEFT, padx=10, pady=10)
         # Imagenes del boton de encendido
         self.start_button_pause = PhotoImage(
             file="images//off.png").subsample(6)
@@ -21,11 +20,12 @@ class Start_menu(Frame):
         self.start_button_frame.pack(anchor="w", side=TOP, pady=(10,80))
         # Texto del botón de iniciado
         self.start_button_label = Label(self.start_button_frame,
-            bg="white", fg=self.root.color, text=root_frame.state[0],
+            bg="white", fg=self.root.color, text=root_frame.state[3],
             font=("Verdana", 12, "bold"))
         self.start_button_label.pack(side=BOTTOM)
         # Dependiendo del estado actual del botón es la imagen que se pone
         if root_frame.current_state == 0:
+            self.start_button_label.config(fg="red")
             self.start_button = Label(self.start_button_frame, bg="white",
                 image=self.start_button_pause)
             self.start_button.bind("<Button-1>", self.activate)
@@ -138,6 +138,6 @@ class Start_menu(Frame):
             self.root_frame.current_state = 0
             self.root.pin_on(self.root.ch3, 1)
 
-        self.root_frame.clear(self)
+        self.root_frame.clear(self.root_frame)
         self.root_frame.create_widgets(self.root_frame.current_menu)
 # ------------------ Termina menu START/STOP --------------------------
