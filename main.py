@@ -11,10 +11,10 @@
 # --------- Paquetes necesarios para el funcionamiento ------------------------
 from tkinter import *
 import home, inicio
-# import RPi.GPIO as GPIO
-# import board
-# import os
-# import adafruit_dht
+import RPi.GPIO as GPIO
+import board
+import os
+import adafruit_dht
 # -----------------------------------------------------------------------------
 
 

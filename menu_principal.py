@@ -1,6 +1,6 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-# import inicio
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -14,6 +14,10 @@ class Menu_principal(Frame):
         self.vol = 0
         self.tiempo_sanitizacion = 0
         self.state = ("Normal", "Step", "Testing", "Manual")
+        self.timer_valores = [
+            ["DOM", "blue"], ["LUN", "green"], ["MAR", "blue"], ["MIE", "blue"],
+            ["JUE", "blue"], ["VIE", "blue"], ["SAB", "blue"]
+            ]
         self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu), ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
         self.menu_buttons = []
         # Metodos
@@ -78,7 +82,7 @@ class Menu_principal(Frame):
     def cambiar_sesion(self):
         self.grid_forget()
         self.root.sesion = ""
-        # inicio.Inicio(self.root).tkraise()
+        inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
@@ -88,7 +92,7 @@ class Root(Tk):
         self.geometry("770x495")
         self.sesion = "Admin"
         self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"        
+        self.color = "#2ECC71"
         Menu_principal(self, "START/STOP")
 
-Root().mainloop()
+# Root().mainloop()

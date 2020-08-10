@@ -12,21 +12,47 @@ class Conf_menu():
         # Barra de fecha y hora con texto
         self.barra_FyH = Frame(self.primera_mitad, bd=3,
             bg="gray", relief=RIDGE)
-        self.barra_FyH.pack(padx=10, pady=(10,0), side=TOP)
+        self.barra_FyH.pack(pady=(10,0), side=TOP)
         self.FyH_label = Label(self.barra_FyH, text="Fecha y Hora",
             bg="gray", fg="white", font=self.root.myFont)
         self.FyH_label.pack(padx=120, pady=10)
         # Frame de hora y fecha editable
         self.FyH_frame = Frame(self.primera_mitad, bd=3,
-            relief=SOLID, bg="yellow")
+            relief=RIDGE, bg="yellow")
         self.FyH_frame.pack(side=TOP, padx=10, pady=(1,10))
-        self.FyH_valores = Label(self.FyH_frame, font=self.root.myFont, bg="yellow")
-        self.FyH_valores.pack(padx=110, pady=10)
+        self.FyH_valores = Label(self.FyH_frame, font=self.root.myFont,
+            bg="yellow")
+        self.FyH_valores.pack(padx=95, pady=10)
         self.FyH_valores.bind("<Button-1>", self.set_date_time)
+        # frame segunda segunda mitad
+        self.segunda_mitad = Frame(self.root_frame.main_container, bg="white")
+        self.segunda_mitad.pack(fill=BOTH, side=RIGHT)
+        # Frame de timer
+        self.barra_timer = Frame(self.segunda_mitad, bd=3, bg="gray", relief=RIDGE)
+        self.barra_timer.pack(side=TOP, padx=10, pady=(10,0))
+        self.timer_label = Label(self.barra_timer, bg="gray", fg="white",
+            font=self.root.myFont, text="Configurar Timer")
+        self.timer_label.pack(padx=95, pady=10)
+        # Valore editables del timer
+        self.timer_valores_frame = Frame(self.segunda_mitad, bg="white")
+        self.timer_valores_frame.pack(side=TOP, padx=10, pady=(6,10))
+        for i, bg in self.root_frame.timer_valores:
+            self.dias(self.timer_valores_frame, i, bg)
+
         self.actualizar_hora()
 
-    def set_date_time(self, event):
-        self.root_frame.grid_forget()
+    def dias(self, frame, text, bg):
+        dia = Label(frame, text=text, bg=bg, fg="white", font=("Verdana", 15),
+            bd=3, relief=RAISED)
+        dia.pack(side=LEFT)
+        dia.bind("<Button-1>", self.edit_timer)
+
+    def edit_timer(self, event=None):
+        pass        
+
+    def set_date_time(self, event=None):
+        pass
+        # self.root_frame.grid_forget()
         # teclado_fecha.Teclado()
 
     def actualizar_hora(self):

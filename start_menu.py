@@ -21,7 +21,7 @@ class Start_menu():
         # Texto del botón de iniciado
         self.start_button_label = Label(self.start_button_frame,
             bg="white", fg=self.root.color, text=root_frame.state[3],
-            font=self.root.myFont)
+            font=("Verdana", 12, "bold"))
         self.start_button_label.pack(side=BOTTOM)
         # Dependiendo del estado actual del botón es la imagen que se pone
         if root_frame.current_state == 0:
@@ -43,9 +43,11 @@ class Start_menu():
             bg="white")
         self.timerFrame.pack(side=BOTTOM)
         self.timer_icon = Label(self.timerFrame, bg="white",
-            image=self.timer_image).pack(side=TOP)
+            image=self.timer_image)
+        self.timer_icon.pack(side=TOP)
+        self.timer_icon.bind("<Button-1>", self.activate_timer)
         self.timer_label = Label(self.timerFrame, bg="white",
-            font=self.root.myFont)
+            font=("Verdana", 12, "bold"))
         self.timer_label.pack(side=BOTTOM)
         if self.root_frame.timer == 0:
             self.timer_label.config(text="Timer off", fg="red")
@@ -137,13 +139,20 @@ class Start_menu():
             self.root_frame.current_state = 1
             self.root_frame.mensaje = "STATUS: OPERANDO"
             self.alertas_label.config(text=self.root_frame.mensaje)
-            # self.root.pin_on(self.root.ch3, 0)
+            self.root.pin_on(self.root.ch3, 0)
         else:
             self.start_button.config(image=self.start_button_pause)
             self.start_button_label.config(fg="red")
             self.root_frame.current_state = 0
             self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
             self.alertas_label.config(text=self.root_frame.mensaje)
-            # self.root.pin_on(self.root.ch3, 1)
+            self.root.pin_on(self.root.ch3, 1)
 
+    def activate_timer(self, event=None):
+        if self.root_frame.timer == 0:
+            self.root_frame.timer = 1
+            self.timer_label.config(fg=self.root.color, text="Timer on")
+        else:
+            self.root_frame.timer = 0
+            self.timer_label.config(fg="red", text="Timer off")
 # ------------------ Termina menu START/STOP --------------------------
