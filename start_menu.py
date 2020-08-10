@@ -115,7 +115,7 @@ class Start_menu():
         self.boton_cerrar_sesion = Button(self.barra_inferior, fg="white",
             bg="red", bd=2, relief=SOLID, font=self.root.myFont,
             text="Cerrar sesión", command=self.root_frame.cambiar_sesion)
-        self.boton_cerrar_sesion.pack(side=BOTTOM, ipady=8, ipadx=4)
+        self.boton_cerrar_sesion.pack(side=LEFT, ipady=7, ipadx=4)
             # ***********************************************************
 
         # -----------------------------------------------------------------

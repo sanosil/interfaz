@@ -1,6 +1,6 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-import inicio
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -71,11 +71,13 @@ class Menu_principal(Frame):
 
     def menu_button_principal(self, text, func):
         if text == self.current_menu:
-            self.menu_buttons.append(Button(self.menu, fg="white", width=18,
+            self.menu_buttons.append(Button(self.menu,
+                activebackground="#60FEA3", fg="white", width=18,
                 bg="#60FEA3", font=self.root.myFont, text=text, relief=FLAT,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
         else:
-            self.menu_buttons.append(Button(self.menu, fg="white", width=18,
+            self.menu_buttons.append(Button(self.menu, fg="white",
+                activebackground="#60FEA3", width=18,
                 bg=self.root.color, font=self.root.myFont, text=text,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
