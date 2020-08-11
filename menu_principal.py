@@ -1,6 +1,6 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-# import inicio
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
