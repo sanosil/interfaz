@@ -7,51 +7,51 @@ class Conf_menu():
         self.root = root
         now = datetime.now()
         self.root_frame = root_frame
-        self.primera_mitad = Frame(self.root_frame.main_container, bg="white",
-            bd=3, relief=SOLID)
+        self.primera_mitad = Frame(self.root_frame.main_container, bg="white")
         self.primera_mitad.pack(side=LEFT)
         # Barra de fecha y hora con texto
         self.barra_FyH = Frame(self.primera_mitad, bd=3,
             bg="gray", relief=RIDGE)
-        self.barra_FyH.pack(pady=(10,0), side=TOP)
+        self.barra_FyH.pack(pady=(50,10), side=TOP)
         self.FyH_label = Label(self.barra_FyH, text="Fecha y Hora",
             bg="gray", fg="white", font=self.root.myFont)
         self.FyH_label.pack(padx=120, pady=10)
         # Frame de hora y fecha editable
         self.FyH_frame = Frame(self.primera_mitad, bd=3,
             relief=RIDGE, bg="yellow")
-        self.FyH_frame.pack(side=TOP, padx=10, pady=(1,10))
+        self.FyH_frame.pack(side=TOP, padx=10, pady=(10,20))
         self.FyH_valores = Label(self.FyH_frame, font=self.root.myFont,
             bg="yellow")
         self.FyH_valores.pack(padx=95, pady=10)
         self.FyH_valores.bind("<Button-1>", self.set_date_time)
         # frame segunda segunda mitad
-        self.segunda_mitad = Frame(self.root_frame.main_container, bg="white",
-            bd=3, relief=SOLID)
+        self.segunda_mitad = Frame(self.root_frame.main_container, bg="white")
         self.segunda_mitad.pack(fill=BOTH, expand=YES, side=LEFT)
         # Frame de timer
         self.barra_timer = Frame(self.segunda_mitad, bd=3, bg="gray", relief=RIDGE)
-        self.barra_timer.pack(side=TOP, padx=10, pady=(10,0))
+        self.barra_timer.pack(side=TOP, padx=10, pady=(50,15))
         self.timer_label = Label(self.barra_timer, bg="gray", fg="white",
             font=self.root.myFont, text="Configurar Timer")
         self.timer_label.pack(padx=95, pady=10)
         # Valore editables del timer
         self.timer_valores_frame = Frame(self.segunda_mitad, bg="white")
-        self.timer_valores_frame.pack(side=BOTTOM, padx=10, pady=(6,10))
+        self.timer_valores_frame.pack(side=TOP, padx=10, pady=(10,20))
         for i, bg in self.root_frame.timer_valores:
             self.dias(self.timer_valores_frame, i, bg)
 
         # Botón de usuario
-        self.frame_inferior = Frame(self.root_frame, bg="white", bd=3,
-            relief=SOLID)
-        self.frame_inferior.grid(column=0, row=2, sticky="nw")
-        self.settings = ["USUARIO", "IDIOMA", "WI-FI"]
-        for text in self.settings:
-            self.settings_buttons(text)
+        self.frame_inferior = Frame(self.root_frame, bg="white")
+        self.frame_inferior.grid(column=0, row=2)
+        self.settings = [("USUARIO", self.user_settings),
+                         ("IDIOMA", self.language_settings),
+                         ("WI-FI", self.wifi_settings)
+                        ]
+        for text, command in self.settings:
+            self.settings_buttons(text, command)
 
-    def settings_buttons(self, text):
-        Button(self.frame_inferior, fg="white",
-            font=("Verdana", 18), text=text, bg=self.root.color).pack(
+    def settings_buttons(self, text, command):
+        Button(self.frame_inferior, fg="white", command=command,
+            font=("Verdana", 18), text=text, bg="red", bd=5).pack(
             side=LEFT, padx=40, pady=(80, 10))
 
         self.actualizar_hora()
@@ -62,13 +62,20 @@ class Conf_menu():
         dia.pack(side=LEFT)
         dia.bind("<Button-1>", self.edit_timer)
 
+    def user_settings(self):
+        print("user settings")
+
+    def language_settings(self):
+        print("Language settings")
+
+    def wifi_settings(self):
+        print("Wi fi settings")
+
     def edit_timer(self, event=None):
-        pass
+        print("edit timer")
 
     def set_date_time(self, event=None):
-        pass
-        # self.root_frame.grid_forget()
-        # teclado_fecha.Teclado()
+        print("set date and time")
 
     def actualizar_hora(self):
         if self.root_frame.current_menu == "CONF":
