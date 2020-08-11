@@ -42,10 +42,9 @@ class Conf_menu():
             self.dias(self.timer_valores_frame, i, bg)
 
         # Botón de usuario
-        self.frame_inferior = Frame(self.root_frame.main_container, bg="white", bd=3,
+        self.frame_inferior = Frame(self.root_frame, bg="white", bd=3,
             relief=SOLID)
-        # self.frame_inferior.grid(column=0, row=2, sticky="nw")
-        self.frame_inferior.pack(side=BOTTOM, expand=YES, fill=BOTH)
+        self.frame_inferior.grid(column=0, row=2, sticky="nw")
         self.settings = ["USUARIO", "IDIOMA", "WI-FI"]
         for text in self.settings:
             self.settings_buttons(text)
