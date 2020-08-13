@@ -29,9 +29,11 @@ class Diag_menu():
         self.linea_dos = self.termometro.create_line(125, 75, 155, 75,
             fill="white")
         self.cent_frame = Frame(self.termometro, bg=self.bg_color)
-        Label(self.cent_frame, text="°C", font=self.root.myFont, fg="white",
-            bg=self.bg_color).pack()
-        self.termometro.create_window(240, 90, window=self.cent_frame,
+        self.temp_digital = Label(self.cent_frame, fg="yellow",
+            text=str(self.root.temp_dht) + "°C", font=self.root.myFont,
+            bg=self.bg_color)
+        self.temp_digital.pack()
+        self.termometro.create_window(230, 90, window=self.cent_frame,
             anchor=CENTER)
 
         self.inicio_term = self.termometro.create_arc(145, 400, 215, 320,
@@ -43,11 +45,12 @@ class Diag_menu():
         self.term_interno = self.termometro.create_arc(150, 395, 210, 325,
             fill="red", start=100, extent=340, outline="red")
         self.temperatura = self.termometro.create_rectangle(176, 360,
-            183, 323 - (self.root.temp_dht * 2), fill="red", outline="red")
+            183, 273 - (self.root.temp_dht * 2), fill="red", outline="red")
         self.brillo = self.termometro.create_arc(180, 385, 200, 350, extent=170,
             start=230, fill="white", outline="white")
-        y = 320
-        for i in range(105):
+        y = 270
+
+        for i in range(-20, 80):
             if (i + 1) % 5 == 0:
                 frm = Frame(self.termometro, bg=self.bg_color)
                 Label(frm, text=i+1, fg="white", font=("Verdana", 5), bg=self.bg_color).pack()
@@ -61,8 +64,8 @@ class Diag_menu():
 
     def actualizar_termometro(self):
         if self.root_frame.current_menu == "DIAG":
-            self.termometro.coords(self.temperatura, 176, 360, 183, 323 -
+            self.termometro.coords(self.temperatura, 176, 360, 183, 273 -
                 (self.root.temp_dht*2))
-            print(self.root.temp_dht)
-            self.root.temp_dht = random.randint(0, 100)
+            self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
+            self.root.temp_dht = random.randint(-20, 80)
             self.root_frame.after(2000, self.actualizar_termometro)
