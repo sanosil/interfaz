@@ -6,7 +6,7 @@ class Conf_menu():
         # variables
         self.root = root
         now = datetime.now()
-        self.root_frame = root_frame
+        self.root_frame = root_frame        
         self.primera_mitad = Frame(self.root_frame.main_container, bg="white")
         self.primera_mitad.pack(side=LEFT)
         # Barra de fecha y hora con texto
@@ -41,18 +41,18 @@ class Conf_menu():
 
         # Botón de usuario
         self.frame_inferior = Frame(self.root_frame, bg="white")
-        self.frame_inferior.grid(column=0, row=2)
+        self.frame_inferior.grid(column=0, row=2, sticky="nw", ipady=78)
         self.settings = [("USUARIO", self.user_settings),
                          ("IDIOMA", self.language_settings),
-                         ("WI-FI", self.wifi_settings)
+                         ("WI-FI", self.wifi_settings),
+                         ("PROGRAMA", self.program_settings)
                         ]
         for text, command in self.settings:
             self.settings_buttons(text, command)
 
     def settings_buttons(self, text, command):
         Button(self.frame_inferior, fg="white", command=command,
-            font=("Verdana", 18), text=text, bg="red", bd=5).pack(
-            side=LEFT, padx=40, pady=(80, 10))
+            font=("Verdana", 18), text=text, bg=self.root.color, bd=5).pack(side=LEFT, padx=26)
 
         self.actualizar_hora()
 
@@ -76,6 +76,9 @@ class Conf_menu():
 
     def set_date_time(self, event=None):
         print("set date and time")
+
+    def program_settings(self, event=None):
+        print("Program settings")
 
     def actualizar_hora(self):
         if self.root_frame.current_menu == "CONF":
