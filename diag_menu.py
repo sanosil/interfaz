@@ -103,12 +103,15 @@ class Diag_menu():
                 self.canvas_humedad.create_line(self.x0, self.y0, self.x1,
                     self.y1, width=3, fill="red")
                 frm = Frame(self.canvas_humedad, bg="white")
-                Label(frm, bg="white", text=i + 1, font=("Verdana", 8)).pack()
+                Label(frm, bg="white", text=i+1, font=("Verdana", 7)).pack()
                 if self.angulo < 90:
-                    self.canvas_humedad.create_window(self.x0 - 8,
+                    self.canvas_humedad.create_window(self.x0 - 10,
                         self.y0 - 10, window=frm)
+                elif i+1 == 55:
+                    self.canvas_humedad.create_window(self.x0 ,
+                        self.y0 - 12, window=frm)
                 else:
-                    self.canvas_humedad.create_window(self.x0 + 8,
+                    self.canvas_humedad.create_window(self.x0 + 10,
                         self.y0 - 10, window=frm)
             else:
                 if i > 0:
@@ -116,7 +119,7 @@ class Diag_menu():
                 self.canvas_humedad.create_line(self.x0, self.y0, self.x1,
                     self.y1, fill="blue")
 
-
+            self.angulo_humedad = 90
 
         self.root_frame.after(2000, self.actualizar_termometro)
 
