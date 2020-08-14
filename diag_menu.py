@@ -12,7 +12,7 @@ class Diag_menu():
         self.frame_termometro = Frame(self.root_frame.main_container,
             bg="gray", relief=SUNKEN, bd=5)
         self.frame_termometro.pack(side=LEFT)
-
+        # ---------------------------- Termometro -----------------------------
         self.termometro = Canvas(self.frame_termometro, bg="white",
             width=width, height=height)
         self.frame_titulo = Frame(self.termometro, relief=RIDGE, bd=3,
@@ -34,7 +34,7 @@ class Diag_menu():
             text=str(self.root.temp_dht) + "°C", font=self.root.myFont,
             bg=self.bg_color)
         self.temp_digital.pack()
-        self.termometro.create_window(230, 90, window=self.cent_frame,
+        self.termometro.create_window(220, 85, window=self.cent_frame,
             anchor=CENTER)
 
         self.inicio_term = self.termometro.create_arc(145, 400, 215, 320,
@@ -65,6 +65,8 @@ class Diag_menu():
                     fill="blue")
         self.termometro.pack()
 
+        # ----------------------- Velocímetro ------------------------------
+        self.angulo_humedad = 90
         self.frame_humedad = Frame(self.root_frame.main_container, bg="gray",
             bd=5, relief=SUNKEN)
         self.frame_humedad.pack(side=LEFT)
@@ -85,9 +87,18 @@ class Diag_menu():
         self.canvas_humedad.create_oval(160, 340, 210, 290, fill="black", outline="black")
         self.canvas_humedad.create_oval(165, 335, 205, 295, fill="gray", outline="gray")
         # Aguja de indicador
-        self.canvas_humedad.create_arc(175, 325, 195, 305, start=self.angulo,
-            extent=180, fill="red", outline="red")
-        self.canvas_humedad.create_polygon(175, 316, 185, 186, 195, 316, fill="red")
+        # altura de aguja = 130, radio = 10
+        self.x0_aguja = 175
+        self.y0_aguja = 315
+        self.x1_aguja = 185
+        self.y1_aguja = 185
+        self.x2_aguja = 195
+        self.y2_aguja = 315
+        self.canvas_humedad.create_oval(175, 325, 195, 305, fill="red",
+            outline="red")
+        self.aguja = self.canvas_humedad.create_polygon(self.x0_aguja,
+            self.y0_aguja, self.x1_aguja, self.y1_aguja, self.x2_aguja,
+            self.y2_aguja, fill="red")
         # Pin blanco que sujeta la aguja
         self.canvas_humedad.create_oval(182.5, 312.5, 187.5, 317.5, fill="white",
             outline="white")
@@ -97,7 +108,7 @@ class Diag_menu():
         self.x1 = 45
         self.y1 = 315
         self.angulo = 0
-        for i in range(100):
+        for i in range(101):
             if (i+1) % 5 == 0:
                 self.actualizar_coordenadas(160)
                 self.canvas_humedad.create_line(self.x0, self.y0, self.x1,
@@ -119,7 +130,6 @@ class Diag_menu():
                 self.canvas_humedad.create_line(self.x0, self.y0, self.x1,
                     self.y1, fill="blue")
 
-            self.angulo_humedad = 90
 
         self.root_frame.after(2000, self.actualizar_termometro)
 
@@ -136,4 +146,10 @@ class Diag_menu():
                 (self.root.temp_dht*2))
             self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
             self.root.temp_dht = random.randint(-20, 80)
+
+            self.angulo_humedad = (self.root.humidity_dht * 180) / 100
+            self.root.humidity_dht = random.randint(0, 100)
+
+
+
             self.root_frame.after(2000, self.actualizar_termometro)
