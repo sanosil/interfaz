@@ -42,9 +42,10 @@ class Menu_principal(Frame):
         # --------------------------- Menu CONF -------------------------------
         elif menu == "CONF":
             conf_menu.Conf_menu(self.root, self)
-        # ------------------ Termina menu CONF -------------------------------
+        # --------------------------- Menu DIAG -------------------------------
         elif menu == "DIAG":
             diag_menu.Diag_menu(self.root, self)
+        # --------------------------- Menu Log --------------------------------
         elif menu == "LOG":
             log_menu.Log_menu(self.root, self)
 

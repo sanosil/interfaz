@@ -1,24 +1,25 @@
 from tkinter import *
-import random
+import random, math
 
 class Diag_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
         width = 370
-        height = 420
+        height = 430
         self.color = "lightcyan2"
-        self.bg_color = "gray25"
+        self.bg_color = "gray64"
         self.frame_termometro = Frame(self.root_frame.main_container,
-            bg="gray", relief=SUNKEN, bd=10)
-        self.frame_termometro.pack()
+            bg="gray", relief=SUNKEN, bd=5)
+        self.frame_termometro.pack(side=LEFT)
 
         self.termometro = Canvas(self.frame_termometro, bg="white",
             width=width, height=height)
         self.frame_titulo = Frame(self.termometro, relief=RIDGE, bd=3,
             bg=self.root.color)
-        Label(self.frame_titulo, text="TEMPERATURA", fg="white",
-            bg=self.root.color, font=self.root.myFont).pack(padx=10, pady=10)
+        self.label_titulo_temp = Label(self.frame_titulo, text="TEMPERATURA", fg="white",
+            bg=self.root.color, font=self.root.myFont)
+        self.label_titulo_temp.pack(padx=10, pady=10)
         self.termometro.create_window(180, 40, window=self.frame_titulo,
             anchor=CENTER)
 
@@ -53,14 +54,78 @@ class Diag_menu():
         for i in range(-20, 80):
             if (i + 1) % 5 == 0:
                 frm = Frame(self.termometro, bg=self.bg_color)
-                Label(frm, text=i+1, fg="white", font=("Verdana", 5), bg=self.bg_color).pack()
-                self.termometro.create_window(220, y-(i*2), window=frm, anchor=CENTER)
-                self.termometro.create_line(187, y - (i*2), 205, y - (i*2), fill="red")
+                Label(frm, text=i+1, font=("Verdana", 5),
+                    bg=self.bg_color).pack()
+                self.termometro.create_window(220, y-(i*2), window=frm,
+                    anchor=CENTER)
+                self.termometro.create_line(187, y - (i*2), 205, y - (i*2),
+                    fill="red")
             else:
-                self.termometro.create_line(187, y - (i*2), 200, y - (i*2),fill="blue")
+                self.termometro.create_line(187, y - (i*2), 200, y - (i*2),
+                    fill="blue")
         self.termometro.pack()
 
+        self.frame_humedad = Frame(self.root_frame.main_container, bg="gray",
+            bd=5, relief=SUNKEN)
+        self.frame_humedad.pack(side=LEFT)
+        self.canvas_humedad = Canvas(self.frame_humedad, width=width,
+            height=height, bg="white")
+        self.canvas_humedad.pack()
+        self.frame_titulo_humedad = Frame(self.canvas_humedad, relief=RIDGE,
+            bd=3, bg=self.root.color)
+        self.label_titulo_humedad = Label(self.frame_titulo_humedad,
+            bg=self.root.color, text="Humedad Relativa", fg="white",
+            font=self.root.myFont)
+        self.label_titulo_humedad.pack(padx=10, pady=10)
+        self.canvas_humedad.create_window(180, 40,
+            window=self.frame_titulo_humedad)
+        # Centro x = 185 y = 315
+        self.angulo = 180
+        # Base indicador
+        self.canvas_humedad.create_oval(160, 340, 210, 290, fill="black", outline="black")
+        self.canvas_humedad.create_oval(165, 335, 205, 295, fill="gray", outline="gray")
+        # Aguja de indicador
+        self.canvas_humedad.create_arc(175, 325, 195, 305, start=self.angulo,
+            extent=180, fill="red", outline="red")
+        self.canvas_humedad.create_polygon(175, 316, 185, 186, 195, 316, fill="red")
+        # Pin blanco que sujeta la aguja
+        self.canvas_humedad.create_oval(182.5, 312.5, 187.5, 317.5, fill="white",
+            outline="white")
+        # radio exerior = 170 radio interior = 150
+        self.x0 = 35
+        self.y0 = 315
+        self.x1 = 45
+        self.y1 = 315
+        self.angulo = 0
+        for i in range(100):
+            if (i+1) % 5 == 0:
+                self.actualizar_coordenadas(160)
+                self.canvas_humedad.create_line(self.x0, self.y0, self.x1,
+                    self.y1, width=3, fill="red")
+                frm = Frame(self.canvas_humedad, bg="white")
+                Label(frm, bg="white", text=i + 1, font=("Verdana", 8)).pack()
+                if self.angulo < 90:
+                    self.canvas_humedad.create_window(self.x0 - 8,
+                        self.y0 - 10, window=frm)
+                else:
+                    self.canvas_humedad.create_window(self.x0 + 8,
+                        self.y0 - 10, window=frm)
+            else:
+                if i > 0:
+                    self.actualizar_coordenadas(150)
+                self.canvas_humedad.create_line(self.x0, self.y0, self.x1,
+                    self.y1, fill="blue")
+
+
+
         self.root_frame.after(2000, self.actualizar_termometro)
+
+    def actualizar_coordenadas(self, largo):
+        self.angulo = self.angulo + 1.8
+        self.x0 = 185 - (largo * math.cos((self.angulo * math.pi)/180))
+        self.y0 = 315 - (largo * math.sin((self.angulo * math.pi)/180))
+        self.x1 = 185 - (140 * math.cos((self.angulo * math.pi)/180))
+        self.y1 = 315 - (140 * math.sin((self.angulo * math.pi)/180))
 
     def actualizar_termometro(self):
         if self.root_frame.current_menu == "DIAG":
