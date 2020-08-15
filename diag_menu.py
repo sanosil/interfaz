@@ -1,5 +1,5 @@
 from tkinter import *
-import random, math
+import math
 
 class Diag_menu():
     def __init__(self, root, root_frame):
@@ -8,7 +8,7 @@ class Diag_menu():
         width = 370
         height = 430
         self.color = "lightcyan2"
-        self.bg_color = "gray64"
+        self.bg_color = "slate blue"
         self.frame_termometro = Frame(self.root_frame.main_container,
             bg="gray", relief=SUNKEN, bd=5)
         self.frame_termometro.pack(side=LEFT)
@@ -23,12 +23,12 @@ class Diag_menu():
         self.termometro.create_window(180, 40, window=self.frame_titulo,
             anchor=CENTER)
 
-        self.contorno = self.termometro.create_rectangle(105, 410, 255, 70,
-            fill=self.bg_color)
-        self.linea_uno = self.termometro.create_line(205, 405, 235, 405,
-            fill="white")
-        self.linea_dos = self.termometro.create_line(125, 75, 155, 75,
-            fill="white")
+        self.termometro.create_polygon(115, 420, 105, 410, 255, 70, 265, 80,
+            265, 420, outline="blue", fill="dark slate blue")
+        self.termometro.create_line(255, 410, 265, 420, fill="blue")
+        self.termometro.create_rectangle(105, 410, 255, 70, outline="blue", fill=self.bg_color)
+        self.termometro.create_line(205, 405, 235, 405, fill="white")
+        self.termometro.create_line(125, 75, 155, 75, fill="white")
         self.cent_frame = Frame(self.termometro, bg=self.bg_color)
         self.temp_digital = Label(self.cent_frame, fg="yellow",
             text=str(self.root.temp_dht) + "°C", font=self.root.myFont,
@@ -46,7 +46,7 @@ class Diag_menu():
         self.term_interno = self.termometro.create_arc(150, 395, 210, 325,
             fill="red", start=100, extent=340, outline="red")
         self.temperatura = self.termometro.create_rectangle(176, 360,
-            183, 273 - (self.root.temp_dht * 2), fill="red", outline="red")
+            183, (273 - (self.root.temp_dht * 2)), fill="red", outline="red")
         self.brillo = self.termometro.create_arc(180, 385, 200, 350, extent=170,
             start=230, fill="white", outline="white")
         y = 270
@@ -61,8 +61,7 @@ class Diag_menu():
                 self.termometro.create_line(187, y - (i*2), 205, y - (i*2),
                     fill="red")
             else:
-                self.termometro.create_line(187, y - (i*2), 200, y - (i*2),
-                    fill="blue")
+                self.termometro.create_line(187, y - (i*2), 200, y - (i*2))
         self.termometro.pack()
 
         # ----------------------- Velocímetro ------------------------------
@@ -159,8 +158,8 @@ class Diag_menu():
 	# Si esta dentro del menú del diag
         if self.root_frame.current_menu == "DIAG":
             # Termómetro
-            self.termometro.coords(self.temperatura, 176, 360, 183, 273 -
-                (self.root.temp_dht*2))
+            self.termometro.coords(self.temperatura, 176, 360, 183, (273 -
+                (self.root.temp_dht*2)))
             self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
 
             # Humedad relativa
