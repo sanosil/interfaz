@@ -28,9 +28,9 @@ class Interfaz(Tk):
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
         self.config(bg="white")
-        # self.geometry("800x480")
-        self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                              self.winfo_screenheight()))
+        self.geometry("800x480")
+        # self.geometry("%dx%d" % (self.winfo_screenwidth(),
+        #                       self.winfo_screenheight()))
         self.actualizar_temp_humedad()
         home.Home(self).tkraise()
         # inicio.Inicio(self).tkraise()
@@ -59,6 +59,8 @@ class Interfaz(Tk):
          self.after(2000, self.actualizar_temp_humedad)
 
     def rasp_variables(self):
+        self.temp_dht = 25
+        self.humidity_dht = 50
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
         self.bomba_entrada = 26
         self.bomba_salida = 20

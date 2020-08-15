@@ -146,7 +146,7 @@ class Diag_menu():
                     self.y1, fill="blue")
 
 
-        self.root_frame.after(50, self.actualizar_termometro)
+        self.root_frame.after(2000, self.actualizar_termometro)
 
     def actualizar_coordenadas(self, largo):
         self.angulo = self.angulo + 1.8
@@ -156,10 +156,13 @@ class Diag_menu():
         self.y1 = 315 - (140 * math.sin((self.angulo * math.pi)/180))
 
     def actualizar_termometro(self):
+	# Si esta dentro del menú del diag
         if self.root_frame.current_menu == "DIAG":
+            # Termómetro
             self.termometro.coords(self.temperatura, 176, 360, 183, 273 -
                 (self.root.temp_dht*2))
-            self.temp_digital.config(text=str(self.root.temp_dht) + "°C")        
+            self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
+
             # Humedad relativa
             self.angulo_humedad = (self.root.humidity_dht * 180) / 100
             self.x0_aguja = 185 - 10 * math.cos(((self.angulo_humedad - 90)
@@ -174,17 +177,10 @@ class Diag_menu():
                 * math.pi)/180)
             self.y2_aguja = 315 + 10 * math.sin(((self.angulo_humedad - 90)
                 * math.pi)/180)
+
             self.humedad_relativa.config(text=str(self.root.humidity_dht)+"%")
+
             self.canvas_humedad.coords(self.aguja, self.x0_aguja, self.y0_aguja,
                 self.x1_aguja, self.y1_aguja, self.x2_aguja, self.y2_aguja)
 
-            if self.count == 0:
-                self.root.humidity_dht = self.root.humidity_dht + 1
-                if self.root.humidity_dht == 100:
-                    self.count = 1
-            else:
-                self.root.humidity_dht = self.root.humidity_dht - 1
-                if self.root.humidity_dht == 0:
-                    self.count = 0
-
-            self.root_frame.after(50, self.actualizar_termometro)
+            self.root_frame.after(2000, self.actualizar_termometro)
