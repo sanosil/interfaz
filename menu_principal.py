@@ -91,7 +91,7 @@ class Root(Tk):
     def __init__(self):
         super().__init__()
         self.temp_dht = 25
-        self.humidity_dht = 50
+        self.humidity_dht = 0
         self.config(bg="white")
         self.overrideredirect(1)
         self.geometry("770x495")
