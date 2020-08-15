@@ -66,7 +66,7 @@ class Diag_menu():
         self.termometro.pack()
 
         # ----------------------- Velocímetro ------------------------------
-        self.angulo_humedad = 0
+        self.angulo_humedad = (self.root.humidity_dht * 180) / 100
         self.frame_humedad = Frame(self.root_frame.main_container, bg="gray",
             bd=5, relief=SUNKEN)
         self.frame_humedad.pack(side=LEFT)
