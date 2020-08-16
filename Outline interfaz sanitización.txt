@@ -14,7 +14,7 @@ Outline de ventanas de interfaz gráfica
 	- Menú principal (Con información esencial)                                          ----    Listo   -----
 		- Mensajes de error (En caso de existir)				     ----    Listo   -----
    F2: CONF
-	- Configuración (Administrador)							     ---- En proceso -----
+	- Configuración (Administrador)							     ----    Listo   -----
 		- User settings								     ---- En proceso -----
 		- Ventana de configuración de valores (Teclado numérico virtual)	     ---- En proceso -----
 		- Configuración programada (Semanalmente)				     ---- En proceso -----
@@ -28,7 +28,7 @@ Outline de ventanas de interfaz gráfica
 	- Screen saver dormido (Ojos)							     ---- En proceso -----
 	- Screen saver despierto (Ojos)							     ---- En proceso -----
    F3
-	- Diagnostics (Temperatura, humedad, flow rate)					     ---- En proceso -----
+	- Diagnostics (Temperatura, humedad, flow rate)					     ----    Listo   -----
    F4
 	- Event logger (Log files)							     ---- En proceso -----
 
@@ -38,7 +38,7 @@ Funciones
 	- Log file									     ---- En proceso ----
 	- Volumen a sanitizar								     ---- En proceso ----
 	- Medición de mililitros							     ---- En proceso ----
-	- Medición de temperatura y humedad						     ---- En proceso ----
+	- Medición de temperatura y humedad						     ----    Listo   ----
 	- Modo de operación de la máquina (Normal, step, testing, manual)		     ---- En proceso ----
 	- Timer antes de operación (Para permitir a la gente salir de la habitación)	     ---- En proceso ----
 	- Usb log files									     ---- En proceso ----
