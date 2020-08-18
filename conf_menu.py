@@ -6,7 +6,7 @@ class Conf_menu():
         # variables
         self.root = root
         now = datetime.now()
-        self.root_frame = root_frame        
+        self.root_frame = root_frame
         self.primera_mitad = Frame(self.root_frame.main_container, bg="white")
         self.primera_mitad.pack(side=LEFT)
         # Barra de fecha y hora con texto

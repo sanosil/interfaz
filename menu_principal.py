@@ -91,6 +91,7 @@ class Root(Tk):
     def __init__(self):
         super().__init__()
         self.temp_dht = 25
+        self.ch3 = 0
         self.humidity_dht = 50
         self.config(bg="white")
         self.overrideredirect(1)
@@ -99,5 +100,8 @@ class Root(Tk):
         self.myFont = ("Verdana", 12)
         self.color = "#2ECC71"
         Menu_principal(self, "START/STOP")
+
+    def pin_on(self, ch, s):
+        pass
 
 Root().mainloop()

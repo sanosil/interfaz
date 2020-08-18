@@ -12,6 +12,7 @@
 from tkinter import *
 import home, inicio
 import RPi.GPIO as GPIO
+import datetime as dt
 import board
 import os
 import adafruit_dht
@@ -59,6 +60,7 @@ class Interfaz(Tk):
          self.after(2000, self.actualizar_temp_humedad)
 
     def rasp_variables(self):
+        self.pulsos = 0
         self.temp_dht = 25
         self.humidity_dht = 50
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
@@ -67,14 +69,18 @@ class Interfaz(Tk):
         self.ch1 = 26
         self.ch2 = 20
         self.ch3 = 21
+        self.sensor_flujo = 23
+        self.ml = 0
         self.ch = (self.ch1, self.ch2, self.ch3)
         self.flotador = 12
         self.voltaje = (5, 6)
         GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.sensor_flujo, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.add_event_detect(self.sensor_flujo, GPIO.RISING, bouncetime=0)
+        GPIO.add_event_callback(self.sensor_flujo, self.measure_ml)
         GPIO.setup(self.flotador, GPIO.IN)
         GPIO.setup(self.voltaje, GPIO.OUT)
         GPIO.setup(self.ch, GPIO.OUT)
-
         self.pin_on(self.ch, 1)
 
     def shutdown(self):
@@ -83,7 +89,23 @@ class Interfaz(Tk):
     # Prender y apagar pines en la raspberry
     def pin_on(self, ch, s):
          GPIO.output(ch, s)
+
+    # Medir sensor_flujo
+    def measure_ml(self):
+        # Formula: Pulsos = (98 * Q) +-= 2% Q = l/Min
+        # ml = (Pulsos * s)/1633.33
+        self.current_time = dt.datetime.now()
+        if self.pulsos = 0:
+            self.time = 1
+        else:
+            self.time = (self.current_time-self.old_time).seconds
+
+        self.pulsos = self.pulsos + 1
+        self.ml = self.ml + (self.pulsos * self.time)/1633.33
+        print(self.ml)
+        self.old_time = dt.datetime.now()
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------
 Interfaz().mainloop()
+GPIO.cleanup()
