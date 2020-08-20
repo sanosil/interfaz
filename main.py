@@ -33,8 +33,8 @@ class Interfaz(Tk):
         # self.geometry("%dx%d" % (self.winfo_screenwidth(),
         #                       self.winfo_screenheight()))
         self.actualizar_temp_humedad()
-        home.Home(self).tkraise()
-        # inicio.Inicio(self).tkraise()
+        # home.Home(self).tkraise()
+        inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.myFont = ("Verdana", 12)
@@ -66,17 +66,14 @@ class Interfaz(Tk):
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
         self.bomba_entrada = 26
         self.bomba_salida = 20
-        self.ch1 = 26
-        self.ch2 = 20
-        self.ch3 = 21
+        self.ch = (self.bomba_entrada, self.bomba_salida, 21)
         self.sensor_flujo = 23
         self.ml = 0
-        self.ch = (self.ch1, self.ch2, self.ch3)
         self.flotador = 12
         self.voltaje = (5, 6)
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.sensor_flujo, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(self.sensor_flujo, GPIO.RISING, bouncetime=0)
+        GPIO.setup(self.sensor_flujo,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.add_event_detect(self.sensor_flujo, GPIO.RISING)
         GPIO.add_event_callback(self.sensor_flujo, self.measure_ml)
         GPIO.setup(self.flotador, GPIO.IN)
         GPIO.setup(self.voltaje, GPIO.OUT)
@@ -91,19 +88,18 @@ class Interfaz(Tk):
          GPIO.output(ch, s)
 
     # Medir sensor_flujo
-    def measure_ml(self):
+    def measure_ml(self, event=None):
         # Formula: Pulsos = (98 * Q) +-= 2% Q = l/Min
         # ml = (Pulsos * s)/1633.33
-        self.current_time = dt.datetime.now()
-        if self.pulsos = 0:
-            self.time = 1
-        else:
-            self.time = (self.current_time-self.old_time).seconds
+        # self.current_time = dt.datetime.now()
+        # if self.pulsos == 0:
+            # self.time = 1
+        # else:
+        #     self.time = (self.current_time-self.old_time).seconds
 
         self.pulsos = self.pulsos + 1
-        self.ml = self.ml + (self.pulsos * self.time)/1633.33
-        print(self.ml)
-        self.old_time = dt.datetime.now()
+        # self.ml = self.ml + (self.pulsos * self.time)/1633.33
+        # self.old_time = dt.datetime.now()
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------

@@ -46,7 +46,7 @@ class Diag_menu():
         self.term_interno = self.termometro.create_arc(150, 395, 210, 325,
             fill="red", start=100, extent=340, outline="red")
         self.temperatura = self.termometro.create_rectangle(176, 360,
-            183, (273 - (self.root.temp_dht * 2)), fill="red", outline="red")
+            185, (273 - (self.root.temp_dht * 2)), fill="red", outline="red")
         self.brillo = self.termometro.create_arc(180, 385, 200, 350, extent=170,
             start=230, fill="white", outline="white")
         y = 270
@@ -158,7 +158,7 @@ class Diag_menu():
 	# Si esta dentro del menú del diag
         if self.root_frame.current_menu == "DIAG":
             # Termómetro
-            self.termometro.coords(self.temperatura, 176, 360, 183, (273 -
+            self.termometro.coords(self.temperatura, 176, 360, 185, (273 -
                 (self.root.temp_dht*2)))
             self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
 

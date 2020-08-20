@@ -6,7 +6,6 @@ class Inicio(Frame):
     def __init__(self, root):
         super().__init__(root)
         self.config(bg="white")
-        print("entro")
         self.root = root
         self.usuario = "Admin"
         self.grid(column=0, row=0)

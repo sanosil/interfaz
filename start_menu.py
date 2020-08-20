@@ -139,20 +139,23 @@ class Start_menu():
             self.root_frame.current_state = 1
             self.root_frame.mensaje = "STATUS: OPERANDO"
             self.alertas_label.config(text=self.root_frame.mensaje)
-            self.root.pin_on(self.root.ch3, 0)
+            self.root.pin_on(self.root.bomba_entrada, 0)
         else:
             self.start_button.config(image=self.start_button_pause)
             self.start_button_label.config(fg="red")
             self.root_frame.current_state = 0
             self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
             self.alertas_label.config(text=self.root_frame.mensaje)
-            self.root.pin_on(self.root.ch3, 1)
+            self.root.pin_on(self.root.bomba_entrada, 1)
 
     def activate_timer(self, event=None):
         if self.root_frame.timer == 0:
             self.root_frame.timer = 1
             self.timer_label.config(fg=self.root.color, text="Timer on")
+            self.root.pin_on(self.root.bomba_salida, 0)
         else:
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")
+            self.root.pin_on(self.root.bomba_salida, 1)
+
 # ------------------ Termina menu START/STOP --------------------------

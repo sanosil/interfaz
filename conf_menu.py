@@ -50,11 +50,15 @@ class Conf_menu():
         for text, command in self.settings:
             self.settings_buttons(text, command)
 
+        self.pulsos = Label(self.root_frame.main_container,
+            text=self.root.pulsos)
+        self.pulsos.pack(side=LEFT)
+        self.actualizar_hora()
+
     def settings_buttons(self, text, command):
         Button(self.frame_inferior, fg="white", command=command,
             font=("Verdana", 18), text=text, bg=self.root.color, bd=5).pack(side=LEFT, padx=26)
 
-        self.actualizar_hora()
 
     def dias(self, frame, text, bg):
         dia = Label(frame, text=text, bg=bg, fg="white", font=("Verdana", 15),
@@ -82,9 +86,10 @@ class Conf_menu():
 
     def actualizar_hora(self):
         if self.root_frame.current_menu == "CONF":
+            self.pulsos.config(text=self.root.pulsos)
             today = date.today()
             now = datetime.now()
             today_str = today.strftime("%d/%m/%y") + " " + now.strftime("%H:%M:%S")
 
             self.FyH_valores.config(text=today_str)
-            self.root_frame.after(1000, self.actualizar_hora)
+            self.root_frame.after(100, self.actualizar_hora)
