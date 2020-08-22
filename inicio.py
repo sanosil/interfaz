@@ -84,6 +84,9 @@ class Inicio(Frame):
         self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
         self.password.bind("<Button-1>", self.teclado)
         self.password.grid(column=1, row=0)
+        self.apagar = Button(self.container_pass, text="Apagar", bg="red",
+            font=self.root.myFont, fg="white", command=self.root.shutdown)
+        self.apagar.grid(column=2, row=0)
 
     def evento(self, event, frame, user):
         self.usuario = user
