@@ -136,7 +136,7 @@ class Start_menu():
 
     def activate(self, event=None):
         # self.root.destroy()
-        if self.root_frame.current_button_state == 0:
+        if self.root.current_button_state == 0:
             self.start_button.config(image=self.start_button_active)
             self.start_button_label.config(fg=self.root.color)
             self.root_frame.current_button_state = 1
@@ -166,18 +166,23 @@ class Start_menu():
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
         self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
         self.alertas_label.config(text=self.root_frame.mensaje)
+        self.root.current_button_state = 0
+        self.frame_confirmacion.grid_forget()
 
     def no(self):
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
-        self.root_frame.current_button_state = 1
+        self.root.current_button_state = 1
         self.root_frame.create_widgets(self.root_frame.current_menu)
+        self.frame_confirmacion.grid_forget()
 
     def activate_timer(self, event=None):
-        if self.root_frame.timer == 0:
-            self.root_frame.timer = 1
+        if self.root.timer == 0:
+            self.root.timer = 1
+            self.root_frame.timer = self.root.timer
             self.timer_label.config(fg=self.root.color, text="Timer on")
 
         else:
+            self.root.timer = 0
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")
 

@@ -15,8 +15,7 @@ class Programas():
 			self.manual()
 
 	def normal(self):
-            self.root.pin_on(self.root.bomba_entrada, 0)
-            self.root.after(100, self.measure_ml)
+ 
 
 	def step(self):
 		pass
@@ -26,9 +25,3 @@ class Programas():
 
 	def manual(self):
 		pass
-
-#        def measure_ml(self):
- #           if self.root.current_button_state == 1:
-  #              self.flujo = (self.root.pulsos/.1)/1633.333
-   #             self.root.pulsos = 0
-    #            self.root.after(100, measure_ml)
