@@ -70,13 +70,11 @@ class Interfaz(Tk):
         self.sensor_flujo = 23
         self.ml = 0
         self.flotador = 12
-        self.voltaje = (5, 6)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.sensor_flujo,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(self.sensor_flujo, GPIO.RISING)
-        GPIO.add_event_callback(self.sensor_flujo, self.measure_ml)
-        GPIO.setup(self.flotador, GPIO.IN)
-        GPIO.setup(self.voltaje, GPIO.OUT)
+        GPIO.add_event_callback(self.sensor_flujo, self.count_pulses)
+        GPIO.setup(self.flotador, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.ch, GPIO.OUT)
         self.pin_on(self.ch, 1)
 
@@ -88,18 +86,8 @@ class Interfaz(Tk):
          GPIO.output(ch, s)
 
     # Medir sensor_flujo
-    def measure_ml(self, event=None):
-        # Formula: Pulsos = (98 * Q) +-= 2% Q = l/Min
-        # ml = (Pulsos * s)/1633.33
-        # self.current_time = dt.datetime.now()
-        # if self.pulsos == 0:
-            # self.time = 1
-        # else:
-        #     self.time = (self.current_time-self.old_time).seconds
-
+    def count_pulses(self, event=None):
         self.pulsos = self.pulsos + 1
-        # self.ml = self.ml + (self.pulsos * self.time)/1633.33
-        # self.old_time = dt.datetime.now()
 # -----------------------------------------------------------------------------
 
 # ------------------------ Inicia aplicación ----------------------------------
