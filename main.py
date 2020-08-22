@@ -64,6 +64,9 @@ class Interfaz(Tk):
 
     def rasp_variables(self):
         self.pulsos = 0
+        self.tanque_lleno = 0
+        self.vol = 200
+        self.concentracion = 10
         self.temp_dht = 25
         self.humidity_dht = 50
         self.dhtDevice = adafruit_dht.DHT11(board.D16)

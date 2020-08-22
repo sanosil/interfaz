@@ -13,7 +13,7 @@ class Menu_principal(Frame):
         self.current_menu  = menu
         self.current_button_state = self.root.current_button_state
         self.current_program = self.root.current_program
-        self.vol = 0
+        self.vol = self.root.vol
         self.tiempo_sanitizacion = 0
         self.state = ("Normal", "Step", "Testing", "Manual")
         self.timer_valores = [
