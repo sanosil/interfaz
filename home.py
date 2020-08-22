@@ -17,7 +17,7 @@ class Home(Frame):
                             font=("Verdana", 22), anchor=S)
         self.version.grid(column=0, row=1)
         # Logo de la empresa
-        self.logo_file = PhotoImage(file="images//logo.png").subsample(2)
+        self.logo_file = PhotoImage(file="/home/pi/Desktop/Interfaz-Sanosil/images/logo.png").subsample(2)
         # Widget del logo
         self.logo = Label(self, bg="white", image=self.logo_file)
         self.logo.image = self.logo_file  # Keep the reference

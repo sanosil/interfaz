@@ -4,16 +4,16 @@ class Start_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-
+        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
         self.frame_timer_y_encendido.pack(anchor="n", side=LEFT, padx=10, pady=10)
         # Imagenes del boton de encendido
         self.start_button_pause = PhotoImage(
-            file="images//off.png").subsample(6)
+            file=self.path+"off.png").subsample(6)
         self.start_button_active = PhotoImage(
-            file="images//on.png").subsample(6)
+            file=self.path+"on.png").subsample(6)
         # Frame del botón de inicio
         self.start_button_frame = Frame(self.frame_timer_y_encendido,
             bg="white")
@@ -38,7 +38,7 @@ class Start_menu():
 
         # ----------------------- timer -----------------------------------
         # imagen
-        self.timer_image = PhotoImage(file="images//timer.png").subsample(7)
+        self.timer_image = PhotoImage(file=self.path+"timer.png").subsample(7)
         self.timerFrame = Frame(self.frame_timer_y_encendido,
             bg="white")
         self.timerFrame.pack(side=BOTTOM)
@@ -65,9 +65,9 @@ class Start_menu():
         self.visual_menus_frame = Frame(root_frame.main_container, bg="white")
         self.visual_menus_frame.pack(side=RIGHT)
 
-        self.conf_icon = PhotoImage(file="images//conf.png")
-        self.diag_icon = PhotoImage(file="images//diag.png").subsample(7)
-        self.log_icon = PhotoImage(file="images//log.png").subsample(7)
+        self.conf_icon = PhotoImage(file=self.path+"conf.png")
+        self.diag_icon = PhotoImage(file=self.path+"diag.png").subsample(7)
+        self.log_icon = PhotoImage(file=self.path+"log.png").subsample(7)
 
         self.visual_menus_list = (
             (root_frame.funcs[1][0], self.conf_icon, root_frame.conf_menu),

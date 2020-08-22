@@ -11,10 +11,11 @@ class Inicio(Frame):
         self.grid(column=0, row=0)
         self.user_container = Frame(self, bg="white")
         self.user_container.grid(column=0, row=0)
+        path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         self.user_images = {
-            "admin": PhotoImage(file="images//Admin.png").subsample(4),
-            "service": PhotoImage(file="images//Service.png").subsample(4),
-            "user": PhotoImage(file="images//User.png").subsample(4)
+            "admin": PhotoImage(file=path+"Admin.png").subsample(4),
+            "service": PhotoImage(file=path+"Service.png").subsample(4),
+            "user": PhotoImage(file=path+"User.png").subsample(4)
         }
         self.sel_label = Label(self.user_container, bg="white",
                     font=("Verdana", 18, "bold"), text="Seleccione\nusuario")

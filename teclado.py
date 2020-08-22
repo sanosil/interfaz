@@ -19,7 +19,9 @@ class Teclado(Frame):
         self.espacio_2 = Frame(self.contenedor, height=70, bg="white")
         self.espacio_2.pack(side=TOP, expand=YES, fill=BOTH)
 
-        self.titulo_teclado = Label(self.espacio_2, bg="white", font=("Verdana", 25), text=titulo_teclado).pack()
+        self.titulo_teclado = Label(self.espacio_2, bg="white", font=("Verdana", 25), text=titulo_teclado)
+        self.titulo_teclado.pack()
+        self.titulo_teclado.bind("<Button-1>", self.salir)
 
         # First row of buttons
         self.rowa = Frame(self.contenedor, bg="white")
@@ -61,7 +63,7 @@ class Teclado(Frame):
 
         self.teclas = (
                 ("Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"),
-                ("A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"),
+               ("A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"),
                 ("Z", "X", "C", "V", "B", "N", "M", "Enter")
         )
         self.width = 2
@@ -134,4 +136,7 @@ class Teclado(Frame):
     def acceso(self):
         self.grid_forget()
         menu_principal.Menu_principal(self.root, "START/STOP").tkraise()
+
+    def salir(self, event=None):
+        self.root.destroy()
 # ---------------- Termina ventana de teclado numérico ------------------------
