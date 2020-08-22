@@ -16,10 +16,10 @@ class Programas():
 			self.manual()
 
 	def normal(self):
-		self.root.ml = 0
-		self.total_ml = self.root.concentracion * self.root.vol
-        self.root.pin_on(self.root.bomba_entrada, 0)
-        self.root.after(200, self.measure_ml)
+                self.root.ml = 0
+                self.total_ml = self.root.concentracion * self.root.vol
+                self.root.pin_on(self.root.bomba_entrada, 0)
+                self.root.after(200, self.measure_ml)
 
 	def step(self):
 		pass
@@ -33,20 +33,22 @@ class Programas():
 	def measure_ml(self):
 		if self.root.current_button_state == 1:
 			# flujo en ml/s
-       		self.flujo = ((self.root.pulsos/.2)/98)*(1000/60)
-        	self.root.pulsos = 0
-			self.root.ml = self.root.ml + (self.flujo * .2)
-			if GPIO.input(self.root.flotador) == 0:
-				self.root.pin_on(self.root.bomba_entrada, 1)
-				self.root.tanque_lleno = 1
-				if self.root.ml < self.total_ml
-					self.root.after(20000, self.llenar_tanque)
-			elif self.root.ml >= self.total_ml:
-				self.root.pin_on(self.root.bomba_entrada, 1)
-				self.root.pin_on(self.root.bomba_salida, 0)
-				self.root.after(30000, self.apagar_bomba)
-			else:
-         		self.root.after(200, measure_ml)
+                        self.flujo = ((self.root.pulsos/0.2)/98)*(1000/60)
+                        print(self.flujo)
+                        self.root.pulsos = 0
+                        self.root.ml = self.root.ml + (self.flujo * .2)
+                        print(self.root.ml)
+                        if GPIO.input(self.root.flotador) == 0:
+                                self.root.pin_on(self.root.bomba_entrada, 1)
+                                self.root.tanque_lleno = 1
+                                if self.root.ml < self.total_ml:
+                                    self.root.after(20000, self.llenar_tanque)
+                                elif self.root.ml >= self.total_ml:
+                                    self.root.pin_on(self.root.bomba_entrada, 1)
+                                    self.root.pin_on(self.root.bomba_salida, 0)
+                                    self.root.after(30000, self.apagar_bomba)
+                        else:
+                            self.root.after(200, self.measure_ml)
 
 	def llenar_tanque(self):
 		self.root.after(200, self.measure_ml)

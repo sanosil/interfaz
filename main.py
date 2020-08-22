@@ -30,11 +30,11 @@ class Interfaz(Tk):
         self.overrideredirect(True)  # Se elimina la barra superior
         self.config(bg="white")
         self.geometry("800x480")
-        self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                              self.winfo_screenheight()))
+        # self.geometry("%dx%d" % (self.winfo_screenwidth(),
+        #                      self.winfo_screenheight()))
         self.actualizar_temp_humedad()
-        home.Home(self).tkraise()
-        # inicio.Inicio(self).tkraise()
+        # home.Home(self).tkraise()
+        inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.timer = 0

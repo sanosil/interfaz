@@ -50,9 +50,9 @@ class Conf_menu():
         for text, command in self.settings:
             self.settings_buttons(text, command)
 
-        self.pulsos = Label(self.root_frame.main_container,
+        self.ml = Label(self.root_frame.main_container,
             text=self.root.pulsos)
-        self.pulsos.pack(side=LEFT)
+        self.ml.pack(side=LEFT)
         self.actualizar_hora()
 
     def settings_buttons(self, text, command):
