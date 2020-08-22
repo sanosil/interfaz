@@ -1,10 +1,12 @@
 from tkinter import *
+import programas
 
 class Start_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.path="images/"
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
@@ -20,11 +22,12 @@ class Start_menu():
         self.start_button_frame.pack(anchor="w", side=TOP, pady=(10,80))
         # Texto del botón de iniciado
         self.start_button_label = Label(self.start_button_frame,
-            bg="white", fg=self.root.color, text=root_frame.state[3],
+            bg="white", fg=self.root.color,
+            text=self.root_frame.state[self.root_frame.current_program],
             font=("Verdana", 12, "bold"))
         self.start_button_label.pack(side=BOTTOM)
         # Dependiendo del estado actual del botón es la imagen que se pone
-        if root_frame.current_state == 0:
+        if root_frame.current_button_state == 0:
             self.start_button_label.config(fg="red")
             self.start_button = Label(self.start_button_frame, bg="white",
                 image=self.start_button_pause)
@@ -133,29 +136,50 @@ class Start_menu():
 
     def activate(self, event=None):
         # self.root.destroy()
-        if self.root_frame.current_state == 0:
+        if self.root_frame.current_button_state == 0:
             self.start_button.config(image=self.start_button_active)
             self.start_button_label.config(fg=self.root.color)
-            self.root_frame.current_state = 1
-            self.root_frame.mensaje = "STATUS: OPERANDO"
+            self.root_frame.current_button_state = 1
+            programas.Programas(self.root, self.root_frame, self,
+                self.root_frame.state[self.root_frame.current_program])
             self.alertas_label.config(text=self.root_frame.mensaje)
-            self.root.pin_on(self.root.bomba_entrada, 0)
+
         else:
-            self.start_button.config(image=self.start_button_pause)
-            self.start_button_label.config(fg="red")
-            self.root_frame.current_state = 0
-            self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
-            self.alertas_label.config(text=self.root_frame.mensaje)
-            self.root.pin_on(self.root.bomba_entrada, 1)
+            self.confirmacion()
+
+    def confirmacion(self):
+        self.root_frame.grid_forget()
+        self.frame_confirmacion = Frame(self.root, bg="white", bd=3, relief=RIDGE)
+        self.frame_confirmacion.grid(column=0, row=0, padx=(50,0), pady=(100, 0))
+        self.confirmacion_label = Label(self.frame_confirmacion, bg="white",
+            font=("Verdana", 18),
+            text="¿Está seguro que desea abortar el programa?")
+        self.confirmacion_label.pack(side=TOP, padx=50, pady=(80, 20))
+        self.button_yes = Button(self.frame_confirmacion, text="Sí", fg="white",
+            bg="red", font=("Verdana", 18), command=self.si)
+        self.button_yes.pack(side=LEFT, padx=(220, 30), pady=(0, 50), ipadx=20, ipady=20)
+        self.button_no = Button(self.frame_confirmacion, text="No", fg="white",
+            bg=self.root.color, font=("Verdana", 18), command=self.no)
+        self.button_no.pack(side=LEFT, padx=(0, 30), pady=(0, 50), ipadx=20, ipady=20)
+
+    def si(self):
+        self.root_frame.__init__(self.root, self.root_frame.current_menu)
+        self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
+        self.alertas_label.config(text=self.root_frame.mensaje)
+
+    def no(self):
+        self.root_frame.__init__(self.root, self.root_frame.current_menu)
+        self.root_frame.current_button_state = 1
+        self.root_frame.create_widgets(self.root_frame.current_menu)
 
     def activate_timer(self, event=None):
         if self.root_frame.timer == 0:
             self.root_frame.timer = 1
             self.timer_label.config(fg=self.root.color, text="Timer on")
-            self.root.pin_on(self.root.bomba_salida, 0)
+
         else:
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")
-            self.root.pin_on(self.root.bomba_salida, 1)
+
 
 # ------------------ Termina menu START/STOP --------------------------

@@ -50,9 +50,9 @@ class Conf_menu():
         for text, command in self.settings:
             self.settings_buttons(text, command)
 
-        self.pulsos = Label(self.root_frame.main_container,
-            text=self.root.pulsos)
-        self.pulsos.pack(side=LEFT)
+        # self.pulsos = Label(self.root_frame.main_container,
+        #     text=self.root.pulsos)
+        # self.pulsos.pack(side=LEFT)
         self.actualizar_hora()
 
     def settings_buttons(self, text, command):
@@ -86,7 +86,7 @@ class Conf_menu():
 
     def actualizar_hora(self):
         if self.root_frame.current_menu == "CONF":
-            self.pulsos.config(text=self.root.pulsos)
+            # self.pulsos.config(text=self.root.pulsos)
             today = date.today()
             now = datetime.now()
             today_str = today.strftime("%d/%m/%y") + " " + now.strftime("%H:%M:%S")

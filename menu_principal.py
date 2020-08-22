@@ -1,6 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-import inicio
+
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -10,7 +11,8 @@ class Menu_principal(Frame):
         self.timer = 0
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.current_menu  = menu
-        self.current_state = 0
+        self.current_button_state = 0
+        self.current_program = 0
         self.vol = 0
         self.tiempo_sanitizacion = 0
         self.state = ("Normal", "Step", "Testing", "Manual")
@@ -85,7 +87,7 @@ class Menu_principal(Frame):
     def cambiar_sesion(self):
         self.grid_forget()
         self.root.sesion = ""
-        inicio.Inicio(self.root).tkraise()
+        # inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
@@ -104,4 +106,4 @@ class Root(Tk):
     def pin_on(self, ch, s):
         pass
 
-# Root().mainloop()
+Root().mainloop()
