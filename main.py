@@ -33,8 +33,8 @@ class Interfaz(Tk):
         # self.geometry("%dx%d" % (self.winfo_screenwidth(),
         #                      self.winfo_screenheight()))
         self.actualizar_temp_humedad()
-        # home.Home(self).tkraise()
-        inicio.Inicio(self).tkraise()
+        home.Home(self).tkraise()
+        # inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.timer = 0
