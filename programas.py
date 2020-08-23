@@ -37,26 +37,26 @@ class Programas():
                     print(self.flujo)
                     self.root.pulsos = 0
                     self.root.ml = self.root.ml + (self.flujo * .2)
-                    print(self.root.ml)
                     if GPIO.input(self.root.flotador) == 0:
                         self.root.pin_on(self.root.bomba_entrada, 1)
-                        self.root.tanque_lleno = 1
                         if self.root.ml < self.total_ml:
-                            self.root.after(20000, self.llenar_tanque)
-                        elif self.root.ml >= self.total_ml:
-                            self.root.pin_on(self.root.bomba_entrada, 1)
-                            self.root.pin_on(self.root.bomba_salida, 0)
-                            self.root.after(30000, self.apagar_bomba)
+                            self.root.after(60000, self.llenar_tanque)
+                    elif self.root.ml >= self.total_ml:
+                        # Fin de programa
+                        self.root.pin_on(self.root.bomba_entrada, 1)
                     else:
+                        # Después de 200 ms se vuelven a medir los ml
                         self.root.after(200, self.measure_ml)
                 else:
+                    self.root.pulses = 0
+                    self.root.ml = 0
                     self.root.pin_on(self.root.bomba_entrada, 1)
                     self.root.pin_on(self.root.bomba_salida, 0)
-                    self.root.after(20000, self.apagar_bomba)
+                    self.root.after(60000, self.apagar_bomba)
 
 	def llenar_tanque(self):
-		self.root.after(200, self.measure_ml)
-		self.root.tanque_lleno = 0
+                self.root.pin_on(self.root.bomba_entrada, 0)
+                self.root.after(200, self.measure_ml)
 
 	def apagar_bomba(self):
 		self.root.pin_on(self.root.bomba_salida, 1)
