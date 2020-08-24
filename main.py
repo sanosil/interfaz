@@ -37,6 +37,8 @@ class Interfaz(Tk):
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
+        self.mensaje = "STATUS: LISTO PARA OPERAR"
+        self.program_object = None
         self.timer = 0
         self.current_button_state = 0
         self.current_program = 0

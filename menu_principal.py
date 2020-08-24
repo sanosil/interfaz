@@ -1,15 +1,14 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 
-import inicio
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
         super().__init__(root)
-        # Variables
+        # Variables        
         self.root = root
         self.timer = self.root.timer
-        self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.current_menu  = menu
         self.current_button_state = self.root.current_button_state
         self.current_program = self.root.current_program
@@ -87,11 +86,24 @@ class Menu_principal(Frame):
     def cambiar_sesion(self):
         self.grid_forget()
         self.root.sesion = ""
-        inicio.Inicio(self.root).tkraise()
+        # inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
         super().__init__()
+        self.timer = 0
+        self.color = "#2ECC71"
+        self.mensaje = "STATUS: LISTO PARA OPERAR"
+        self.program_object = None
+        self.color_alertas = self.color
+        self.bomba_entrada = 0
+        self.bomba_salida = 0
+        self.current_button_state = 0
+        self.current_program = 0
+        self.vol = 48
+        self.concentracion = 6
+        self.pulsos = 0
+        self.ml = 0
         self.temp_dht = 25
         self.ch3 = 0
         self.humidity_dht = 50
@@ -100,10 +112,10 @@ class Root(Tk):
         self.geometry("770x495")
         self.sesion = "Admin"
         self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"
+
         Menu_principal(self, "START/STOP")
 
     def pin_on(self, ch, s):
-        pass
+        print("channel " + str(ch) + str(s))
 
-# Root().mainloop()
+Root().mainloop()

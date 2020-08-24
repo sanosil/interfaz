@@ -50,9 +50,6 @@ class Conf_menu():
         for text, command in self.settings:
             self.settings_buttons(text, command)
 
-        self.ml = Label(self.root_frame.main_container,
-            text=self.root.pulsos)
-        self.ml.pack(side=LEFT)
         self.actualizar_hora()
 
     def settings_buttons(self, text, command):
@@ -85,8 +82,7 @@ class Conf_menu():
         print("Program settings")
 
     def actualizar_hora(self):
-        if self.root_frame.current_menu == "CONF":
-            self.ml.config(text=self.root.ml)
+        if self.root_frame.current_menu == "CONF":            
             today = date.today()
             now = datetime.now()
             today_str = today.strftime("%d/%m/%y") + " " + now.strftime("%H:%M:%S")

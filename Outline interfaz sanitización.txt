@@ -37,7 +37,7 @@ Funciones
 	- Prueba de vida								     ---- En proceso ----
 	- Log file									     ---- En proceso ----
 	- Volumen a sanitizar								     ---- En proceso ----
-	- Medición de mililitros							     ---- En proceso ----
+	- Medición de mililitros							     ----    Listo   ----
 	- Medición de temperatura y humedad						     ----    Listo   ----
 	- Modo de operación de la máquina (Normal, step, testing, manual)		     ---- En proceso ----
 	- Timer antes de operación (Para permitir a la gente salir de la habitación)	     ---- En proceso ----

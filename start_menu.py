@@ -5,8 +5,8 @@ class Start_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-        # self.path="images/"
+        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.path="images/"
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
@@ -87,12 +87,14 @@ class Start_menu():
         self.barra_inferior.grid(column=0, row=2, sticky="NW")
 
             # ************* Mensaje de alertas ***************************
-        self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color,
+        self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color_alertas,
         bd=2, relief=SOLID)
         self.alertas_frame.pack(side=TOP, anchor="w")
-        self.alertas_label = Label(self.alertas_frame, bg=self.root.color,
-            fg="white", font=self.root.myFont, text=self.root_frame.mensaje)
-        self.alertas_label.pack(padx=(5, 400), pady=10)
+        self.alertas_label = Label(self.alertas_frame, bg=self.root.color_alertas,
+            fg="white", font=self.root.myFont, text=self.root.mensaje)
+        self.alertas_label.pack(padx=(20, 20), pady=10)
+        if self.root.current_button_state == 1:
+            self.root.program_object.set_previous_frame(self)
             # ************************************************************
             # ************* Volumen a sanitizar *************************
         self.volumen_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -141,9 +143,10 @@ class Start_menu():
             self.start_button_label.config(fg=self.root.color)
             self.root.current_button_state = 1
             self.root_frame.current_button_state = self.root.current_button_state
-            programas.Programas(self.root, self.root_frame, self,
+            self.root.program_object = programas.Programas(self.root,
+                self.root_frame, self,
                 self.root_frame.state[self.root_frame.current_program])
-            self.alertas_label.config(text=self.root_frame.mensaje)
+            self.alertas_label.config(text=self.root.mensaje)
 
         else:
             self.confirmacion()
@@ -165,9 +168,9 @@ class Start_menu():
 
     def si(self):
         self.root.current_button_state = 0
+        self.root.mensaje = "STATUS: LISTO PARA OPERAR"
+        self.root.color_alertas = self.root.color
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
-        self.root_frame.mensaje = "STATUS: LISTO PARA OPERAR"
-        self.alertas_label.config(text=self.root_frame.mensaje)
         self.frame_confirmacion.grid_forget()
 
     def no(self):
