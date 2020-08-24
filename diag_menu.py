@@ -7,8 +7,8 @@ class Diag_menu():
         self.root_frame = root_frame
         width = 370
         height = 430
-        self.color = "lightcyan2"
-        self.bg_color = "slate blue"
+        self.color = "green"
+        self.bg_color = "spring green"
         self.frame_termometro = Frame(self.root_frame.main_container,
             bg="gray", relief=SUNKEN, bd=5)
         self.frame_termometro.pack(side=LEFT)
@@ -24,7 +24,7 @@ class Diag_menu():
             anchor=CENTER)
 
         self.termometro.create_polygon(115, 420, 105, 410, 255, 70, 265, 80,
-            265, 420, outline="blue", fill="dark slate blue")
+            265, 420, outline="blue", fill=self.color)
         self.termometro.create_line(255, 410, 265, 420, fill="blue")
         self.termometro.create_rectangle(105, 410, 255, 70, outline="blue", fill=self.bg_color)
         self.termometro.create_line(205, 405, 235, 405, fill="white")

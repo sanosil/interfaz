@@ -6,7 +6,7 @@ import start_menu, conf_menu, diag_menu, log_menu
 class Menu_principal(Frame):
     def __init__(self, root, menu):
         super().__init__(root)
-        # Variables        
+        # Variables
         self.root = root
         self.timer = self.root.timer
         self.current_menu  = menu
@@ -55,16 +55,20 @@ class Menu_principal(Frame):
             l.destroy()
 
     def start_menu(self, event=None):
-        self.switch_menu("START/STOP")
+        if self.current_menu != "START/STOP":
+            self.switch_menu("START/STOP")
 
     def conf_menu(self, event=None):
-        self.switch_menu("CONF")
+        if self.current_menu != "CONF":
+            self.switch_menu("CONF")
 
     def diag_menu(self, event=None):
-        self.switch_menu("DIAG")
+        if self.current_menu != "DIAG":
+            self.switch_menu("DIAG")
 
     def log_menu(self, event=None):
-        self.switch_menu("LOG")
+        if self.current_menu != "LOG":
+            self.switch_menu("LOG")
 
     def switch_menu(self, menu):
         self.current_menu = menu
@@ -74,12 +78,12 @@ class Menu_principal(Frame):
     def menu_button_principal(self, text, func):
         if text == self.current_menu:
             self.menu_buttons.append(Button(self.menu,
-                activebackground="#60FEA3", fg="white", width=18,
-                bg="#60FEA3", font=self.root.myFont, text=text, relief=FLAT,
+                activebackground=self.root.selected_color, fg="white", width=18,
+                bg=self.root.selected_color, font=self.root.myFont, text=text, relief=FLAT,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
         else:
             self.menu_buttons.append(Button(self.menu, fg="white",
-                activebackground="#60FEA3", width=18,
+                activebackground=self.root.selected_color, width=18,
                 bg=self.root.color, font=self.root.myFont, text=text,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
@@ -92,12 +96,16 @@ class Root(Tk):
     def __init__(self):
         super().__init__()
         self.timer = 0
-        self.color = "#2ECC71"
+        # self.color = "#2ECC71"
+        self.color = "deep sky blue"
+        # self.root.selected_color = "#60FEA3"
+        self.selected_color = "cyan"
+        self.tanque_lleno = 1
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.program_object = None
         self.color_alertas = self.color
         self.bomba_entrada = 0
-        self.bomba_salida = 0
+        self.bomba_salida = 1
         self.current_button_state = 0
         self.current_program = 0
         self.vol = 48

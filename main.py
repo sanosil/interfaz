@@ -39,11 +39,16 @@ class Interfaz(Tk):
     def variables(self):
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.program_object = None
+        self.vol = 48
+        self.concentracion = 10
         self.timer = 0
         self.current_button_state = 0
         self.current_program = 0
         self.myFont = ("Verdana", 12)
-        self.color = "#2ECC71"
+        # self.color = "#2ECC71"
+        self.color = "deep sky blue"
+        self.selected_color = "cyan"
+        self.color_alertas = self.color
         self.sesion = ""
         # Usernames
         self.usernames = ("Admin", "Service", "Operador 1", "Operador 2",
@@ -67,8 +72,6 @@ class Interfaz(Tk):
     def rasp_variables(self):
         self.pulsos = 0
         self.tanque_lleno = 0
-        self.vol = 48
-        self.concentracion = 10
         self.temp_dht = 25
         self.humidity_dht = 50
         self.dhtDevice = adafruit_dht.DHT11(board.D16)

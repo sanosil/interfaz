@@ -52,6 +52,8 @@ class Conf_menu():
 
         self.actualizar_hora()
 
+
+
     def settings_buttons(self, text, command):
         Button(self.frame_inferior, fg="white", command=command,
             font=("Verdana", 18), text=text, bg=self.root.color, bd=5).pack(side=LEFT, padx=26)
@@ -82,10 +84,9 @@ class Conf_menu():
         print("Program settings")
 
     def actualizar_hora(self):
-        if self.root_frame.current_menu == "CONF":            
+        if self.root_frame.current_menu == "CONF":
             today = date.today()
             now = datetime.now()
             today_str = today.strftime("%d/%m/%y") + " " + now.strftime("%H:%M:%S")
-
             self.FyH_valores.config(text=today_str)
-            self.root_frame.after(100, self.actualizar_hora)
+            self.root.after(1000, self.actualizar_hora)
