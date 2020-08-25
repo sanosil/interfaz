@@ -185,6 +185,7 @@ class Start_menu():
             self.timer_label.config(fg=self.root.color, text="Timer on")
             self.root.pin_on(self.root.bomba_entrada, 1)
         else:
+            self.root.pin_on(self.root.bomba_entrada, 0)
             self.root.timer = 0
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")

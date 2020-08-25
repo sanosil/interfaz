@@ -40,7 +40,7 @@ class Interfaz(Tk):
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.program_object = None
         self.vol = 48
-        self.concentracion = 10
+        self.concentracion = 6
         self.timer = 0
         self.current_button_state = 0
         self.current_program = 0
