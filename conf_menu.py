@@ -11,11 +11,11 @@ class Conf_menu():
         self.primera_mitad.pack(side=LEFT)
         # Barra de fecha y hora con texto
         self.barra_FyH = Frame(self.primera_mitad, bd=3,
-            bg="gray", relief=RIDGE)
+            bg=self.root.selected_color, relief=RIDGE)
         self.barra_FyH.pack(pady=(50,10), side=TOP)
         self.FyH_label = Label(self.barra_FyH, text="Fecha y Hora",
-            bg="gray", fg="white", font=self.root.myFont)
-        self.FyH_label.pack(padx=120, pady=10)
+            bg=self.root.selected_color, font=("Verdana", 14, "bold"))
+        self.FyH_label.pack(padx=80, pady=10)
         # Frame de hora y fecha editable
         self.FyH_frame = Frame(self.primera_mitad, bd=3,
             relief=RIDGE, bg="yellow")
@@ -28,11 +28,12 @@ class Conf_menu():
         self.segunda_mitad = Frame(self.root_frame.main_container, bg="white")
         self.segunda_mitad.pack(fill=BOTH, expand=YES, side=LEFT)
         # Frame de timer
-        self.barra_timer = Frame(self.segunda_mitad, bd=3, bg="gray", relief=RIDGE)
+        self.barra_timer = Frame(self.segunda_mitad, bd=3,
+            bg=self.root.selected_color, relief=RIDGE)
         self.barra_timer.pack(side=TOP, padx=10, pady=(50,15))
-        self.timer_label = Label(self.barra_timer, bg="gray", fg="white",
-            font=self.root.myFont, text="Configurar Timer")
-        self.timer_label.pack(padx=95, pady=10)
+        self.timer_label = Label(self.barra_timer, bg=self.root.selected_color,
+            font=("Verdana", 14, "bold"), text="Configurar Timer")
+        self.timer_label.pack(padx=55, pady=10)
         # Valore editables del timer
         self.timer_valores_frame = Frame(self.segunda_mitad, bg="white")
         self.timer_valores_frame.pack(side=TOP, padx=10, pady=(10,20))

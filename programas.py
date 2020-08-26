@@ -1,5 +1,6 @@
 from tkinter import *
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
+from datetime import date, datetime
 
 class Programas():
 	def __init__(self, root, root_frame, previous_frame, programa):
@@ -7,6 +8,9 @@ class Programas():
 		self.root_frame = root_frame
 		self.previous_frame = previous_frame
 		self.program = programa
+		self.root.fecha_inicio = date.today()
+		self.root.hora_inicio = datetime.now()
+
 		if self.program == "Normal":
 			self.normal()
 		elif self.program == "Step":
@@ -32,7 +36,7 @@ class Programas():
 			if self.root.concentracion != 0 and self.root.vol != 0:
 				self.total_ml = self.root.concentracion * self.root.vol
 				self.root.after(1000, self.salida_start)
-				self.tiempo_a_sanitizar = .5 * self.total_ml
+				self.tiempo_a_sanitizar = 2 * self.total_ml
 
 	def salida_start(self):
 		self.tiempo_salida = self.tiempo_salida - 1
@@ -62,18 +66,18 @@ class Programas():
 	def measure_ml(self):
             if self.root.current_button_state == 1:
                 # flujo en ml/s
-                self.flujo = ((self.root.pulsos/0.1)/80)*(1000/60)
-                # self.flujo = 12.5
+                # self.flujo = ((self.root.pulsos/0.1)/80)*(1000/60)
+                self.flujo = 12.5
                 self.root.pulsos = 0
                 self.root.ml = self.root.ml + (self.flujo * .1)
                 self.root.mensaje = "STATUS: LLENANDO; " + str(self.root.ml) + " ml UTILIZADOS"
                 if self.root_frame.current_menu == "START/STOP":
                     self.previous_frame.alertas_label.config(text=self.root.mensaje)
 
-                if GPIO.input(self.root.flotador) == 0:
-                    self.root.pin_on(self.root.bomba_entrada, 1)
-                    self.root.after(120000, self.llenar_tanque)
-                elif self.root.ml >= 300 and self.inicio == 0:
+                # if GPIO.input(self.root.flotador) == 0:
+                #     self.root.pin_on(self.root.bomba_entrada, 1)
+                #     self.root.after(120000, self.llenar_tanque)
+                if self.root.ml >= 300 and self.inicio == 0:
                     self.inicio = 1
                     self.root.ml = 0
                     self.root.after(100, self.measure_ml)
@@ -119,6 +123,8 @@ class Programas():
 			self.root.after(60000, self.apagar_bomba)
 
 	def end(self):
+		self.root.fecha_termino = date.today()
+		self.root.hora_termino = datetime.now()
 		if self.root.tanque_lleno == 0:
 			self.root.current_button_state = 0
 			self.root.mensaje = "STATUS: LISTO PARA OPERAR"

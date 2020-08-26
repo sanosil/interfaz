@@ -1,7 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 
-import inicio
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -78,28 +78,32 @@ class Menu_principal(Frame):
     def menu_button_principal(self, text, func):
         if text == self.current_menu:
             self.menu_buttons.append(Button(self.menu,
-                activebackground=self.root.selected_color, fg="white", width=18,
-                bg=self.root.selected_color, font=self.root.myFont, text=text, relief=FLAT,
+                activebackground=self.root.selected_color, width=18, relief=FLAT,
+                bg="spring green", font=self.root.myFont_bold, text=text,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
         else:
-            self.menu_buttons.append(Button(self.menu, fg="white",
+            self.menu_buttons.append(Button(self.menu, text=text,
                 activebackground=self.root.selected_color, width=18,
-                bg=self.root.color, font=self.root.myFont, text=text,
+                bg=self.root.color, font=self.root.myFont, fg="white",
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
     def cambiar_sesion(self):
         self.grid_forget()
         self.root.sesion = ""
-        inicio.Inicio(self.root).tkraise()
+        # inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
         super().__init__()
         self.timer = 0
         # self.color = "#2ECC71"
-        self.color = "deep sky blue"
+        self.fecha_inicio = None
+        self.hora_inicio = None
+        self.fecha_termino = None
+        self.hora_termino = None
+        self.color = "green"
         # self.root.selected_color = "#60FEA3"
-        self.selected_color = "cyan"
+        self.selected_color = "white"
         self.tanque_lleno = 1
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.program_object = None
@@ -120,10 +124,11 @@ class Root(Tk):
         self.geometry("770x495")
         self.sesion = "Admin"
         self.myFont = ("Verdana", 12)
+        self.myFont_bold = ("Verdana", 12, "bold")
 
         Menu_principal(self, "START/STOP")
 
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-# Root().mainloop()
+Root().mainloop()

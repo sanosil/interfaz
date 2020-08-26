@@ -38,6 +38,11 @@ class Interfaz(Tk):
 
     def variables(self):
         self.mensaje = "STATUS: LISTO PARA OPERAR"
+        self.fecha_inicio = None
+        self.hora_inicio = None
+        self.fecha_termino = None
+        self.hora_termino = None
+
         self.program_object = None
         self.vol = 48
         self.concentracion = 6
@@ -45,9 +50,10 @@ class Interfaz(Tk):
         self.current_button_state = 0
         self.current_program = 0
         self.myFont = ("Verdana", 12)
+        self.myFont_bold = ("Verdana", 12, "bold")
         # self.color = "#2ECC71"
-        self.color = "deep sky blue"
-        self.selected_color = "cyan"
+        self.color = "green"
+        self.selected_color = "white"
         self.color_alertas = self.color
         self.sesion = ""
         # Usernames

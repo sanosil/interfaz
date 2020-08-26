@@ -7,42 +7,39 @@ class Diag_menu():
         self.root_frame = root_frame
         width = 370
         height = 430
-        self.color = "green"
-        self.bg_color = "spring green"
+        self.color = "white"
+        self.bg_color = "white"
         self.frame_termometro = Frame(self.root_frame.main_container,
-            bg="gray", relief=SUNKEN, bd=5)
+            bg=self.root.selected_color, relief=SUNKEN, bd=5)
         self.frame_termometro.pack(side=LEFT)
         # ---------------------------- Termometro -----------------------------
         self.termometro = Canvas(self.frame_termometro, bg="white",
             width=width, height=height)
         self.frame_titulo = Frame(self.termometro, relief=RIDGE, bd=3,
-            bg=self.root.color)
-        self.label_titulo_temp = Label(self.frame_titulo, text="TEMPERATURA", fg="white",
-            bg=self.root.color, font=self.root.myFont)
+            bg=self.root.selected_color)
+        self.label_titulo_temp = Label(self.frame_titulo, text="TEMPERATURA",
+            bg=self.root.selected_color, font=("Verdana", 14, "bold"))
         self.label_titulo_temp.pack(padx=10, pady=10)
         self.termometro.create_window(180, 40, window=self.frame_titulo,
             anchor=CENTER)
 
         self.termometro.create_polygon(115, 420, 105, 410, 255, 70, 265, 80,
-            265, 420, outline="blue", fill=self.color)
-        self.termometro.create_line(255, 410, 265, 420, fill="blue")
-        self.termometro.create_rectangle(105, 410, 255, 70, outline="blue", fill=self.bg_color)
-        self.termometro.create_line(205, 405, 235, 405, fill="white")
-        self.termometro.create_line(125, 75, 155, 75, fill="white")
+            265, 420, outline="black", fill=self.color)
+        self.termometro.create_line(255, 410, 265, 420, fill="black")
+        self.termometro.create_rectangle(105, 410, 255, 70, outline="black", fill=self.bg_color)
         self.cent_frame = Frame(self.termometro, bg=self.bg_color)
-        self.temp_digital = Label(self.cent_frame, fg="yellow",
-            text=str(self.root.temp_dht) + "°C", font=self.root.myFont,
-            bg=self.bg_color)
+        self.temp_digital = Label(self.cent_frame, bg=self.bg_color,
+            text=str(self.root.temp_dht) + "°C", font=self.root.myFont)
         self.temp_digital.pack()
         self.termometro.create_window(220, 85, window=self.cent_frame,
             anchor=CENTER)
 
         self.inicio_term = self.termometro.create_arc(145, 400, 215, 320,
-            start=110, extent=320, outline=self.color, fill=self.color)
+            start=110, extent=320, outline=self.color, fill="lightblue")
         self.cuerpo_term = self.termometro.create_rectangle(169, 360, 190, 110,
-            fill=self.color, outline=self.color)
+            fill="lightblue", outline="lightblue")
         self.term_cabeza = self.termometro.create_arc(169, 121, 190, 99,
-            start=0, extent=180, fill=self.color, outline=self.color)
+            start=0, extent=180, fill="lightblue", outline="lightblue")
         self.term_interno = self.termometro.create_arc(150, 395, 210, 325,
             fill="red", start=100, extent=340, outline="red")
         self.temperatura = self.termometro.create_rectangle(176, 360,
@@ -73,10 +70,10 @@ class Diag_menu():
             height=height, bg="white")
         self.canvas_humedad.pack()
         self.frame_titulo_humedad = Frame(self.canvas_humedad, relief=RIDGE,
-            bd=3, bg=self.root.color)
+            bd=3, bg=self.root.selected_color)
         self.label_titulo_humedad = Label(self.frame_titulo_humedad,
-            bg=self.root.color, text="Humedad Relativa", fg="white",
-            font=self.root.myFont)
+            bg=self.root.selected_color, text="HUMEDAD RELATIVA",
+            font=("Verdana", 14, "bold"))
         self.label_titulo_humedad.pack(padx=10, pady=10)
         self.canvas_humedad.create_window(180, 40,
             window=self.frame_titulo_humedad)
