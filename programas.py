@@ -9,7 +9,7 @@ class Programas():
 		self.previous_frame = previous_frame
 		self.program = programa
 		self.root.fecha_inicio = date.today()
-		self.root.hora_inicio = datetime.now()
+		self.root.hora_inicio = datetime.now().strftime("%H:%M:%S")
 
 		if self.program == "Normal":
 			self.normal()

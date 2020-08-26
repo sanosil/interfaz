@@ -56,14 +56,14 @@ class Log_menu():
         self.label_valor_fecha = Label(self.frame_valor_fecha, font=self.root.myFont,
             text=self.root.fecha_inicio, bg="lightgray")
         self.frame_valor_fecha.pack(side=LEFT, padx=(60, 10), pady=5)
-        self.label_valor_fecha.pack(padx=106)
+        self.label_valor_fecha.pack()
 
         # Valor HORA
         self.frame_valor_hora = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
         self.label_valor_hora = Label(self.frame_valor_hora, font=self.root.myFont,
             text=self.root.hora_inicio, bg="lightgray")
         self.frame_valor_hora.pack(side=LEFT, padx=(10, 0), pady=5)
-        self.label_valor_hora.pack(padx=106)
+        self.label_valor_hora.pack()
 
     def crear_log(self):
         pass
