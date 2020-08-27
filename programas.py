@@ -40,19 +40,26 @@ class Programas():
 
 	def salida_start(self):
 		self.tiempo_salida = self.tiempo_salida - 1
-		if self.root_frame.current_menu == "START/STOP":
-			self.root.mensaje = "STATUS: Comenzando a operar salga de la habitación en " + str(self.tiempo_salida) + " seg"
-			self.previous_frame.alertas_label.config(text=self.root.mensaje)
-		if self.tiempo_salida == 0:
-			self.root.color_alertas = self.root.color
-			if self.root_frame.current_menu =="START/STOP":
-				self.previous_frame.alertas_frame.config(bg=self.root.color_alertas)
-				self.previous_frame.alertas_label.config(text=self.root.mensaje,
-					bg=self.root.color_alertas)
-			self.root.pin_on(self.root.bomba_entrada, 0)
-			self.root.after(100, self.measure_ml)
+		if self.root.current_button_state == 1:
+			if self.root_frame.current_menu == "START/STOP":
+				self.root.mensaje = "STATUS: Comenzando a operar salga de la habitación en " + str(self.tiempo_salida) + " seg"
+				self.previous_frame.alertas_label.config(text=self.root.mensaje)
+			if self.tiempo_salida == 0:
+				self.root.color_alertas = self.root.color
+				if self.root_frame.current_menu =="START/STOP":
+					self.previous_frame.alertas_frame.config(bg=self.root.color_alertas)
+					self.previous_frame.alertas_label.config(text=self.root.mensaje,
+						bg=self.root.color_alertas)
+				self.root.pin_on(self.root.bomba_entrada, 0)
+				self.root.after(100, self.measure_ml)
+			else:
+				self.root.after(1000, self.salida_start)
 		else:
-			self.root.after(1000, self.salida_start)
+			self.root.mensaje = "STATUS: LISTO PARA OPERAR"
+			if self.root_frame.current_menu == "START/STOP":
+				self.previous_frame.alertas_frame.config(bg=self.root.color)								
+				self.previous_frame.alertas_label.config(text=self.root.mensaje,
+					bg=self.root.color)
 
 	def step(self):
 		pass
@@ -75,8 +82,9 @@ class Programas():
                     self.previous_frame.alertas_label.config(text=self.root.mensaje)
 
                 # if GPIO.input(self.root.flotador) == 0:
-                #     self.root.pin_on(self.root.bomba_entrada, 1)
-                #     self.root.after(120000, self.llenar_tanque)
+				# 	self.root.pin_on(self.root.bomba_entrada, 1)
+				# 	self.root.after(120000, self.llenar_tanque)
+				# 	self.root.tanque_lleno = 1
                 if self.root.ml >= 300 and self.inicio == 0:
                     self.inicio = 1
                     self.root.ml = 0
@@ -96,8 +104,21 @@ class Programas():
                 self.root.pulses = 0
                 self.root.ml = 0
                 self.root.pin_on(self.root.bomba_entrada, 1)
-                self.root.pin_on(self.root.bomba_salida, 0)
-                self.root.after(80000, self.apagar_bomba)
+                if self.root.tanque_lleno == 1:
+                    self.root.mensaje = "STATUS: VACIANDO EL TANQUE"
+                    if self.root_frame.current_menu == "START/STOP":
+                        self.previous_frame.alertas_label.config(
+							text=self.root.mensaje, bg="orange")
+                    self.root.pin_on(self.root.bomba_salida, 0)
+                    self.root.after(80000, self.apagar_bomba)
+                else:
+                    self.root.mensaje = "STATUS: LISTO PARA OPERAR"
+                    if self.root_frame.current_menu == "START/STOP":
+                        self.previous_frame.alertas_label.config(
+							text=self.root.mensaje, bg=self.root.color)
+                        self.root.pin_on(self.root.bomba_salida, 0)
+                        self.root.after(80000, self.apagar_bomba)
+
 
 	def terminar_normal(self):
 		if self.root.current_button_state == 1:
@@ -120,7 +141,7 @@ class Programas():
 				self.root.after(1000, self.terminar_normal)
 		else:
 			self.root.pin_on(self.root.bomba_salida, 0)
-			self.root.after(60000, self.apagar_bomba)
+			self.root.after(5000, self.apagar_bomba)
 
 	def end(self):
 		self.root.fecha_termino = date.today()
@@ -144,5 +165,9 @@ class Programas():
                 self.root.after(100, self.measure_ml)
 
 	def apagar_bomba(self):
+		if self.root_frame.current_menu == "START/STOP":
+			self.root.mensaje = "STATUS: LISTO PARA OPERAR"
+			self.previous_frame.alertas_label.config(text=self.root.mensaje,
+				bg=self.root.color_alertas)
 		self.root.tanque_lleno = 0
 		self.root.pin_on(self.root.bomba_salida, 1)

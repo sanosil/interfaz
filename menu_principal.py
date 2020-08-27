@@ -1,6 +1,5 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-
 # import inicio
 
 class Menu_principal(Frame):
@@ -88,7 +87,7 @@ class Menu_principal(Frame):
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
     def cambiar_sesion(self):
-        self.grid_forget()
+        self.clear(self.root)        
         self.root.sesion = ""
         # inicio.Inicio(self.root).tkraise()
 
@@ -96,6 +95,7 @@ class Root(Tk):
     def __init__(self):
         super().__init__()
         self.timer = 0
+        self.sesion = "Admin"
         # self.color = "#2ECC71"
         self.fecha_inicio = None
         self.hora_inicio = None

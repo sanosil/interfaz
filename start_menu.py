@@ -119,7 +119,8 @@ class Start_menu():
             # *********** Cerrar sesión *********************************
         self.boton_cerrar_sesion = Button(self.barra_inferior, fg="white",
             bg="red", bd=2, relief=SOLID, font=self.root.myFont,
-            text="Cerrar sesión", command=self.root_frame.cambiar_sesion)
+            text="Cerrar sesión", command=lambda: self.confirmacion(
+            "Seguro que desea cerrar sesión", lambda: self.root_frame.cambiar_sesion()))
         self.boton_cerrar_sesion.pack(side=LEFT, ipady=7, ipadx=4)
             # ***********************************************************
 
@@ -149,31 +150,30 @@ class Start_menu():
             self.alertas_label.config(text=self.root.mensaje)
 
         else:
-            self.confirmacion()
+            self.confirmacion("Seguro que desea abortar el programa", lambda: self.si())
 
-    def confirmacion(self):
-        self.root_frame.grid_forget()
+    def confirmacion(self, text, command=None):
         self.frame_confirmacion = Frame(self.root, bg="white", bd=3, relief=RIDGE)
-        self.frame_confirmacion.grid(column=0, row=0, padx=(50,0), pady=(100, 0))
+        self.frame_confirmacion.grid(column=0, row=0, padx=(80,0), pady=(100, 0))
         self.confirmacion_label = Label(self.frame_confirmacion, bg="white",
-            font=("Verdana", 18),
-            text="¿Está seguro que desea abortar el programa?")
+            font=("Verdana", 18), text=text)
         self.confirmacion_label.pack(side=TOP, padx=50, pady=(80, 20))
-        self.button_yes = Button(self.frame_confirmacion, text="Sí", fg="white",
-            bg="red", font=("Verdana", 18), command=self.si)
-        self.button_yes.pack(side=LEFT, padx=(220, 30), pady=(0, 50), ipadx=20, ipady=20)
-        self.button_no = Button(self.frame_confirmacion, text="No", fg="white",
+        self.frame_botones = Frame(self.frame_confirmacion, bg="white")
+        self.frame_botones.pack(side=BOTTOM, pady=20)
+        self.button_yes = Button(self.frame_botones, text="Sí", fg="white",
+            bg="red", font=("Verdana", 18), command=command)
+        self.button_yes.grid(column=0, row=0, padx=20, ipadx=20, ipady=20)
+        self.button_no = Button(self.frame_botones, text="No", fg="white",
             bg=self.root.color, font=("Verdana", 18), command=self.no)
-        self.button_no.pack(side=LEFT, padx=(0, 30), pady=(0, 50), ipadx=20, ipady=20)
+        self.button_no.grid(column=1, row=0, padx=20, ipadx=20, ipady=20)
 
     def si(self):
+        self.root_frame.clear(self.root)
         self.root.current_button_state = 0
-        self.root.mensaje = "STATUS: LISTO PARA OPERAR"
-        self.root.color_alertas = self.root.color
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
-        self.frame_confirmacion.grid_forget()
 
     def no(self):
+        self.root_frame.grid_forget()
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
         self.root_frame.create_widgets(self.root_frame.current_menu)
         self.frame_confirmacion.grid_forget()

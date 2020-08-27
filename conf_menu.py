@@ -18,11 +18,11 @@ class Conf_menu():
         self.FyH_label.pack(padx=80, pady=10)
         # Frame de hora y fecha editable
         self.FyH_frame = Frame(self.primera_mitad, bd=3,
-            relief=RIDGE, bg="yellow")
-        self.FyH_frame.pack(side=TOP, padx=10, pady=(10,20))
+            relief=SUNKEN, bg="yellow")
+        self.FyH_frame.pack(side=TOP, padx=45, pady=(10,20))
         self.FyH_valores = Label(self.FyH_frame, font=self.root.myFont,
             bg="yellow")
-        self.FyH_valores.pack(padx=95, pady=10)
+        self.FyH_valores.pack(padx=70, pady=10)
         self.FyH_valores.bind("<Button-1>", self.set_date_time)
         # frame segunda segunda mitad
         self.segunda_mitad = Frame(self.root_frame.main_container, bg="white")
@@ -30,10 +30,10 @@ class Conf_menu():
         # Frame de timer
         self.barra_timer = Frame(self.segunda_mitad, bd=3,
             bg=self.root.selected_color, relief=RIDGE)
-        self.barra_timer.pack(side=TOP, padx=10, pady=(50,15))
+        self.barra_timer.pack(side=TOP, pady=(50,15))
         self.timer_label = Label(self.barra_timer, bg=self.root.selected_color,
             font=("Verdana", 14, "bold"), text="Configurar Timer")
-        self.timer_label.pack(padx=55, pady=10)
+        self.timer_label.pack(padx=75, pady=10)
         # Valore editables del timer
         self.timer_valores_frame = Frame(self.segunda_mitad, bg="white")
         self.timer_valores_frame.pack(side=TOP, padx=10, pady=(10,20))
@@ -57,7 +57,8 @@ class Conf_menu():
 
     def settings_buttons(self, text, command):
         Button(self.frame_inferior, fg="white", command=command,
-            font=("Verdana", 18), text=text, bg=self.root.color, bd=5).pack(side=LEFT, padx=26)
+            font=("Verdana", 18), text=text, bg="red", bd=5).pack(
+            side=LEFT, padx=28)
 
 
     def dias(self, frame, text, bg):
