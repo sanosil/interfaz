@@ -44,7 +44,7 @@ class Interfaz(Tk):
         self.hora_termino = None
 
         self.program_object = None
-        self.vol = 48
+        self.vol = 16
         self.concentracion = 6
         self.timer = 0
         self.current_button_state = 0
