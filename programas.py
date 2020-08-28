@@ -57,9 +57,10 @@ class Programas():
 		else:
 			self.root.mensaje = "STATUS: LISTO PARA OPERAR"
 			if self.root_frame.current_menu == "START/STOP":
-				self.previous_frame.alertas_frame.config(bg=self.root.color)								
+				self.previous_frame.alertas_frame.config(bg=self.root.color)
 				self.previous_frame.alertas_label.config(text=self.root.mensaje,
 					bg=self.root.color)
+			self.root.program_object = None
 
 	def step(self):
 		pass
@@ -78,14 +79,17 @@ class Programas():
                 self.root.pulsos = 0
                 self.root.ml = self.root.ml + (self.flujo * .1)
                 self.root.mensaje = "STATUS: LLENANDO; " + str(self.root.ml) + " ml UTILIZADOS"
+                self.previous_frame.alertas_label.config(bg="blue")
+                self.previous_frame.alertas_frame.config(bg="blue")
+
                 if self.root_frame.current_menu == "START/STOP":
                     self.previous_frame.alertas_label.config(text=self.root.mensaje)
 
-                # if GPIO.input(self.root.flotador) == 0:
-				# 	self.root.pin_on(self.root.bomba_entrada, 1)
-				# 	self.root.after(120000, self.llenar_tanque)
-				# 	self.root.tanque_lleno = 1
-                if self.root.ml >= 300 and self.inicio == 0:
+                if GPIO.input(self.root.flotador) == 0:
+					self.root.pin_on(self.root.bomba_entrada, 1)
+					self.root.after(120000, self.llenar_tanque)
+					self.root.tanque_lleno = 1
+                elif self.root.ml >= 300 and self.inicio == 0:
                     self.inicio = 1
                     self.root.ml = 0
                     self.root.after(100, self.measure_ml)
@@ -106,6 +110,7 @@ class Programas():
                 self.root.pin_on(self.root.bomba_entrada, 1)
                 if self.root.tanque_lleno == 1:
                     self.root.mensaje = "STATUS: VACIANDO EL TANQUE"
+                    self.previous_frame.alertas_frame.config(bg="orange")
                     if self.root_frame.current_menu == "START/STOP":
                         self.previous_frame.alertas_label.config(
 							text=self.root.mensaje, bg="orange")
@@ -116,8 +121,7 @@ class Programas():
                     if self.root_frame.current_menu == "START/STOP":
                         self.previous_frame.alertas_label.config(
 							text=self.root.mensaje, bg=self.root.color)
-                        self.root.pin_on(self.root.bomba_salida, 0)
-                        self.root.after(80000, self.apagar_bomba)
+                    self.root.program_object = None
 
 
 	def terminar_normal(self):
@@ -152,6 +156,7 @@ class Programas():
 			self.root_frame.grid_forget()
 			self.root.color_alertas = self.root.color
 			self.root_frame.__init__(self.root, self.root_frame.current_menu)
+			self.program_object = None
 		else:
 			if self.root_frame.current_menu == "START/STOP":
 				self.root.mensaje = "STATUS: VACIANDO TANQUE"
@@ -171,3 +176,4 @@ class Programas():
 				bg=self.root.color_alertas)
 		self.root.tanque_lleno = 0
 		self.root.pin_on(self.root.bomba_salida, 1)
+		self.root.program_object = None

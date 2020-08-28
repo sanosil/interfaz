@@ -153,30 +153,33 @@ class Diag_menu():
 
     def actualizar_termometro(self):
 	# Si esta dentro del menú del diag
-        if self.root_frame.current_menu == "DIAG":
-            # Termómetro
-            self.termometro.coords(self.temperatura, 176, 360, 185, (273 -
-                (self.root.temp_dht*2)))
-            self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
+        try:
+            if self.root_frame.current_menu == "DIAG":
+                # Termómetro
+                self.termometro.coords(self.temperatura, 176, 360, 185, (273 -
+                    (self.root.temp_dht*2)))
+                self.temp_digital.config(text=str(self.root.temp_dht) + "°C")
 
-            # Humedad relativa
-            self.angulo_humedad = (self.root.humidity_dht * 180) / 100
-            self.x0_aguja = 185 - 10 * math.cos(((self.angulo_humedad - 90)
-                * math.pi)/180)
-            self.y0_aguja = 315 - 10 * math.sin(((self.angulo_humedad - 90)
-                * math.pi)/180)
-            self.x1_aguja = 185 - 130 * math.cos((self.angulo_humedad
-                * math.pi) / 180)
-            self.y1_aguja = 315 - 130 * math.sin((self.angulo_humedad
-                * math.pi) / 180)
-            self.x2_aguja = 185 + 10 * math.cos(((self.angulo_humedad - 90)
-                * math.pi)/180)
-            self.y2_aguja = 315 + 10 * math.sin(((self.angulo_humedad - 90)
-                * math.pi)/180)
+                # Humedad relativa
+                self.angulo_humedad = (self.root.humidity_dht * 180) / 100
+                self.x0_aguja = 185 - 10 * math.cos(((self.angulo_humedad - 90)
+                    * math.pi)/180)
+                self.y0_aguja = 315 - 10 * math.sin(((self.angulo_humedad - 90)
+                    * math.pi)/180)
+                self.x1_aguja = 185 - 130 * math.cos((self.angulo_humedad
+                    * math.pi) / 180)
+                self.y1_aguja = 315 - 130 * math.sin((self.angulo_humedad
+                    * math.pi) / 180)
+                self.x2_aguja = 185 + 10 * math.cos(((self.angulo_humedad - 90)
+                    * math.pi)/180)
+                self.y2_aguja = 315 + 10 * math.sin(((self.angulo_humedad - 90)
+                    * math.pi)/180)
 
-            self.humedad_relativa.config(text=str(self.root.humidity_dht)+"%")
+                self.humedad_relativa.config(text=str(self.root.humidity_dht)+"%")
 
-            self.canvas_humedad.coords(self.aguja, self.x0_aguja, self.y0_aguja,
-                self.x1_aguja, self.y1_aguja, self.x2_aguja, self.y2_aguja)
+                self.canvas_humedad.coords(self.aguja, self.x0_aguja, self.y0_aguja,
+                    self.x1_aguja, self.y1_aguja, self.x2_aguja, self.y2_aguja)
 
-            self.root_frame.after(2000, self.actualizar_termometro)
+                self.root_frame.after(2000, self.actualizar_termometro)
+        except:
+            pass

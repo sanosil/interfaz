@@ -1,6 +1,6 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
-# import inicio
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -87,9 +87,9 @@ class Menu_principal(Frame):
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
     def cambiar_sesion(self):
-        self.clear(self.root)        
+        self.clear(self.root)
         self.root.sesion = ""
-        # inicio.Inicio(self.root).tkraise()
+        inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
@@ -104,7 +104,7 @@ class Root(Tk):
         self.color = "green"
         # self.root.selected_color = "#60FEA3"
         self.selected_color = "white"
-        self.tanque_lleno = 1
+        self.tanque_lleno = 0
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.program_object = None
         self.color_alertas = self.color
@@ -131,4 +131,4 @@ class Root(Tk):
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-Root().mainloop()
+# Root().mainloop()

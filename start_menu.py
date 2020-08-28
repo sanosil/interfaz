@@ -93,7 +93,7 @@ class Start_menu():
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color_alertas,
             fg="white", font=self.root.myFont, text=self.root.mensaje)
         self.alertas_label.pack(padx=(20, 20), pady=10)
-        if self.root.current_button_state == 1:
+        if self.root.program_object != None:
             self.root.program_object.set_previous_frame(self)
             # ************************************************************
             # ************* Volumen a sanitizar *************************
@@ -139,7 +139,7 @@ class Start_menu():
 
     def activate(self, event=None):
         # self.root.destroy()
-        if self.root.current_button_state == 0:
+        if self.root.current_button_state == 0 and self.root.program_object == None:
             self.start_button.config(image=self.start_button_active)
             self.start_button_label.config(fg=self.root.color)
             self.root.current_button_state = 1

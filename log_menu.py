@@ -6,7 +6,7 @@ class Log_menu():
         # Variables root
         self.root = root
         self.root_frame = root_frame
-        self.current_log = 10
+        self.current_log = 1
         self.create_widgets()
 
     def create_widgets(self):
@@ -48,7 +48,7 @@ class Log_menu():
         self.frame_valor_id = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
         self.label_valor_id = Label(self.frame_valor_id, font=self.root.myFont,
             text=self.current_log, bg="lightgray")
-        self.frame_valor_id.pack(side=LEFT, padx=(50,30), pady=(0, 10))
+        self.frame_valor_id.pack(side=LEFT, padx=(50,30), pady=(5, 20))
         if self.current_log < 10:
             self.label_valor_id.pack(padx=45)
         else:
@@ -57,7 +57,7 @@ class Log_menu():
         self.frame_valor_fecha = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
         self.label_valor_fecha = Label(self.frame_valor_fecha, font=self.root.myFont,
             text=self.root.fecha_inicio, bg="lightgray")
-        self.frame_valor_fecha.pack(side=LEFT, padx=(60, 10), pady=5)
+        self.frame_valor_fecha.pack(side=LEFT, padx=(60, 10), pady=(5, 20))
         if self.root.fecha_inicio != None:
             self.label_valor_fecha.pack(padx=110-(len(str(self.root.fecha_inicio))*5))
         else:
@@ -66,11 +66,23 @@ class Log_menu():
         self.frame_valor_hora = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
         self.label_valor_hora = Label(self.frame_valor_hora, font=self.root.myFont,
             text=self.root.hora_inicio, bg="lightgray")
-        self.frame_valor_hora.pack(side=LEFT, padx=(10, 0), pady=5)
+        self.frame_valor_hora.pack(side=LEFT, padx=(10, 0), pady=(5, 20))
         if self.root.hora_inicio != None:
             self.label_valor_hora.pack(padx=107-len(str(self.root.hora_inicio))*5)
         else:
             self.label_valor_hora.pack(padx=103)
+
+        # Frame row c
+        self.rowd = Frame(self.root_frame.main_container, bg="white")
+        self.rowd.grid(column=0, row=3, sticky=W)
+
+        #User
+        self.user_frame = Frame(self.rowd, bd=3, bg="yellow", relief=RIDGE)
+        self.label_user = Label(self.user_frame, text="USER", bg="yellow",
+            font=self.root.myFont)
+        self.user_frame.pack(side=LEFT, padx=(50,30), pady=5)
+        self.label_user.pack(padx=25)
+
 
     def crear_log(self):
         pass
