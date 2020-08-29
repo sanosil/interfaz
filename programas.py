@@ -1,6 +1,7 @@
 from tkinter import *
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 from datetime import date, datetime
+import sqlite3
 
 class Programas():
 	def __init__(self, root, root_frame, previous_frame, programa):
@@ -74,9 +75,10 @@ class Programas():
 	def measure_ml(self):
             if self.root.current_button_state == 1:
                 # flujo en ml/s
-                self.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
+                # self.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
+
+                self.flujo = 12.5
                 print(self.flujo)
-                # self.flujo = 12.5
                 self.root.pulsos = 0
                 self.root.ml = self.root.ml + (self.flujo * .1)
                 self.root.mensaje = "STATUS: LLENANDO; " + str(self.root.ml) + " ml UTILIZADOS"
@@ -86,11 +88,11 @@ class Programas():
                 if self.root_frame.current_menu == "START/STOP":
                     self.previous_frame.alertas_label.config(text=self.root.mensaje)
 
-                if GPIO.input(self.root.flotador) == 0:
-                    self.root.pin_on(self.root.bomba_entrada, 1)
-                    self.root.after(120000, self.llenar_tanque)
-                    self.root.tanque_lleno = 1
-                elif self.root.ml >= 300 and self.inicio == 0:
+                # if GPIO.input(self.root.flotador) == 0:
+                #     self.root.pin_on(self.root.bomba_entrada, 1)
+                #     self.root.after(120000, self.llenar_tanque)
+                #     self.root.tanque_lleno = 1
+                if self.root.ml >= 300 and self.inicio == 0:
                     self.inicio = 1
                     self.root.ml = 0
                     self.root.after(100, self.measure_ml)

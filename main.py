@@ -16,6 +16,7 @@ import datetime as dt
 import board
 import os
 import adafruit_dht
+import sqlite3
 # -----------------------------------------------------------------------------
 
 
@@ -42,6 +43,7 @@ class Interfaz(Tk):
         self.hora_inicio = None
         self.fecha_termino = None
         self.hora_termino = None
+        self.database = sqlite3.connect("program_database.db")
 
         self.program_object = None
         self.vol = 16
