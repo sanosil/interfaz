@@ -12,7 +12,7 @@ class Log_menu():
     def create_widgets(self):
         self.rowa = Frame(self.root_frame.main_container, bg="white")
         self.rowa.grid(column=0, row=0)
-        # Título
+         # Título
         self.frame_titulo = Frame(self.rowa, bg="white", bd=3, relief=RIDGE)
         self.label_titulo = Label(self.frame_titulo, text="EVENTOS LOG",
             font=("Verdana", 15, "bold"), bg="white")
@@ -20,70 +20,40 @@ class Log_menu():
         self.label_titulo.pack(padx=80)
 
         self.rowb = Frame(self.root_frame.main_container, bg="white")
-        self.rowb.grid(column=0, row=1, sticky=W)
-        # ID
-        self.frame_id = Frame(self.rowb, bg="yellow", bd=3, relief=RIDGE)
-        self.label_id = Label(self.frame_id, bg="yellow", text="LOG ID",
-            font=self.root.myFont)
-        self.frame_id.pack(side=LEFT, padx=(50,30), pady=5)
-        self.label_id.pack(padx=20)
-        # Fecha
-        self.frame_fecha = Frame(self.rowb, bg="yellow", bd=3, relief=RIDGE)
-        self.label_fecha = Label(self.frame_fecha, bg="yellow", text="FECHA INICIO",
-            font=self.root.myFont)
-        self.frame_fecha.pack(side=LEFT, padx=(60, 10), pady=5)
-        self.label_fecha.pack(padx=50)
+        self.rowb.grid(column=0, row=1)
 
-        # Hora
-        self.frame_hora = Frame(self.rowb, bg="yellow", bd=3, relief=RIDGE)
-        self.label_hora = Label(self.frame_hora, bg="yellow", text="HORA INICIO",
-            font=self.root.myFont)
-        self.frame_hora.pack(side=LEFT, padx=10, pady=5)
-        self.label_hora.pack(padx=45)
+        text = ("LOG ID", "FECHA INICIO", "HORA INICIO",
+                "USER", "FECHA FINAL", "HORA FINAL",
+                "CONCENTRACION", " VOLUMEN  ", "TIEMPO SANITIZADO",
+                "HUMEDAD RELATIVA INICIAL", "HUMEDAD RELATIVA FINAL",
+                "TEMPERATURA INICIAL", "TEMPERATURA FINAL")
+        count = 0
+        for row in range(1, 4):
+            for col in range(3):
+                self.frame_field(self.rowb, row, col, text[count], 198)
+                count= count + 1
 
         self.rowc = Frame(self.root_frame.main_container, bg="white")
-        self.rowc.grid(column=0, row=2, sticky=W)
+        self.rowc.grid(column=0, row=2)
 
-        # Valor ID
-        self.frame_valor_id = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
-        self.label_valor_id = Label(self.frame_valor_id, font=self.root.myFont,
-            text=self.current_log, bg="lightgray")
-        self.frame_valor_id.pack(side=LEFT, padx=(50,30), pady=(5, 20))
-        if self.current_log < 10:
-            self.label_valor_id.pack(padx=45)
+        for row in range(4, 6):
+            for col in range(2):
+                self.frame_field(self.rowc, row, col, text[count], 280)
+                count = count + 1
+
+
+    def frame_field(self, parent, row, col, text, offset):
+        fr = Frame(parent, bg="yellow", bd=3, relief=RIDGE)
+        fr.grid(column=col, row=row, padx=20, pady=10)
+        lbl = Label(fr, bg="yellow", text=text, font=self.root.myFont)
+        if len(text) % 2 == 0:
+            lbl.pack(padx=((offset - (len(text)*11))/2))
         else:
-            self.label_valor_id.pack(padx=40)
-        # Valor FECHA
-        self.frame_valor_fecha = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
-        self.label_valor_fecha = Label(self.frame_valor_fecha, font=self.root.myFont,
-            text=self.root.fecha_inicio, bg="lightgray")
-        self.frame_valor_fecha.pack(side=LEFT, padx=(60, 10), pady=(5, 20))
-        if self.root.fecha_inicio != None:
-            self.label_valor_fecha.pack(padx=110-(len(str(self.root.fecha_inicio))*5))
-        else:
-            self.label_valor_fecha.pack(padx=107)
-        # Valor HORA
-        self.frame_valor_hora = Frame(self.rowc, bg="lightgray", bd=3, relief=SUNKEN)
-        self.label_valor_hora = Label(self.frame_valor_hora, font=self.root.myFont,
-            text=self.root.hora_inicio, bg="lightgray")
-        self.frame_valor_hora.pack(side=LEFT, padx=(10, 0), pady=(5, 20))
-        if self.root.hora_inicio != None:
-            self.label_valor_hora.pack(padx=107-len(str(self.root.hora_inicio))*5)
-        else:
-            self.label_valor_hora.pack(padx=103)
+            lbl.pack(padx=((offset+1 - (len(text)*11))/2))
 
-        # Frame row c
-        self.rowd = Frame(self.root_frame.main_container, bg="white")
-        self.rowd.grid(column=0, row=3, sticky=W)
+    def frame_value():
+        pass
 
-        #User
-        self.user_frame = Frame(self.rowd, bd=3, bg="yellow", relief=RIDGE)
-        self.label_user = Label(self.user_frame, text="USER", bg="yellow",
-            font=self.root.myFont)
-        self.user_frame.pack(side=LEFT, padx=(50,30), pady=5)
-        self.label_user.pack(padx=25)
-
-
-    def create_log(self):
-        self.root.fecha_termino = date.today()
-        self.root.hora_termino = datetime.now()
+def create_log(self):
+    self.root.fecha_termino = date.today()
+    self.root.hora_termino = datetime.now()

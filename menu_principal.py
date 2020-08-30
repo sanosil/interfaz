@@ -1,7 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 import sqlite3
-# import inicio
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -10,7 +10,7 @@ class Menu_principal(Frame):
         self.root = root
         data = self.root.database.execute(f"SELECT * FROM user_settings WHERE username = '{self.root.sesion}';")
         for row in data:
-            self.user_data = row        
+            self.user_data = row
         self.timer = self.user_data[7]
         self.current_menu  = menu
         self.current_button_state = self.root.current_button_state
@@ -94,7 +94,7 @@ class Menu_principal(Frame):
         if self.root.program_object == None:
             self.clear(self.root)
             self.root.sesion = ""
-            # inicio.Inicio(self.root).tkraise()
+            inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
@@ -137,4 +137,4 @@ class Root(Tk):
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-Root().mainloop()
+# Root().mainloop()
