@@ -43,7 +43,7 @@ class Interfaz(Tk):
         self.hora_inicio = None
         self.fecha_termino = None
         self.hora_termino = None
-        self.database = sqlite3.connect("program_database.db")
+        self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
         self.usernames = []
         self.program_object = None
         self.vol = 16
