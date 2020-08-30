@@ -84,5 +84,6 @@ class Log_menu():
         self.label_user.pack(padx=25)
 
 
-    def crear_log(self):
-        pass
+    def create_log(self):
+        self.root.fecha_termino = date.today()
+        self.root.hora_termino = datetime.now()

@@ -8,13 +8,16 @@ class Menu_principal(Frame):
         super().__init__(root)
         # Variables
         self.root = root
-        self.timer = self.root.timer
+        data = self.root.database.execute(f"SELECT * FROM user_settings WHERE username = '{self.root.sesion}';")
+        for row in data:
+            self.user_data = row        
+        self.timer = self.user_data[7]
         self.current_menu  = menu
         self.current_button_state = self.root.current_button_state
-        self.current_program = self.root.current_program
-        self.vol = self.root.vol
+        self.current_program = self.user_data[4]
+        self.root.concentracion = self.user_data[6]
+        self.vol = self.user_data[5]
         self.tiempo_sanitizacion = 0
-        self.state = ("Normal", "Step", "Testing", "Manual")
         self.timer_valores = [
             ["DOM", "blue"], ["LUN", "blue"], ["MAR", "blue"], ["MIE", "blue"],
             ["JUE", "blue"], ["VIE", "blue"], ["SAB", "blue"]
@@ -88,9 +91,10 @@ class Menu_principal(Frame):
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
 
     def cambiar_sesion(self):
-        self.clear(self.root)
-        self.root.sesion = ""
-        # inicio.Inicio(self.root).tkraise()
+        if self.root.program_object == None:
+            self.clear(self.root)
+            self.root.sesion = ""
+            # inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
@@ -124,7 +128,7 @@ class Root(Tk):
         self.config(bg="white")
         self.overrideredirect(1)
         self.geometry("770x495")
-        self.sesion = "Admin"
+        self.sesion = "ADMIN"
         self.myFont = ("Verdana", 12)
         self.myFont_bold = ("Verdana", 12, "bold")
 

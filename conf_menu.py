@@ -86,9 +86,12 @@ class Conf_menu():
         print("Program settings")
 
     def actualizar_hora(self):
-        if self.root_frame.current_menu == "CONF":
-            today = date.today()
-            now = datetime.now()
-            today_str = today.strftime("%d/%m/%y") + " " + now.strftime("%H:%M:%S")
-            self.FyH_valores.config(text=today_str)
-            self.root.after(1000, self.actualizar_hora)
+        try:
+            if self.root_frame.current_menu == "CONF":
+                today = date.today()
+                now = datetime.now()
+                today_str = today.strftime("%d/%m/%y") + " " + now.strftime("%H:%M:%S")
+                self.FyH_valores.config(text=today_str)
+                self.root.after(1000, self.actualizar_hora)
+        except:
+            pass

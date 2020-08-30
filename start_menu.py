@@ -23,7 +23,7 @@ class Start_menu():
         # Texto del botón de iniciado
         self.start_button_label = Label(self.start_button_frame,
             bg="white", fg=self.root.color,
-            text=self.root_frame.state[self.root_frame.current_program],
+            text=self.root_frame.current_program,
             font=("Verdana", 12, "bold"))
         self.start_button_label.pack(side=BOTTOM)
         # Dependiendo del estado actual del botón es la imagen que se pone
@@ -146,7 +146,7 @@ class Start_menu():
             self.root_frame.current_button_state = self.root.current_button_state
             self.root.program_object = programas.Programas(self.root,
                 self.root_frame, self,
-                self.root_frame.state[self.root_frame.current_program])
+                self.root_frame.current_program)
             self.alertas_label.config(text=self.root.mensaje)
 
         else:
@@ -169,6 +169,7 @@ class Start_menu():
 
     def si(self):
         self.root_frame.clear(self.root)
+        self.root.color_alertas = "green"
         self.root.current_button_state = 0
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
 
