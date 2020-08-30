@@ -7,7 +7,7 @@ class Inicio(Frame):
         super().__init__(root)
         self.config(bg="white")
         self.root = root
-        self.usuario = "Admin"
+        self.usuario = "ADMIN"
         self.grid(column=0, row=0)
         self.user_container = Frame(self, bg="white")
         self.user_container.grid(column=0, row=0)
@@ -43,11 +43,11 @@ class Inicio(Frame):
         self.service = Label(self.frame_service, bg="white",
                         image=self.user_images["service"])
         self.service_label = Label(self.frame_service, bg="white",
-                        font=self.root.myFont, text=root.usernames[1])
+                        font=self.root.myFont, text=root.usernames[4])
         self.frame_service.grid(column=2, row=0)
         self.service.grid(column=0, row=0)
         self.service.bind("<Button-1>",
-                    lambda e, f=self.frame_service, u=root.usernames[1]:
+                    lambda e, f=self.frame_service, u=root.usernames[4]:
                     self.evento(e, f, u))
         self.service_label.grid(column=0, row=1)
         # Operadores
@@ -61,14 +61,14 @@ class Inicio(Frame):
             self.operador.append(Label(self.frame_operador[i], bg="white",
                             image=self.user_images["user"]))
             self.labels_operador.append(Label(self.frame_operador[i],
-                        bg="white", font=self.root.myFont, text=root.usernames[i+2]))
+                        bg="white", font=self.root.myFont, text=root.usernames[i+1]))
             if i == 0:
                 self.frame_operador[i].grid(column=i, row=1, padx=(70, 0))
             else:
                 self.frame_operador[i].grid(column=i, row=1)
             self.operador[i].grid(column=0, row=0)
             self.operador[i].bind("<Button-1>",
-                        lambda e, f=self.frame_operador[i], u=root.usernames[i+2]:
+                        lambda e, f=self.frame_operador[i], u=root.usernames[i+1]:
                         self.evento(e, f, u))
             self.labels_operador[i].grid(column=0, row=1)
 

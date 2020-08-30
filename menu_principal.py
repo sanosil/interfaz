@@ -16,7 +16,7 @@ class Menu_principal(Frame):
         self.current_button_state = self.root.current_button_state
         self.current_program = self.user_data[4]
         self.root.concentracion = self.user_data[6]
-        self.vol = self.user_data[5]
+        self.root.vol = self.user_data[5]
         self.tiempo_sanitizacion = 0
         self.timer_valores = [
             ["DOM", "blue"], ["LUN", "blue"], ["MAR", "blue"], ["MIE", "blue"],
@@ -81,7 +81,7 @@ class Menu_principal(Frame):
     def menu_button_principal(self, text, func):
         if text == self.current_menu:
             self.menu_buttons.append(Button(self.menu,
-                activebackground=self.root.selected_color, width=18, relief=FLAT,
+                activebackground="spring green", width=18, relief=FLAT,
                 bg="spring green", font=self.root.myFont_bold, text=text,
                 command=func).pack(fill=BOTH, side=LEFT, expand=YES, ipady=10))
         else:

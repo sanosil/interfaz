@@ -29,7 +29,7 @@ class Interfaz(Tk):
 
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
-        self.config(bg="white")
+        self.config(bg="white", cursor="dot")
         self.geometry("800x480")
         # self.geometry("%dx%d" % (self.winfo_screenwidth(),
         #                      self.winfo_screenheight()))
@@ -44,7 +44,7 @@ class Interfaz(Tk):
         self.fecha_termino = None
         self.hora_termino = None
         self.database = sqlite3.connect("program_database.db")
-
+        self.usernames = []
         self.program_object = None
         self.vol = 16
         self.concentracion = 6
@@ -59,13 +59,14 @@ class Interfaz(Tk):
         self.color_alertas = self.color
         self.sesion = ""
         # Usernames
-        self.usernames = ("Admin", "Service", "Operador 1", "Operador 2",
-                    "Operador 3")
+        usernames = self.database.execute("SELECT username FROM user_settings;")
+        for row in usernames:
+            self.usernames.append(row[0])
         # Passwords
         self.passwords = {
             self.usernames[0]: "ADMIN",
-            self.usernames[1]: "SERVICE", self.usernames[2]: "1234",
-            self.usernames[3]: "1234", self.usernames[4]:"1234"
+            self.usernames[1]: "1234", self.usernames[2]: "1234",
+            self.usernames[3]: "1234", self.usernames[4]:"SERVICE"
         }
 
     def actualizar_temp_humedad(self):

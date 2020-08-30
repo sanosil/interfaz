@@ -1,7 +1,7 @@
 from tkinter import *
 import RPi.GPIO as GPIO
 from datetime import date, datetime
-from log_menu import create_log
+import log_menu
 import sqlite3
 
 class Programas():
@@ -38,7 +38,7 @@ class Programas():
 			if self.root.concentracion != 0 and self.root.vol != 0:
 				self.total_ml = self.root.concentracion * self.root.vol
 				self.root.after(1000, self.salida_start)
-				self.tiempo_a_sanitizar = .1 * self.total_ml
+				self.tiempo_a_sanitizar = 2 * self.total_ml
 
 	def salida_start(self):
 		self.tiempo_salida = self.tiempo_salida - 1
@@ -77,6 +77,7 @@ class Programas():
             if self.root.current_button_state == 1:
                 # flujo en ml/s
                 self.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
+                print(self.flujo)
                 # self.flujo = 12.5
                 self.root.pulsos = 0
                 self.root.ml = self.root.ml + (self.flujo * .1)
@@ -92,7 +93,7 @@ class Programas():
                     self.root.pin_on(self.root.bomba_entrada, 1)
                     self.root.after(120000, self.llenar_tanque)
                     self.root.tanque_lleno = 1
-                elif self.root.ml >= 300 and self.inicio == 0:
+                elif self.root.ml >= 320 and self.inicio == 0:
                     self.inicio = 1
                     self.root.ml = 0
                     self.root.after(100, self.measure_ml)
@@ -129,7 +130,7 @@ class Programas():
 			self.previous_frame.alertas_label.config(
 				text=self.root.mensaje, bg="orange")
 		self.root.pin_on(self.root.bomba_salida, 0)
-		self.root.after(5000, self.apagar_bomba)
+		self.root.after(80000, self.apagar_bomba)
 
 	def terminar_normal(self):
 		if self.root.current_button_state == 1:

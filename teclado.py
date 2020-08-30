@@ -138,6 +138,6 @@ class Teclado(Frame):
         menu_principal.Menu_principal(self.root, "START/STOP").tkraise()
 
     def salir(self, event=None):
-        if self.title == "Service":
+        if self.title == "SERVICE":
             self.root.destroy()
 # ---------------- Termina ventana de teclado numérico ------------------------

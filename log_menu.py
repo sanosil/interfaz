@@ -44,7 +44,7 @@ class Log_menu():
 
     def frame_field(self, parent, row, col, text, offset):
         fr = Frame(parent, bg="yellow", bd=3, relief=RIDGE)
-        fr.grid(column=col, row=row, padx=20, pady=10)
+        fr.grid(column=col, row=row, padx=30, pady=10)
         lbl = Label(fr, bg="yellow", text=text, font=self.root.myFont)
         if len(text) % 2 == 0:
             lbl.pack(padx=((offset - (len(text)*11))/2))
@@ -54,6 +54,6 @@ class Log_menu():
     def frame_value():
         pass
 
-def create_log(self):
+def create_log():
     self.root.fecha_termino = date.today()
     self.root.hora_termino = datetime.now()

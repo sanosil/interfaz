@@ -101,7 +101,7 @@ class Start_menu():
             relief=SOLID)
         self.volumen_frame.pack(side=LEFT, anchor="w")
         self.volumen_label = Label(self.volumen_frame, bg="gray", fg="white",
-            font=self.root.myFont, text="Volumen: %d m3" % self.root_frame.vol)
+            font=self.root.myFont, text="Volumen: %d m3" % self.root.vol)
         self.volumen_label.pack(padx=30, pady=10)
             # ***********************************************************
             # ************* Sesión **************************************
@@ -154,7 +154,7 @@ class Start_menu():
 
     def confirmacion(self, text, command=None):
         self.frame_confirmacion = Frame(self.root, bg="white", bd=3, relief=RIDGE)
-        self.frame_confirmacion.grid(column=0, row=0, padx=(80,0), pady=(100, 0))
+        self.frame_confirmacion.grid(column=0, row=0, padx=(150,0), sticky=W)
         self.confirmacion_label = Label(self.frame_confirmacion, bg="white",
             font=("Verdana", 18), text=text)
         self.confirmacion_label.pack(side=TOP, padx=50, pady=(80, 20))
@@ -184,9 +184,7 @@ class Start_menu():
             self.root.timer = 1
             self.root_frame.timer = self.root.timer
             self.timer_label.config(fg=self.root.color, text="Timer on")
-            self.root.pin_on(self.root.bomba_entrada, 1)
         else:
-            self.root.pin_on(self.root.bomba_entrada, 0)
             self.root.timer = 0
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")
