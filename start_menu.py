@@ -5,8 +5,8 @@ class Start_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-        # self.path="images/"
+        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.path="images/"
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
@@ -113,7 +113,7 @@ class Start_menu():
             padx=(30, 200), pady=10)
         self.tiempo_a_sanitizar = Label(self.sesion_frame, bg="gray",
             fg="white", font=self.root.myFont,
-            text="Tiempo: %d s" % self.root_frame.tiempo_sanitizacion)
+            text="Tiempo: %d s" % self.root.time)
         self.tiempo_a_sanitizar.pack(side=RIGHT, padx=(40,10))
             # ***********************************************************
             # *********** Cerrar sesión *********************************

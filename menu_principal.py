@@ -1,14 +1,15 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 import sqlite3
-import inicio
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
         super().__init__(root)
         # Variables
         self.root = root
-        data = self.root.database.execute(f"SELECT * FROM user_settings WHERE username = '{self.root.sesion}';")
+        data = self.root.database.execute("SELECT * FROM user_settings " \
+            f"WHERE username = '{self.root.sesion}';")
         for row in data:
             self.user_data = row
         self.timer = self.user_data[7]
@@ -17,12 +18,13 @@ class Menu_principal(Frame):
         self.current_program = self.user_data[4]
         self.root.concentracion = self.user_data[6]
         self.root.vol = self.user_data[5]
-        self.tiempo_sanitizacion = 0
+        self.root.time = (self.root.vol * self.root.concentracion) * 2
         self.timer_valores = [
             ["DOM", "blue"], ["LUN", "blue"], ["MAR", "blue"], ["MIE", "blue"],
             ["JUE", "blue"], ["VIE", "blue"], ["SAB", "blue"]
             ]
-        self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu), ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
+        self.funcs = [("START/STOP", self.start_menu), ("CONF", self.conf_menu),
+            ("DIAG", self.diag_menu), ("LOG", self.log_menu)]
         self.menu_buttons = []
         # Metodos
         self.config(bg="white")
@@ -94,7 +96,7 @@ class Menu_principal(Frame):
         if self.root.program_object == None:
             self.clear(self.root)
             self.root.sesion = ""
-            inicio.Inicio(self.root).tkraise()
+            # inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
@@ -118,13 +120,16 @@ class Root(Tk):
         self.bomba_salida = 1
         self.current_button_state = 0
         self.current_program = 0
-        self.vol = 48
-        self.concentracion = 6
+        self.vol = 0
+        self.concentracion = 0
+        self.time = (self.vol * self.concentracion) * 2
         self.pulsos = 0
         self.ml = 0
         self.temp_dht = 25
+        self.temp_dht_inicial = 0
         self.ch3 = 0
         self.humidity_dht = 50
+        self.humidity_dht_inicial = 0
         self.config(bg="white")
         self.overrideredirect(1)
         self.geometry("770x495")
@@ -137,4 +142,4 @@ class Root(Tk):
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-# Root().mainloop()
+Root().mainloop()

@@ -46,8 +46,9 @@ class Interfaz(Tk):
         self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
         self.usernames = []
         self.program_object = None
-        self.vol = 16
-        self.concentracion = 6
+        self.vol = 0
+        self.concentracion = 0
+        self.time = (self.vol * self.concentracion) * 2
         self.timer = 0
         self.current_button_state = 0
         self.current_program = 0
@@ -82,7 +83,9 @@ class Interfaz(Tk):
         self.pulsos = 0
         self.tanque_lleno = 0
         self.temp_dht = 25
+        self.temp_dht_inicial = 0
         self.humidity_dht = 50
+        self.humidity_dht_inicial = 0
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
         self.bomba_entrada = 26
         self.bomba_salida = 20
