@@ -102,7 +102,7 @@ class Start_menu():
         self.volumen_frame.pack(side=LEFT, anchor="w")
         self.volumen_label = Label(self.volumen_frame, bg="gray", fg="white",
             font=self.root.myFont, text="Volumen: %d m3" % self.root.vol)
-        self.volumen_label.pack(padx=30, pady=10)
+        self.volumen_label.pack(padx=25, pady=10)
             # ***********************************************************
             # ************* Sesión **************************************
         self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -114,7 +114,7 @@ class Start_menu():
         self.tiempo_a_sanitizar = Label(self.sesion_frame, bg="gray",
             fg="white", font=self.root.myFont,
             text="Tiempo: %d s" % self.root.time)
-        self.tiempo_a_sanitizar.pack(side=RIGHT, padx=(40,10))
+        self.tiempo_a_sanitizar.pack(side=RIGHT, padx=(15,10))
             # ***********************************************************
             # *********** Cerrar sesión *********************************
         self.boton_cerrar_sesion = Button(self.barra_inferior, fg="white",

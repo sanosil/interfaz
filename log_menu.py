@@ -8,36 +8,82 @@ class Log_menu():
         self.root = root
         self.root_frame = root_frame
         self.current = 1
-        self.create_widgets()
+        self.create_widgets(self.current)
 
-    def create_widgets(self):
+    def create_widgets(self, log):
         self.rowa = Frame(self.root_frame.main_container, bg="white")
         self.rowa.grid(column=0, row=0)
-         # Título
+         # Título y botones
+        self.boton_izquierda = Button(self.rowa, bg="lightblue", text="<-",
+            font=self.root.myFont, command=self.izquierda)
+        self.boton_izquierda.pack(padx=20, side=LEFT)
         self.frame_titulo = Frame(self.rowa, bg="white", bd=3, relief=RIDGE)
         self.label_titulo = Label(self.frame_titulo, text="EVENTOS LOG",
             font=("Verdana", 15, "bold"), bg="white")
-        self.frame_titulo.pack(pady=20)
-        self.label_titulo.pack(padx=80)
+        self.frame_titulo.pack(side=LEFT, pady=20)
+        self.label_titulo.pack(padx=70)
+        self.boton_derecha = Button(self.rowa, bg="lightblue", text="->",
+            font=self.root.myFont, command=self.derecha)
+        self.boton_derecha.pack(side=LEFT, padx=20, pady=20)
 
         self.rowb = Frame(self.root_frame.main_container, bg="white")
         self.rowb.grid(column=0, row=1)
+        self.valores = []
 
+        self.display_log(log)
+
+
+
+    def izquierda(self):
+        current = self.root.database.execute("SELECT * FROM current_log;")
+        for row in current:
+            current_log = row[0]
+
+        if self.current > 1:
+            self.current = self.current - 1
+            self.root_frame.main_container.grid_forget()
+            self.root_frame.main_container.grid(column=0, row=1)
+            self.create_widgets(self.current)
+        else:
+            self.current = current_log - 1
+            self.root_frame.main_container.grid_forget()
+            self.root_frame.main_container.grid(column=0, row=1)
+            self.create_widgets(self.current)
+
+    def derecha(self):
+        current = self.root.database.execute("SELECT * FROM current_log;")
+        for row in current:
+            current_log = row[0]
+
+        if self.current < 15 and self.current < current_log - 1:
+            self.current = self.current + 1
+            self.root_frame.main_container.grid_forget()
+            self.root_frame.main_container.grid(column=0, row=1)
+            self.create_widgets(self.current)
+        else:
+            self.current = 1
+            self.root_frame.main_container.grid_forget()
+            self.root_frame.main_container.grid(column=0, row=1)
+            self.create_widgets(self.current)
+
+    def display_log(self, log):
         text = ("LOG ID", "FECHA INICIO", "HORA INICIO",
                 "USER", "FECHA FINAL", "HORA FINAL",
                 "CONCENTRACION", " VOLUMEN  ", "TIEMPO SANITIZADO",
                 "HUMEDAD RELATIVA INICIAL", "HUMEDAD RELATIVA FINAL",
                 "TEMPERATURA INICIAL", "TEMPERATURA FINAL")
+
+        self.rowc = Frame(self.root_frame.main_container, bg="white")
+        self.rowc.grid(column=0, row=2)
         self.value_lbls = []
         data = None
         try:
-            values = self.root.database.execute(f"SELECT * FROM logs WHERE id = {self.current};")
+            values = self.root.database.execute(f"SELECT * FROM logs WHERE id = {log};")
             for row in values:
                 data = row
         except:
             print("No logs available")
 
-        self.valores = []
         if data != None:
             for i in range(12):
                 if i < 4:
@@ -54,8 +100,6 @@ class Log_menu():
             for i in range(13):
                 self.valores.append(0)
 
-        print (self.valores)
-
         count = 0
         count1 = 0
         for row in range(1, 7):
@@ -66,9 +110,6 @@ class Log_menu():
                 else:
                     self.frame_value(self.rowb, row, col, self.valores[count1])
                     count1 = count1 + 1
-
-        self.rowc = Frame(self.root_frame.main_container, bg="white")
-        self.rowc.grid(column=0, row=2)
 
         for row in range(4, 8):
             for col in range(2):
@@ -100,7 +141,6 @@ def create_log(root):
     current = root.database.execute("SELECT * FROM current_log;")
     for row in current:
         current_log = row[0]
-        print(current_log)
 
     root.fecha_termino = date.today()
     root.hora_termino = datetime.now().strftime("%H:%M:%S")
