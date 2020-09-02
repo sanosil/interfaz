@@ -5,8 +5,8 @@ class Start_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-        self.path="images/"
+        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        # self.path="images/"
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")

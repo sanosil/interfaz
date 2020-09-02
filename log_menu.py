@@ -39,32 +39,34 @@ class Log_menu():
         for row in current:
             current_log = row[0]
 
-        if self.current > 1:
-            self.current = self.current - 1
-            self.root_frame.main_container.grid_forget()
-            self.root_frame.main_container.grid(column=0, row=1)
-            self.create_widgets(self.current)
-        else:
-            self.current = current_log - 1
-            self.root_frame.main_container.grid_forget()
-            self.root_frame.main_container.grid(column=0, row=1)
-            self.create_widgets(self.current)
+        if current_log != 1:
+            if self.current > 1:
+                self.current = self.current - 1
+                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.grid(column=0, row=1)
+                self.create_widgets(self.current)
+            else:
+                self.current = current_log - 1
+                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.grid(column=0, row=1)
+                self.create_widgets(self.current)
 
     def derecha(self):
         current = self.root.database.execute("SELECT * FROM current_log;")
         for row in current:
             current_log = row[0]
 
-        if self.current < 15 and self.current < current_log - 1:
-            self.current = self.current + 1
-            self.root_frame.main_container.grid_forget()
-            self.root_frame.main_container.grid(column=0, row=1)
-            self.create_widgets(self.current)
-        else:
-            self.current = 1
-            self.root_frame.main_container.grid_forget()
-            self.root_frame.main_container.grid(column=0, row=1)
-            self.create_widgets(self.current)
+        if current_log != 1:
+            if self.current < 15 and self.current < current_log - 1:
+                self.current = self.current + 1
+                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.grid(column=0, row=1)
+                self.create_widgets(self.current)
+            else:
+                self.current = 1
+                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.grid(column=0, row=1)
+                self.create_widgets(self.current)
 
     def display_log(self, log):
         text = ("LOG ID", "FECHA INICIO", "HORA INICIO",

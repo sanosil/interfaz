@@ -1,7 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 import sqlite3
-# import inicio
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -96,13 +96,13 @@ class Menu_principal(Frame):
         if self.root.program_object == None:
             self.clear(self.root)
             self.root.sesion = ""
-            # inicio.Inicio(self.root).tkraise()
+            inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
         super().__init__()
         self.timer = 0
-        self.sesion = "Admin"
+        self.sesion = "ADMIN"
         self.database = sqlite3.connect("program_database.db")
         # self.color = "#2ECC71"
         self.fecha_inicio = None
@@ -142,4 +142,4 @@ class Root(Tk):
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-Root().mainloop()
+# Root().mainloop()
