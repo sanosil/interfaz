@@ -118,10 +118,10 @@ class Programas():
                 else:
                     self.root.mensaje = "STATUS: LISTO PARA OPERAR"
                     if self.root_frame.current_menu == "START/STOP":
-						self.previous_frame.alertas_frame.config(
-							bg=self.root.color)
-						self.previous_frame.alertas_label.config(
-							text=self.root.mensaje, bg=self.root.color)
+                        self.previous_frame.alertas_frame.config(
+                            bg=self.root.color)
+                        self.previous_frame.alertas_label.config(
+                            text=self.root.mensaje, bg=self.root.color)
                     self.root.program_object = None
 
 	def vaciar_tanque(self):

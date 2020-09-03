@@ -43,12 +43,12 @@ class Log_menu():
             if self.current > 1:
                 self.current = self.current - 1
                 self.root_frame.main_container.grid_forget()
-                self.root_frame.main_container.grid(column=0, row=1)
+                self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
             else:
                 self.current = current_log - 1
                 self.root_frame.main_container.grid_forget()
-                self.root_frame.main_container.grid(column=0, row=1)
+                self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
 
     def derecha(self):
@@ -60,12 +60,12 @@ class Log_menu():
             if self.current < 15 and self.current < current_log - 1:
                 self.current = self.current + 1
                 self.root_frame.main_container.grid_forget()
-                self.root_frame.main_container.grid(column=0, row=1)
+                self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
             else:
                 self.current = 1
                 self.root_frame.main_container.grid_forget()
-                self.root_frame.main_container.grid(column=0, row=1)
+                self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
 
     def display_log(self, log):
