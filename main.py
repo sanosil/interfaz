@@ -44,6 +44,10 @@ class Interfaz(Tk):
         self.fecha_termino = None
         self.hora_termino = None
         self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
+        idioma = self.database.execute("SELECT language FROM user_settings " \
+            f"WHERE username = '{self.sesion}';")
+        for row in idioma:
+            self.language = row[0]   
         self.usernames = []
         self.program_object = None
         self.vol = 0

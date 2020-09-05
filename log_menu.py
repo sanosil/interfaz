@@ -14,7 +14,7 @@ class Log_menu():
         self.rowa = Frame(self.root_frame.main_container, bg="white")
         self.rowa.grid(column=0, row=0)
          # Título y botones
-        self.boton_izquierda = Button(self.rowa, bg="lightblue", text="<-",
+        self.boton_izquierda = Button(self.rowa, bg="yellow", text="Anterior",
             font=self.root.myFont, command=self.izquierda)
         self.boton_izquierda.pack(padx=20, side=LEFT)
         self.frame_titulo = Frame(self.rowa, bg="white", bd=3, relief=RIDGE)
@@ -22,7 +22,7 @@ class Log_menu():
             font=("Verdana", 15, "bold"), bg="white")
         self.frame_titulo.pack(side=LEFT, pady=20)
         self.label_titulo.pack(padx=70)
-        self.boton_derecha = Button(self.rowa, bg="lightblue", text="->",
+        self.boton_derecha = Button(self.rowa, bg="yellow", text="Siguiente",
             font=self.root.myFont, command=self.derecha)
         self.boton_derecha.pack(side=LEFT, padx=20, pady=20)
 
@@ -124,18 +124,18 @@ class Log_menu():
 
 
     def frame_field(self, parent, row, col, text, offset):
-        fr = Frame(parent, bg="yellow", bd=3, relief=RIDGE)
+        fr = Frame(parent, bg="blue", bd=3, relief=RIDGE)
         fr.grid(column=col, row=row, padx=30, pady=(0, 5))
-        lbl = Label(fr, bg="yellow", text=text, font=self.root.myFont)
+        lbl = Label(fr, bg="blue", text=text, font=self.root.myFont, fg="white")
         if len(text) % 2 == 0:
             lbl.pack(padx=((offset - (len(text)*11))/2))
         else:
             lbl.pack(padx=((offset+1 - (len(text)*11))/2))
 
     def frame_value(self, parent, row, col, value):
-        fr = Frame(parent, bg="lightgray", relief=SUNKEN, bd=3)
+        fr = Frame(parent, bg="white", relief=SUNKEN, bd=3)
         fr.grid(column=col, row=row, pady=(0, 5))
-        lbl = Label(fr, bg="lightgray", font=self.root.myFont, text=value)
+        lbl = Label(fr, bg="white", font=self.root.myFont, text=value)
         lbl.pack()
         self.value_lbls.append(lbl)
 

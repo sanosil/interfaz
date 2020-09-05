@@ -1,5 +1,5 @@
 from tkinter import *
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 from datetime import date, datetime
 import log_menu
 import sqlite3
@@ -38,8 +38,8 @@ class Programas():
 			self.previous_frame.alertas_label.config(text=self.root.mensaje)
 			if self.root.concentracion != 0 and self.root.vol != 0:
 				self.total_ml = self.root.concentracion * self.root.vol
+				self.tiempo_a_sanitizar = self.total_ml * .1
 				self.root.after(1000, self.salida_start)
-				self.tiempo_a_sanitizar = self.total_ml * 2
 
 	def salida_start(self):
 		self.tiempo_salida = self.tiempo_salida - 1
@@ -77,8 +77,8 @@ class Programas():
 	def measure_ml(self):
             if self.root.current_button_state == 1:
                 # flujo en ml/s
-                self.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
-                # self.flujo = 30
+                # self.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
+                self.flujo = 30
                 self.root.pulsos = 0
                 self.root.ml = self.root.ml + (self.flujo * .1)
                 self.root.mensaje = "STATUS: LLENANDO; " + str(int(self.root.ml)) + \
@@ -89,11 +89,11 @@ class Programas():
                     self.previous_frame.alertas_label.config(bg="blue")
                     self.previous_frame.alertas_frame.config(bg="blue")
 
-                if GPIO.input(self.root.flotador) == 0:
-                    self.root.pin_on(self.root.bomba_entrada, 1)
-                    self.root.after(120000, self.llenar_tanque)
-                    self.root.tanque_lleno = 1
-                elif self.root.ml >= 320 and self.inicio == 0:
+                # if GPIO.input(self.root.flotador) == 0:
+                #     self.root.pin_on(self.root.bomba_entrada, 1)
+                #     self.root.after(120000, self.llenar_tanque)
+                #     self.root.tanque_lleno = 1
+                if self.root.ml >= 320 and self.inicio == 0:
                     self.inicio = 1
                     self.root.ml = 0
                     self.root.after(100, self.measure_ml)

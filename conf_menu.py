@@ -1,12 +1,13 @@
 from tkinter import *
 from datetime import datetime, date
+import user_menu, language_menu, wifi_menu, program_menu
 
 class Conf_menu():
     def __init__(self, root, root_frame):
         # variables
         self.root = root
-        now = datetime.now()
         self.root_frame = root_frame
+        now = datetime.now()
         self.primera_mitad = Frame(self.root_frame.main_container, bg="white")
         self.primera_mitad.pack(side=LEFT)
         # Barra de fecha y hora con texto
@@ -48,8 +49,15 @@ class Conf_menu():
                          ("WI-FI", self.wifi_settings),
                          ("PROGRAMA", self.program_settings)
                         ]
+        count = 0
         for text, command in self.settings:
-            self.settings_buttons(text, command)
+            if self.root.sesion == "ADMIN":
+                self.settings_buttons(text, command)
+            elif count != 0:
+                self.settings_buttons(text,command)
+            count = 1
+
+
 
         self.actualizar_hora()
 
@@ -68,10 +76,14 @@ class Conf_menu():
         dia.bind("<Button-1>", self.edit_timer)
 
     def user_settings(self):
-        print("user settings")
+        self.frame_inferior.grid_forget()
+        self.root_frame.main_container.grid_forget()
+        user_menu.User_menu(self.root, self.root_frame)
 
     def language_settings(self):
-        print("Language settings")
+        self.frame_inferior.grid_forget()
+        self.root_frame.main_container.grid_forget()
+        language_menu.Language_menu(self.root, self.root_frame)
 
     def wifi_settings(self):
         print("Wi fi settings")

@@ -1,7 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 import sqlite3
-import inicio
+# import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -96,11 +96,13 @@ class Menu_principal(Frame):
         if self.root.program_object == None:
             self.clear(self.root)
             self.root.sesion = ""
-            inicio.Inicio(self.root).tkraise()
+            # inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):
         super().__init__()
+        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.path="images/"
         self.timer = 0
         self.sesion = "ADMIN"
         self.database = sqlite3.connect("program_database.db")
@@ -133,13 +135,19 @@ class Root(Tk):
         self.config(bg="white")
         self.overrideredirect(1)
         self.geometry("770x495")
-        self.sesion = "ADMIN"
         self.myFont = ("Verdana", 12)
         self.myFont_bold = ("Verdana", 12, "bold")
-
+        self.usernames = []
+        usernames = self.database.execute("SELECT username FROM user_settings;")
+        for row in usernames:
+            self.usernames.append(row[0])
+        idioma = self.database.execute("SELECT language FROM user_settings " \
+            f"WHERE username = '{self.sesion}';")
+        for row in idioma:
+            self.language = row[0]
         Menu_principal(self, "START/STOP")
 
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-# Root().mainloop()
+Root().mainloop()
