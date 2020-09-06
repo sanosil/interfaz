@@ -145,6 +145,8 @@ class Root(Tk):
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
             self.language = row[0]
+
+        print(self.language)
         Menu_principal(self, "START/STOP")
 
     def pin_on(self, ch, s):

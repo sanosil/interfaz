@@ -94,7 +94,7 @@ class Conf_menu():
     def set_date_time(self, event=None):
         print("set date and time")
 
-    def program_settings(self, event=None):
+    def program_settings(self, event=None):        
         print("Program settings")
 
     def actualizar_hora(self):
