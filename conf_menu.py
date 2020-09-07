@@ -45,9 +45,9 @@ class Conf_menu():
         self.frame_inferior = Frame(self.root_frame, bg="white")
         self.frame_inferior.grid(column=0, row=2, sticky="nw", ipady=78)
         self.settings = [("USUARIO", self.user_settings),
+                         ("PROGRAMA", self.program_settings),
                          ("IDIOMA", self.language_settings),
-                         ("WI-FI", self.wifi_settings),
-                         ("PROGRAMA", self.program_settings)
+                         ("WI-FI", self.wifi_settings)
                         ]
         count = 0
         for text, command in self.settings:
@@ -86,16 +86,20 @@ class Conf_menu():
         language_menu.Language_menu(self.root, self.root_frame)
 
     def wifi_settings(self):
-        print("Wi fi settings")
+        self.frame_inferior.grid_forget()
+        self.root_frame.main_container.grid_forget()
+        wifi_menu.Wifi_menu(self.root, self.root_frame)
+
+    def program_settings(self, event=None):
+        self.frame_inferior.grid_forget()
+        self.root_frame.main_container.grid_forget()
+        program_menu.Program_menu(self.root, self.root_frame)
 
     def edit_timer(self, event=None):
         print("edit timer")
 
     def set_date_time(self, event=None):
         print("set date and time")
-
-    def program_settings(self, event=None):        
-        print("Program settings")
 
     def actualizar_hora(self):
         try:

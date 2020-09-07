@@ -46,7 +46,7 @@ class Log_menu():
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
             else:
-                self.current = current_log - 1
+                self.current = self.current - 1
                 self.root_frame.main_container.grid_forget()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
@@ -57,7 +57,7 @@ class Log_menu():
             current_log = row[0]
 
         if current_log != 1:
-            if self.current < 15 and self.current < current_log - 1:
+            if self.current < 15 and self.current <= current_log - 1:
                 self.current = self.current + 1
                 self.root_frame.main_container.grid_forget()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
@@ -143,6 +143,10 @@ def create_log(root):
     current = root.database.execute("SELECT * FROM current_log;")
     for row in current:
         current_log = row[0]
+
+    if current_log > 2:
+        root.database.execute("DELETE FROM logs WHERE id=1;")
+        current_log = 1
 
     root.fecha_termino = date.today()
     root.hora_termino = datetime.now().strftime("%H:%M:%S")
