@@ -8,6 +8,9 @@ class Log_menu():
         self.root = root
         self.root_frame = root_frame
         self.current = 1
+        total = self.root.database.execute("SELECT total FROM current_log;")
+        for row in total:
+            self.total = row[0]
         self.create_widgets(self.current)
 
     def create_widgets(self, log):
@@ -35,7 +38,7 @@ class Log_menu():
 
 
     def izquierda(self):
-        current = self.root.database.execute("SELECT * FROM current_log;")
+        current = self.root.database.execute("SELECT current FROM current_log;")
         for row in current:
             current_log = row[0]
 
@@ -46,18 +49,18 @@ class Log_menu():
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
             else:
-                self.current = self.current - 1
+                self.current = self.total
                 self.root_frame.main_container.grid_forget()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
 
     def derecha(self):
-        current = self.root.database.execute("SELECT * FROM current_log;")
+        current = self.root.database.execute("SELECT current FROM current_log;")
         for row in current:
             current_log = row[0]
 
         if current_log != 1:
-            if self.current < 15 and self.current <= current_log - 1:
+            if self.current < 15 and self.current < self.total:
                 self.current = self.current + 1
                 self.root_frame.main_container.grid_forget()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
@@ -140,11 +143,15 @@ class Log_menu():
         self.value_lbls.append(lbl)
 
 def create_log(root):
-    current = root.database.execute("SELECT * FROM current_log;")
+    total_list = root.database.execute("SELECT total FROM current_log;")
+    for row in total_list:
+        total = row[0]
+    current = root.database.execute("SELECT current FROM current_log;")
+
     for row in current:
         current_log = row[0]
 
-    if current_log > 2:
+    if current_log > 15:
         root.database.execute("DELETE FROM logs WHERE id=1;")
         current_log = 1
 
@@ -157,5 +164,9 @@ def create_log(root):
         f"'{root.sesion}', {root.concentracion}, {root.vol}, {root.time}, " \
         f"'{str(root.fecha_termino)}', '{str(root.hora_termino)}', {root.humidity_dht_inicial}, " \
         f"{root.humidity_dht}, {root.temp_dht_inicial}, {root.temp_dht});")
+
     root.database.execute(f"UPDATE current_log SET current = {current_log + 1};")
+    if total < 15:
+        root.database.execute(f"UPDATE current_log SET total = {total + 1};")
+
     root.database.commit()
