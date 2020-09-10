@@ -77,14 +77,12 @@ class Language_menu():
     def evento(self, event, frm, language):
         frm.focus_set()
         self.new_language = language
-        print(self.new_language)
         self.new_entry.delete(0, END)
         self.new_entry.insert(0, language.capitalize())
 
     def confirmar(self):
         self.root.language = self.new_language
         self.root.database.execute("UPDATE user_settings SET " \
-            f"language='{self.root.language}' WHERE username = '{self.root.sesion}';")
-        print("idioma cambiado")
+            f"language='{self.root.language}' WHERE username = '{self.root.sesion}';")        
         self.root.database.commit()
         self.root_frame.switch_menu("START/STOP")
