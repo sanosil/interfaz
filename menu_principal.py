@@ -8,17 +8,7 @@ class Menu_principal(Frame):
         super().__init__(root)
         # Variables
         self.root = root
-        data = self.root.database.execute("SELECT * FROM user_settings " \
-            f"WHERE username = '{self.root.sesion}';")
-        for row in data:
-            self.user_data = row
-        self.timer = self.user_data[7]
         self.current_menu  = menu
-        self.current_button_state = self.root.current_button_state
-        self.current_program = self.user_data[4]
-        self.root.concentracion = self.user_data[6]
-        self.root.vol = self.user_data[5]
-        self.root.time = (self.root.vol * self.root.concentracion) * 2
         self.timer_valores = [
             ["DOM", "blue"], ["LUN", "blue"], ["MAR", "blue"], ["MIE", "blue"],
             ["JUE", "blue"], ["VIE", "blue"], ["SAB", "blue"]
@@ -33,6 +23,16 @@ class Menu_principal(Frame):
         self.create_widgets(self.current_menu)
 
     def create_widgets(self, menu):
+        data = self.root.database.execute("SELECT * FROM user_settings " \
+            f"WHERE username = '{self.root.sesion}';")
+        for row in data:
+            self.user_data = row
+        self.timer = self.user_data[7]
+        self.current_button_state = self.root.current_button_state
+        self.current_program = self.user_data[4]
+        self.root.concentracion = self.user_data[6]
+        self.root.vol = self.user_data[5]
+        self.root.time = (self.root.vol * self.root.concentracion) * 2
         # Barra de menús
         self.menu = Frame(self, bg="white")
         self.menu.grid(column=0, row=0)
@@ -145,7 +145,7 @@ class Root(Tk):
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
             self.language = row[0]
-        
+
         Menu_principal(self, "START/STOP")
 
     def pin_on(self, ch, s):

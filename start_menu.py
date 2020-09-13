@@ -138,7 +138,7 @@ class Start_menu():
         button_label.pack(side=BOTTOM)
 
     def activate(self, event=None):
-        # self.root.destroy()
+        # self.root.destroy()        
         if self.root.current_button_state == 0 and self.root.program_object == None:
             self.start_button.config(image=self.start_button_active)
             self.start_button_label.config(fg=self.root.color)

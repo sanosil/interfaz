@@ -13,13 +13,13 @@ class Programas():
 		self.root.fecha_inicio = date.today()
 		self.root.hora_inicio = datetime.now().strftime("%H:%M:%S")
 
-		if self.program == "Normal":
+		if self.program == "NORMAL":
 			self.normal()
-		elif self.program == "Step":
+		elif self.program == "STEP":
 			self.step()
-		elif self.program == "Testing":
+		elif self.program == "TESTING":
 			self.testing()
-		elif self.program == "Manual":
+		elif self.program == "MANUAL":
 			self.manual()
 
 	def set_previous_frame(self, previous_frame):
@@ -72,7 +72,7 @@ class Programas():
 		pass
 
 	def manual(self):
-		pass
+		self.apagar_bomba()		
 
 	def measure_ml(self):
             if self.root.current_button_state == 1:
