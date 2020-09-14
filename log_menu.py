@@ -139,7 +139,7 @@ class Log_menu():
         fr = Frame(parent, bg="white", relief=SUNKEN, bd=3)
         fr.grid(column=col, row=row, pady=(0, 5))
         lbl = Label(fr, bg="white", font=self.root.myFont, text=value)
-        lbl.pack()
+        lbl.pack(padx=20)
         self.value_lbls.append(lbl)
 
 def create_log(root):
