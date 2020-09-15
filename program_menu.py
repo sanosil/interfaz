@@ -10,6 +10,9 @@ class Program_menu():
     def create_widgets(self):
         self.ch_select = PhotoImage(file=self.root.path+"ch_select.png").subsample(8)
         self.ch_unselect = PhotoImage(file=self.root.path+"ch_unselect.png").subsample(8)
+        self.radioselect = PhotoImage(file=self.root.path+"radioselect.png")
+        self.radiounselect = PhotoImage(file=self.root.path+"radiounselect.png")
+
         self.main = Frame(self.root_frame, bg="white")
         self.main.grid(sticky=W, column=0, row=1)
 
@@ -23,39 +26,88 @@ class Program_menu():
             text="Programa", font=("Verdana", 15, "bold"))
         self.titulo.pack(padx=30, pady=10)
         self.imagenes = []
-        data = self.root.database.execute("SELECT programa FROM user_settings "\
+        data = self.root.database.execute("SELECT programa, concentration, volume FROM user_settings "\
             f"WHERE username='{self.root.sesion}';")
+
         for row in data:
             self.current_program = row[0]
+            self.concentracion = row[1]
+            self.volume = row[2]
 
         if self.current_program == "NORMAL":
-            self.opcion(self.ch_select, "NORMAL", 1, (0, "NORMAL"))
-            self.opcion(self.ch_unselect, "MANUAL", 2, (1, "MANUAL"))
+            self.opcion(self.ch_select, "NORMAL", 1)
+            self.opcion(self.ch_unselect, "MANUAL", 2)
         else:
-            self.opcion(self.ch_unselect, "NORMAL", 1, (0, "NORMAL"))
-            self.opcion(self.ch_select, "MANUAL", 2, (1, "MANUAL"))
+            self.opcion(self.ch_unselect, "NORMAL", 1)
+            self.opcion(self.ch_select, "MANUAL", 2)
 
-    def opcion(self, image, text, row, com):
+        self.frame_concentracion = Frame(self.main, bg="white")
+        self.frame_concentracion.grid(column=1, row=0, padx=30, pady=5, sticky=N)
+
+        self.frame_titulo_concentracion = Frame(self.frame_concentracion, bg="white",
+            relief=RIDGE, bd=5)
+        self.frame_titulo_concentracion.grid(column=0, row=0, pady=20)
+
+        self.titulo_concentracion = Label(self.frame_titulo_concentracion, bg="white",
+            font=("Verdana", 15, "bold"), text="Concentración")
+        self.titulo_concentracion.pack(padx=15, pady=10)
+
+        self.frame_opciones = Frame(self.frame_concentracion, bg="white")
+        self.frame_opciones.grid(column=0, row=1)
+
+        valores = (6, 8, 10)
+        self.con_imgs = []
+        self.count = 0
+        for i in valores:
+            self.opcion_concentracion(i, self.count)
+            self.count = self.count + 1
+
+    def opcion_concentracion(self, valor, i):
+        fr = Frame(self.frame_opciones, bg="white")
+        fr.pack(side=LEFT, padx=15)
+        if valor == self.concentracion:
+            self.con_imgs.append(Label(fr, image=self.radioselect, bg="white"))
+        else:
+            self.con_imgs.append(Label(fr, image=self.radiounselect, bg="white"))
+        self.con_imgs[i].pack(side=LEFT)
+        self.con_imgs[i].bind("<Button-1>", lambda e, v=valor, c=i: self.cambiar_concentracion(e, v, c))
+        lbl_text = Label(fr, text=str(valor)+" ml/m3", bg="white", font=self.root.myFont)
+        lbl_text.pack(side=LEFT)
+
+    def cambiar_concentracion(self, event, valor, count):
+        c = 0
+        for img in self.con_imgs:
+            if c == count:
+                img.config(image=self.radioselect)
+            else:
+                img.config(image=self.radiounselect)
+            c = c + 1
+
+        self.root.database.execute("UPDATE user_settings SET " \
+            f"concentration={valor} WHERE username='{self.root.sesion}'")
+        self.root.database.commit()
+
+    def opcion(self, image, text, row):
         fr = Frame(self.frame_programa, bg="white")
         fr.grid(column=0, row=row, sticky=W)
         self.imagenes.append(Label(fr, bg="white", image=image))
         self.imagenes[row-1].pack(side=LEFT)
-        self.imagenes[row-1].bind("<Button-1>", lambda e, c=com:self.set_program(e, c))
+        self.imagenes[row-1].bind("<Button-1>", lambda e, t=text, v=row-1:self.set_program(e, t, v))
         self.imagenes[row-1].picture = image
         lbl = Label(fr, bg="white", text=text, font=self.root.myFont)
         lbl.pack(side=LEFT)
 
 
-    def set_program(self, event, kw):
-        if self.current_program != kw[1]:
-            self.current_program = kw[1]
-            if kw[0] == 0:
-                self.imagenes[kw[0]].config(image=self.ch_select)
+    def set_program(self, event, text, valor):
+        if self.current_program != text:
+            self.current_program = text
+            if valor == 0:
+                self.imagenes[valor].config(image=self.ch_select)
                 self.imagenes[1].config(image=self.ch_unselect)
             else:
-                self.imagenes[kw[0]].config(image=self.ch_select)
+                self.imagenes[valor].config(image=self.ch_select)
                 self.imagenes[0].config(image=self.ch_unselect)
 
-            self.root.database.execute(f"UPDATE user_settings SET programa='{kw[1]}'"\
+            self.root.database.execute(f"UPDATE user_settings SET programa='{text}'"\
                 f" WHERE username='{self.root.sesion}';")
             self.root.database.commit()

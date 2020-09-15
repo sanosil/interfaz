@@ -36,7 +36,6 @@ class Log_menu():
         self.display_log(log)
 
 
-
     def izquierda(self):
         current = self.root.database.execute("SELECT current FROM current_log;")
         for row in current:
@@ -128,7 +127,7 @@ class Log_menu():
 
     def frame_field(self, parent, row, col, text, offset):
         fr = Frame(parent, bg="blue", bd=3, relief=RIDGE)
-        fr.grid(column=col, row=row, padx=30, pady=(0, 5))
+        fr.grid(column=col, row=row, padx=25, pady=(0, 5))
         lbl = Label(fr, bg="blue", text=text, font=self.root.myFont, fg="white")
         if len(text) % 2 == 0:
             lbl.pack(padx=((offset - (len(text)*11))/2))
