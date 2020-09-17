@@ -62,6 +62,10 @@ class Program_menu():
             self.opcion_concentracion(i, self.count)
             self.count = self.count + 1
 
+        self.frame_volumen = Frame(self.main, bg="white")
+        self.frame_volumen.grid(column=0, row=1, padx=30, pady=5, sticky="nw")
+        lbl = Label
+
     def opcion_concentracion(self, valor, i):
         fr = Frame(self.frame_opciones, bg="white")
         fr.pack(side=LEFT, padx=15)
