@@ -8,8 +8,11 @@ class Program_menu():
         self.create_widgets()
 
     def create_widgets(self):
-        self.ch_select = PhotoImage(file=self.root.path+"ch_select.png").subsample(8)
-        self.ch_unselect = PhotoImage(file=self.root.path+"ch_unselect.png").subsample(8)
+        self.font = ("Verdana", 15, "bold")
+        self.ch_select = PhotoImage(
+            file=self.root.path+"ch_select.png").subsample(8)
+        self.ch_unselect = PhotoImage(
+            file=self.root.path+"ch_unselect.png").subsample(8)
         self.radioselect = PhotoImage(file=self.root.path+"radioselect.png")
         self.radiounselect = PhotoImage(file=self.root.path+"radiounselect.png")
 
@@ -23,10 +26,11 @@ class Program_menu():
             relief=RIDGE, bd=5)
         self.frame_titulo_programa.grid(column=0, row=0, sticky=W, pady=20)
         self.titulo = Label(self.frame_titulo_programa, bg="white",
-            text="Programa", font=("Verdana", 15, "bold"))
+            text="Programa", font=self.font)
         self.titulo.pack(padx=30, pady=10)
         self.imagenes = []
-        data = self.root.database.execute("SELECT programa, concentration, volume FROM user_settings "\
+        data = self.root.database.execute("SELECT programa, concentration," \
+            " volume FROM user_settings " \
             f"WHERE username='{self.root.sesion}';")
 
         for row in data:
@@ -49,7 +53,7 @@ class Program_menu():
         self.frame_titulo_concentracion.grid(column=0, row=0, pady=20)
 
         self.titulo_concentracion = Label(self.frame_titulo_concentracion, bg="white",
-            font=("Verdana", 15, "bold"), text="Concentración")
+            font=self.font, text="Concentración")
         self.titulo_concentracion.pack(padx=15, pady=10)
 
         self.frame_opciones = Frame(self.frame_concentracion, bg="white")
@@ -63,8 +67,13 @@ class Program_menu():
             self.count = self.count + 1
 
         self.frame_volumen = Frame(self.main, bg="white")
-        self.frame_volumen.grid(column=0, row=1, padx=30, pady=5, sticky="nw")
-        lbl = Label
+        self.frame_volumen.grid(column=0, row=1, padx=50, pady=5, sticky="nw")
+        self.frame_titulo_volumen = Frame(self.frame_volumen, bg="white", bd=5,
+            relief=RIDGE)
+        self.frame_titulo_volumen.grid(column=0, row=0)
+        self.titulo_volumen = Label(self.frame_titulo_volumen, bg="white",
+            text="VOLUMEN", font=self.font)
+        self.titulo_volumen.pack(padx=15, pady=10)
 
     def opcion_concentracion(self, valor, i):
         fr = Frame(self.frame_opciones, bg="white")
@@ -74,7 +83,8 @@ class Program_menu():
         else:
             self.con_imgs.append(Label(fr, image=self.radiounselect, bg="white"))
         self.con_imgs[i].pack(side=LEFT)
-        self.con_imgs[i].bind("<Button-1>", lambda e, v=valor, c=i: self.cambiar_concentracion(e, v, c))
+        self.con_imgs[i].bind("<Button-1>", lambda e, v=valor, c=i:
+            self.cambiar_concentracion(e, v, c))
         lbl_text = Label(fr, text=str(valor)+" ml/m3", bg="white", font=self.root.myFont)
         lbl_text.pack(side=LEFT)
 
