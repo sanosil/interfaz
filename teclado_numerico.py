@@ -1,9 +1,9 @@
-
 from tkinter import *
 
 class Teclado(Frame):
-    def __init__(self, root, titulo):
-        self.color = "chartreuse4"
+    def __init__(self, root, titulo, previous):
+        self.previous = previous
+        self.color = "lemon chiffon"
         super().__init__(root, bg=self.color)
         self.titulo = titulo
         self.root = root
@@ -15,17 +15,18 @@ class Teclado(Frame):
 
     def crear_teclado(self):
         self.frm_titulo_teclado = Frame(self, bg="white", relief=RIDGE, bd=5)
-        self.frm_titulo_teclado.grid(column=0, row=0, padx=25, pady=15, sticky=W)
+        self.frm_titulo_teclado.grid(column=0, row=0, padx=40, pady=15, sticky=W)
 
         self.titulo_teclado = Label(self.frm_titulo_teclado, text=self.titulo,
             bg="white", font=("Verdana", 25, "bold"))
-        self.titulo_teclado.pack(padx=100)
+        self.titulo_teclado.pack(padx=160)
 
         self.rowa = Frame(self, bg=self.color)
         self.rowa.grid(column=0, row=1, sticky=W, padx=(25, 5))
 
-        self.entry_volumen = Entry(self.rowa, font=("Verdana", 25), width=30)
-        self.entry_volumen.pack(side=LEFT, padx=15)
+        self.entry_volumen = Entry(self.rowa, font=("Verdana", 25), width=23,
+            relief=SUNKEN, bd=3, state=DISABLED)
+        self.entry_volumen.pack(side=LEFT, padx=15, ipady=5, ipadx=5)
 
         self.frm_teclado = Frame(self, bg=self.color)
         self.frm_teclado.grid(column=0, row=2, padx=25, pady=15, sticky=W)
@@ -57,12 +58,36 @@ class Teclado(Frame):
         btn_dig.grid(column=col, row=0, ipadx=50, ipady=5, padx=15)
 
         if dig == "  ":
-            btn_dig["state"] = DISABLED
+            # btn_dig["state"] = DISABLED
+            btn_dig.config(command=lambda: self.volver())
+
+    def clear_entry(self):
+        self.nuevo_volumen = ""
+        self.ins("")
+
+    def volver(self):
+        self.grid_forget()
+        self.previous.grid(column=0, row=0)
+
 
     def ins(self, dig):
+        w = 1
         if dig == " .":
             dig = "."
-        self.entry_volumen.insert(END, dig)
+            if dig in self.nuevo_volumen:
+                w = 0
+
+        if w == 1:
+            self.nuevo_volumen = self.nuevo_volumen + str(dig)
+            self.entry_volumen.config(state=NORMAL)
+            self.entry_volumen.delete(0, END)
+            self.entry_volumen.insert(END, self.nuevo_volumen)
+
+        self.entry_volumen.config(state=DISABLED)
+
+    def erase(self):
+        self.nuevo_volumen = self.nuevo_volumen[:-1]
+        self.ins("")
 
     def cambiar_volumen(self, volumen):
         self.root.database.execute("UPDATA user_settings SET " \
@@ -70,4 +95,5 @@ class Teclado(Frame):
         self.root.database.commit()
 
     def enter(self):
-        pass
+        cambiar_volumen(self.nuevo_volumen)
+        self.volver()

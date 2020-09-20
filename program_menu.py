@@ -93,7 +93,7 @@ class Program_menu():
 
     def cambiar_volumen(self, event):
         self.root_frame.grid_forget()
-        teclado_numerico.Teclado(self.root, "Cambiar Volumen")
+        teclado_numerico.Teclado(self.root, "Nuevo Volumen", self.root_frame)
 
     def opcion_concentracion(self, valor, i):
         fr = Frame(self.frame_opciones, bg="white")
