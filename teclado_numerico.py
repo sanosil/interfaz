@@ -52,6 +52,8 @@ class Teclado(Frame):
                 count_col = count_col + 1
             count_col = 0
 
+        
+
     def frame_numero(self, frm, dig, col):
         btn_dig = Button(frm, bg="lightblue1", text=dig,
             font=("Verdana", 20, "bold"), command=lambda d=dig: self.ins(d))

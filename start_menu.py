@@ -189,4 +189,8 @@ class Start_menu():
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")
 
+        self.root.database.execute("UPDATE user_settings SET " \
+            f"timer = {self.root.timer} WHERE username = '{self.root.sesion}'")
+        self.root.database.commit()
+
 # ------------------ Termina menu START/STOP --------------------------
