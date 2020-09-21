@@ -52,7 +52,7 @@ class Start_menu():
         self.timer_label = Label(self.timerFrame, bg="white",
             font=("Verdana", 12, "bold"))
         self.timer_label.grid(column=0, row=1)
-        if self.root_frame.timer == 0:
+        if self.root.timer == 0:
             self.timer_label.config(text="Timer off", fg="red")
         else:
             self.timer_label.config(text="Timer on", fg="#2ECC71")
@@ -102,7 +102,7 @@ class Start_menu():
         self.volumen_frame.pack(side=LEFT, anchor="w")
         self.volumen_label = Label(self.volumen_frame, bg="gray", fg="white",
             font=self.root.myFont, text="Volumen: %d m3" % self.root.vol)
-        self.volumen_label.pack(padx=25, pady=10)
+        self.volumen_label.pack(padx=25-(len(str(self.root.vol))*5), pady=10)
             # ***********************************************************
             # ************* Sesión **************************************
         self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -188,6 +188,5 @@ class Start_menu():
             self.root.timer = 0
             self.root_frame.timer = 0
             self.timer_label.config(fg="red", text="Timer off")
-
 
 # ------------------ Termina menu START/STOP --------------------------

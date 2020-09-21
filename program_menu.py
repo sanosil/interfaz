@@ -21,11 +21,11 @@ class Program_menu():
         self.main.grid(sticky=W, column=0, row=1)
 
         self.frame_programa = Frame(self.main, bg="white")
-        self.frame_programa.grid(column=0, row=0, sticky=W, padx=50, pady=5)
+        self.frame_programa.grid(column=0, row=0, sticky="nw", padx=50, pady=5)
 
         self.frame_titulo_programa = Frame(self.frame_programa, bg="white",
             relief=RIDGE, bd=5)
-        self.frame_titulo_programa.grid(column=0, row=0, sticky=W, pady=20)
+        self.frame_titulo_programa.grid(column=0, row=0, sticky="nw", pady=20)
         self.titulo = Label(self.frame_titulo_programa, bg="white",
             text="Programa", font=self.font)
         self.titulo.pack(padx=30, pady=10)
@@ -86,7 +86,7 @@ class Program_menu():
 
         self.valor_volumen = Label(self.frame_valor_volumen, bg="white",
             text=str(self.volume) + " m3", font=self.root.myFont)
-        self.valor_volumen.pack(padx=(50, 5), pady=5)
+        self.valor_volumen.pack(padx=(80, 5), pady=5)
 
         self.frame_valor_volumen.bind("<Button-1>", self.cambiar_volumen)
         self.valor_volumen.bind("<Button-1>", self.cambiar_volumen)

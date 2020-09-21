@@ -59,16 +59,21 @@ class Teclado(Frame):
 
         if dig == "  ":
             # btn_dig["state"] = DISABLED
-            btn_dig.config(command=lambda: self.volver())
+            btn_dig.config(command=lambda: self.enter())
 
     def clear_entry(self):
         self.nuevo_volumen = ""
         self.ins("")
 
     def volver(self):
+        self.root.config(bg="white")
+        self.grid_forget()
+        self.previous.__init__(self.root, "START/STOP")
+
+    def anterior(self):
+        self.root.config(bg="white")
         self.grid_forget()
         self.previous.grid(column=0, row=0)
-
 
     def ins(self, dig):
         w = 1
@@ -90,10 +95,20 @@ class Teclado(Frame):
         self.ins("")
 
     def cambiar_volumen(self, volumen):
-        self.root.database.execute("UPDATA user_settings SET " \
+        self.root.database.execute("UPDATE user_settings SET " \
             f"volume={volumen} WHERE username='{self.root.sesion}'")
         self.root.database.commit()
 
     def enter(self):
-        cambiar_volumen(self.nuevo_volumen)
-        self.volver()
+        if float(self.nuevo_volumen) < 1000:
+            self.cambiar_volumen(float(self.nuevo_volumen))
+            self.volver()
+        else:
+            self.entry_volumen.delete(0, END)
+            self.nuevo_volumen = "Volumen demasiado grande"
+            self.ins("")
+            self.after(2000, self.act_entry)
+
+    def act_entry(self):
+        self.nuevo_volumen = ""
+        self.ins("")

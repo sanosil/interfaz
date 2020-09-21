@@ -27,7 +27,7 @@ class Menu_principal(Frame):
             f"WHERE username = '{self.root.sesion}';")
         for row in data:
             self.user_data = row
-        self.timer = self.user_data[7]
+        self.root.timer = self.user_data[7]
         self.current_button_state = self.root.current_button_state
         self.current_program = self.user_data[4]
         self.root.concentracion = self.user_data[6]
