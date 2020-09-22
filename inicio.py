@@ -11,11 +11,10 @@ class Inicio(Frame):
         self.grid(column=0, row=0)
         self.user_container = Frame(self, bg="white")
         self.user_container.grid(column=0, row=0)
-        path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         self.user_images = {
-            "admin": PhotoImage(file=path+"Admin.png").subsample(4),
-            "service": PhotoImage(file=path+"Service.png").subsample(4),
-            "user": PhotoImage(file=path+"User.png").subsample(4)
+            "admin": PhotoImage(file=self.root.path+"Admin.png").subsample(4),
+            "service": PhotoImage(file=self.root.path+"Service.png").subsample(4),
+            "user": PhotoImage(file=self.root.path+"User.png").subsample(4)
         }
         self.sel_label = Label(self.user_container, bg="white",
                     font=("Verdana", 18, "bold"), text="Seleccione\nusuario")
@@ -80,7 +79,7 @@ class Inicio(Frame):
                         font=self.root.myFont, text="Contraseña:")
         self.pass_label.grid(column=0, row=0, padx=(0, 30))
         self.password = Entry(self.container_pass, fg="gray",
-            font=("Verdana", 20), width=30)
+            font=("Verdana", 18), width=32)
         self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
         self.password.bind("<Button-1>", self.teclado)
         self.password.grid(column=1, row=0)

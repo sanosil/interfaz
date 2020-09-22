@@ -59,8 +59,7 @@ class Language_menu():
     def create_frm(self, language, image, col, row):
         frm = Frame(self.rowb, bg="white", highlightthickness=2,
             highlightcolor=self.root.color, highlightbackground="white",
-            takefocus=1)
-
+            takefocus=1)        
         if language == self.root.language:
             frm.focus_set()
             self.new_entry.insert(0, language.capitalize())
@@ -83,6 +82,6 @@ class Language_menu():
     def confirmar(self):
         self.root.language = self.new_language
         self.root.database.execute("UPDATE user_settings SET " \
-            f"language='{self.root.language}' WHERE username = '{self.root.sesion}';")        
+            f"language='{self.root.language}' WHERE username = '{self.root.sesion}';")
         self.root.database.commit()
         self.root_frame.switch_menu("START/STOP")
