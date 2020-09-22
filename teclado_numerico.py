@@ -3,7 +3,7 @@ from tkinter import *
 class Teclado(Frame):
     def __init__(self, root, titulo, previous):
         self.previous = previous
-        self.color = "lemon chiffon"
+        self.color = "gray90"
         super().__init__(root, bg=self.color)
         self.titulo = titulo
         self.root = root
@@ -19,7 +19,7 @@ class Teclado(Frame):
 
         self.titulo_teclado = Label(self.frm_titulo_teclado, text=self.titulo,
             bg="white", font=("Verdana", 25, "bold"))
-        self.titulo_teclado.pack(padx=160)
+        self.titulo_teclado.pack(padx=180)
 
         self.rowa = Frame(self, bg=self.color)
         self.rowa.grid(column=0, row=1, sticky=W, padx=(25, 5))
@@ -27,6 +27,10 @@ class Teclado(Frame):
         self.entry_volumen = Entry(self.rowa, font=("Verdana", 25), width=23,
             relief=SUNKEN, bd=3, state=DISABLED)
         self.entry_volumen.pack(side=LEFT, padx=15, ipady=5, ipadx=5)
+
+        self.esc = Button(self.rowa, text="ESC", command=self.volver, bg="pale green",
+            font=("Verdana", 20, "bold"))
+        self.esc.pack(side=LEFT, padx=(20, 0), ipadx=20)
 
         self.frm_teclado = Frame(self, bg=self.color)
         self.frm_teclado.grid(column=0, row=2, padx=25, pady=15, sticky=W)
@@ -52,16 +56,34 @@ class Teclado(Frame):
                 count_col = count_col + 1
             count_col = 0
 
-        
+        self.frm_funciones = Frame(self.frm_teclado, bg=self.color)
+        self.frm_funciones.grid(column=1, row=0, sticky="nw")
+
+        self.funcs = (("CLR", self.clear_entry),
+            ("DEL", self.erase),
+            ("ENTER", self.enter)
+            )
+        count_row = 0
+        for name, func in self.funcs:
+            self.frm_funcs(name, func, count_row)
+            count_row = count_row + 1
+
 
     def frame_numero(self, frm, dig, col):
-        btn_dig = Button(frm, bg="lightblue1", text=dig,
+        btn_dig = Button(frm, bg="gray80", text=dig,
             font=("Verdana", 20, "bold"), command=lambda d=dig: self.ins(d))
         btn_dig.grid(column=col, row=0, ipadx=50, ipady=5, padx=15)
 
         if dig == "  ":
-            # btn_dig["state"] = DISABLED
-            btn_dig.config(command=lambda: self.enter())
+            btn_dig["state"] = DISABLED
+
+    def frm_funcs(self, name, func, row):
+        btn_func = Button(self.frm_funciones, bg="lime green", text=name,
+            command=func, font=("Verdana", 20, "bold"))
+        if name != "ENTER":
+            btn_func.grid(column=0, row=row, ipadx=20, ipady=5, pady=5, padx=15)
+        else:
+            btn_func.grid(column=0, row=row, ipady=43, pady=5, padx=15)
 
     def clear_entry(self):
         self.nuevo_volumen = ""
@@ -102,14 +124,20 @@ class Teclado(Frame):
         self.root.database.commit()
 
     def enter(self):
-        if float(self.nuevo_volumen) < 1000:
-            self.cambiar_volumen(float(self.nuevo_volumen))
-            self.volver()
+        if self.nuevo_volumen != "":
+            if float(self.nuevo_volumen) < 1000:
+                self.cambiar_volumen(float(self.nuevo_volumen))
+                self.volver()
+            else:
+                self.entry_volumen.delete(0, END)
+                self.nuevo_volumen = "Volumen demasiado grande"
+                self.ins("")
+                self.after(2000, self.act_entry)
         else:
-            self.entry_volumen.delete(0, END)
-            self.nuevo_volumen = "Volumen demasiado grande"
+            self.nuevo_volumen = "Ingrese volumen"
             self.ins("")
             self.after(2000, self.act_entry)
+
 
     def act_entry(self):
         self.nuevo_volumen = ""
