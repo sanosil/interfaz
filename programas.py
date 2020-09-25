@@ -72,7 +72,10 @@ class Programas():
 		pass
 
 	def manual(self):
-		self.apagar_bomba()		
+		self.root.pin_on(self.root.bomba_entrada, 0)
+		if GPIO.input(self.root.flotador) == 0:
+			self.root.pin_on(self.root.bomba_entrada, 1)
+
 
 	def measure_ml(self):
             if self.root.current_button_state == 1:

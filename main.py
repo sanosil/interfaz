@@ -1,8 +1,9 @@
 # -----------------------------------------------------------------------------
 #                Sanosil desinfectants for life
-# Prohibida su venta y reproducción sin el consentimiento escrito del autor
-# All rights reserved
+#
+# @Copyright 2020 All rights reserved
 # @Author: Manuel Calzadillas
+# @Mail: menycalzadil@hotmail.com
 # @July 2020
 # @Versión 1.0.0
 #
@@ -47,7 +48,7 @@ class Interfaz(Tk):
         idioma = self.database.execute("SELECT language FROM user_settings " \
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
-            self.language = row[0]   
+            self.language = row[0]
         self.usernames = []
         self.program_object = None
         self.vol = 0
