@@ -31,24 +31,32 @@ class Interfaz(Tk):
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
         self.config(bg="white", cursor="dot")
-        self.geometry("800x480")
+        # self.geometry("770x495")
         self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                             self.winfo_screenheight()))
+                          self.winfo_screenheight()))
         self.actualizar_temp_humedad()
         home.Home(self).tkraise()
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
+        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.path="images/"
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.fecha_inicio = None
         self.hora_inicio = None
         self.fecha_termino = None
         self.hora_termino = None
+        self.sesion = "ADMIN"
         self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
+        " self.database = sqlite3.connect("program_database.db")
         idioma = self.database.execute("SELECT language FROM user_settings " \
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
             self.language = row[0]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2be6b59858a3633daacbc41e398f554ed0559834
         self.usernames = []
         self.program_object = None
         self.vol = 0
@@ -63,7 +71,6 @@ class Interfaz(Tk):
         self.color = "green"
         self.selected_color = "white"
         self.color_alertas = self.color
-        self.sesion = ""
         # Usernames
         usernames = self.database.execute("SELECT username FROM user_settings;")
         for row in usernames:
@@ -111,7 +118,8 @@ class Interfaz(Tk):
 
     # Prender y apagar pines en la raspberry
     def pin_on(self, ch, s):
-         GPIO.output(ch, s)
+        # print(str(ch) + str(s))
+        GPIO.output(ch, s)
 
     # Medir sensor_flujo
     def count_pulses(self, event=None):

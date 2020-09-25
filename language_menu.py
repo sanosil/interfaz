@@ -21,7 +21,8 @@ class Language_menu():
         self.rowc = Frame(self.main_frm, bg="white")
         self.rowc.grid(column=0, row=2, padx=(150,0))
 
-        self.lbl_idioma = Label(self.rowc, bg="white", font=self.root.myFont, text="NUEVO IDIOMA")
+        self.lbl_idioma = Label(self.rowc, bg="white", font=self.root.myFont,
+            text="NUEVO IDIOMA")
         self.lbl_idioma.pack(side=LEFT, padx=10)
         self.new_entry = Entry(self.rowc, font=("Verdana", 25), bd=3, width=6)
         self.new_entry.pack(side=LEFT, ipadx=5, ipady=3, padx=10)
@@ -60,7 +61,6 @@ class Language_menu():
         frm = Frame(self.rowb, bg="white", highlightthickness=2,
             highlightcolor=self.root.color, highlightbackground="white",
             takefocus=1)
-
         if language == self.root.language:
             frm.focus_set()
             self.new_entry.insert(0, language.capitalize())
@@ -83,6 +83,6 @@ class Language_menu():
     def confirmar(self):
         self.root.language = self.new_language
         self.root.database.execute("UPDATE user_settings SET " \
-            f"language='{self.root.language}' WHERE username = '{self.root.sesion}';")        
+            f"language='{self.root.language}' WHERE username = '{self.root.sesion}';")
         self.root.database.commit()
         self.root_frame.switch_menu("START/STOP")

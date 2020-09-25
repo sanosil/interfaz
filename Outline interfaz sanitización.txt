@@ -16,12 +16,12 @@ Outline de ventanas de interfaz gráfica
    F2: CONF
 	- Configuración (Administrador)							     ----    Listo   -----
 		- User settings								     ---- En proceso -----
-		- Ventana de configuración de valores (Teclado numérico virtual)	     ---- En proceso -----
+		- Ventana de configuración de valores (Teclado numérico virtual)	     ----    Listo -----
 		- Configuración programada (Semanalmente)				     ---- En proceso -----
 		- Configuración programada (Horario)					     ---- En proceso -----
 	- Ventana de test de hardware							     ---- En proceso -----
 	- Configuración de fecha y hora							     ---- En proceso -----
-	- Configuración de lenguaje							     ---- En proceso -----
+	- Configuración de lenguaje							     ----    Listo   -----
 	- Configuración de red								     ---- En proceso -----
 	- Configuración de correo							     ---- En proceso -----
    CONFIGURACION ADICIONAL
@@ -30,15 +30,15 @@ Outline de ventanas de interfaz gráfica
    F3
 	- Diagnostics (Temperatura, humedad, flow rate)					     ----    Listo   -----
    F4
-	- Event logger (Log files)							     ---- En proceso -----
+	- Event logger (Log files)							     ----    Listo   -----
 
 Funciones
 	
 	- Prueba de vida								     ---- En proceso ----
-	- Log file									     ---- En proceso ----
-	- Volumen a sanitizar								     ---- En proceso ----
+	- Log file									     ----    Listo   ----
+	- Volumen a sanitizar								     ----    Listo   ----
 	- Medición de mililitros							     ----    Listo   ----
 	- Medición de temperatura y humedad						     ----    Listo   ----
-	- Modo de operación de la máquina (Normal, step, testing, manual)		     ---- En proceso ----
+	- Modo de operación de la máquina (Normal, step, testing, manual)		     ----    Listo   ----
 	- Timer antes de operación (Para permitir a la gente salir de la habitación)	     ----    Listo    ----
 	- Usb log files									     ---- En proceso ----

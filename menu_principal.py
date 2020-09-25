@@ -96,7 +96,7 @@ class Menu_principal(Frame):
         if self.root.program_object == None:
             self.clear(self.root)
             self.root.sesion = ""
-            # inicio.Inicio(self.root).tkraise()
+            inicio.Inicio(self.root).tkraise()
 
 class Root(Tk):
     def __init__(self):

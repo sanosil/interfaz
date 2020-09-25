@@ -1,5 +1,5 @@
 from tkinter import *
-import programas
+import programas, teclado_numerico
 
 class Start_menu():
     def __init__(self, root, root_frame):
@@ -103,6 +103,7 @@ class Start_menu():
         self.volumen_label = Label(self.volumen_frame, bg="gray", fg="white",
             font=self.root.myFont, text="Volumen: %d m3" % self.root.vol)
         self.volumen_label.pack(padx=25-(len(str(self.root.vol))*5), pady=10)
+        self.volumen_label.bind("<Button-1>", self.set_volumen)
             # ***********************************************************
             # ************* Sesión **************************************
         self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
@@ -192,5 +193,9 @@ class Start_menu():
         self.root.database.execute("UPDATE user_settings SET " \
             f"timer = {self.root.timer} WHERE username = '{self.root.sesion}'")
         self.root.database.commit()
+
+    def set_volumen(self, event):
+        self.root_frame.grid_forget()
+        teclado_numerico.Teclado(self.root, "Nuevo volumen", self.root_frame)
 
 # ------------------ Termina menu START/STOP --------------------------
