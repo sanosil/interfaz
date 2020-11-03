@@ -41,6 +41,7 @@ class User_menu():
                             image=self.images["izquierda"])
         self.flecha_izquierda.image = image=self.images["izquierda"]
         self.flecha_izquierda.pack(pady=50, padx=10, side=LEFT)
+        self.flecha_izquierda.bind("<Button-1>", lambda e, d=0:self.cambiar_imagen_usuario(e, d))
         # Frame para campos intermedios
         self.frm_campos_usuario = Frame(self.rowb, bg="white")
         self.frm_campos_usuario.pack(side=LEFT, padx=210)
@@ -54,3 +55,12 @@ class User_menu():
                         image=self.images["derecha"])
         self.flecha_derecha.image = self.images["derecha"]
         self.flecha_derecha.pack(side=LEFT, pady=50)
+        self.flecha_derecha.bind("<Button-1>", lambda e, d=1:self.cambiar_imagen_usuario(e, d))
+
+    def cambiar_imagen_usuario(self, event, direccion):
+        if direccion:
+            self.imagen_usuario_actual.config(image=self.images["operador"])
+            self.imagen_usuario_actual.imagen=self.images["operador"]
+        else:
+            self.imagen_usuario_actual.config(image=self.images["service"])
+            self.imagen_usuario_actual.imagen=self.images["service"]            
