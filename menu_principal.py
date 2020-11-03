@@ -1,7 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 import sqlite3
-#import inicio
+import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -94,6 +94,7 @@ class Menu_principal(Frame):
 
     def cambiar_sesion(self):
         if self.root.program_object == None:
+            self.destroy()
             self.clear(self.root)
             self.root.sesion = ""
             inicio.Inicio(self.root).tkraise()
@@ -143,6 +144,12 @@ class Root(Tk):
         usernames = self.database.execute("SELECT username FROM user_settings;")
         for row in usernames:
             self.usernames.append(row[0])
+
+        passwords = self.database.execute("SELECT password FROM user_settings;")
+        self.passwords = []
+        for row in passwords:
+            self.passwords.append(row[0])
+        print(self.passwords)
         idioma = self.database.execute("SELECT language FROM user_settings " \
             f"WHERE username = '{self.sesion}';")
         for row in idioma:

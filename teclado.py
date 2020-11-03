@@ -1,11 +1,13 @@
 from tkinter import *
-#import menu_principal, inicio
+#import menu_principal
+import inicio
 
 # ---------------------- Teclado númerico password ----------------------------
 class Teclado(Frame):
-    def __init__(self, root, titulo=None, titulo_teclado=None, opcion=None):
+    def __init__(self, root, titulo=None, titulo_teclado=None, opcion=None, root_frame=None):
         super().__init__(root)
         self.root = root  # Ventana principal
+        self.opcion = opcion
         self.color = "ivory3"
         self.title = titulo
         self.config(bg="white")  # Fondo del frame del teclado
@@ -103,7 +105,7 @@ class Teclado(Frame):
         if cont == "Enter":
             tecla = Button(contenedor_tecla, activebackground="white",
                 bg=self.root.color, width=16, font=self.myFont, text=cont,
-                command=self.ver_pass)
+                command=self.enter)
         else:
             tecla = Button(contenedor_tecla, activebackground="white",
                 bg=self.color, width=width, font=self.myFont, text=cont,
@@ -119,15 +121,18 @@ class Teclado(Frame):
         self.entry_pass.delete(len(self.pass_try)-1)
         self.pass_try = self.pass_try[:-1]
 
-    def ver_pass(self):
-        if self.root.passwords[self.title] == self.pass_try:
-            self.espacio.config(bg="blue")
-            self.root.sesion = self.title
-            self.after(50, self.acceso)
+    def enter(self):
+        if self.opcion:
+            pass
         else:
-            self.espacio.config(bg="red")
-            self.mensaje.pack(expand=YES, fill=BOTH)
-            self.after(1000, self.normal)
+            if self.root.passwords[self.title] == self.pass_try:
+                self.espacio.config(bg="blue")
+                self.root.sesion = self.title
+                self.after(50, self.acceso)
+            else:
+                self.espacio.config(bg="red")
+                self.mensaje.pack(expand=YES, fill=BOTH)
+                self.after(1000, self.normal)
 
     def normal(self):
         self.espacio.config(bg="black")

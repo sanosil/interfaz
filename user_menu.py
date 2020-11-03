@@ -107,7 +107,8 @@ class User_menu():
         self.nombre_usuario.config(text=self.root.usernames[self.current_user])
 
     def cambiar_username(self):
-        self.root.teclado = teclado.Teclado(self.root, "Nuevo nombre de usuario", self.root.usernames[self.current_user], 1)
+        self.root_frame.destroy()
+        self.root.teclado = teclado.Teclado(self.root, "Nuevo nombre de usuario", self.root.usernames[self.current_user], 1, self.root_frame)
 
     def cambiar_password(self):
         self.widgets_unpack()

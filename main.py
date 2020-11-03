@@ -72,11 +72,10 @@ class Interfaz(Tk):
         for row in usernames:
             self.usernames.append(row[0])
         # Passwords
-        self.passwords = {
-            self.usernames[0]: "ADMIN",
-            self.usernames[1]: "1234", self.usernames[2]: "1234",
-            self.usernames[3]: "1234", self.usernames[4]:"SERVICE"
-        }
+        passwords = self.database.execute("SELECT password FROM user_settings;")
+        self.passwords = []
+        for row in passwords:
+            self.passwords.append(row[0])
 
     def actualizar_temp_humedad(self):
          try:
