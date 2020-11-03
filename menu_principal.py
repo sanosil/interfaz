@@ -134,7 +134,8 @@ class Root(Tk):
         self.humidity_dht_inicial = 0
         self.config(bg="white")
         self.overrideredirect(1)
-        self.geometry("770x495")
+        # self.geometry("770x495")
+        self.geometry("%dx%d" % (self.winfo_screenwidth(), self.winfo_screenheight()))
         self.myFont = ("Verdana", 12)
         self.myFont_bold = ("Verdana", 12, "bold")
         self.usernames = []
