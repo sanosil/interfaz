@@ -44,12 +44,12 @@ class Log_menu():
         if current_log != 1:
             if self.current > 1:
                 self.current = self.current - 1
-                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.destroy()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
             else:
                 self.current = self.total
-                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.destroy()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
 
@@ -61,12 +61,12 @@ class Log_menu():
         if current_log != 1:
             if self.current < 15 and self.current < self.total:
                 self.current = self.current + 1
-                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.destroy()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
             else:
                 self.current = 1
-                self.root_frame.main_container.grid_forget()
+                self.root_frame.main_container.destroy()
                 self.root_frame.main_container.grid(column=0, row=1, sticky=W)
                 self.create_widgets(self.current)
 

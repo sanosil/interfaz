@@ -91,12 +91,12 @@ class Teclado(Frame):
 
     def volver(self):
         self.root.config(bg="white")
-        self.grid_forget()
+        self.destroy()
         self.previous.__init__(self.root, "START/STOP")
 
     def anterior(self):
         self.root.config(bg="white")
-        self.grid_forget()
+        self.destroy()
         self.previous.grid(column=0, row=0)
 
     def ins(self, dig):
