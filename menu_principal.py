@@ -1,7 +1,7 @@
 from tkinter import *
 import start_menu, conf_menu, diag_menu, log_menu
 import sqlite3
-# import inicio
+#import inicio
 
 class Menu_principal(Frame):
     def __init__(self, root, menu):
@@ -101,7 +101,7 @@ class Menu_principal(Frame):
 class Root(Tk):
     def __init__(self):
         super().__init__()
-        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        #self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         self.path="images/"
         self.timer = 0
         self.sesion = "ADMIN"
@@ -134,8 +134,8 @@ class Root(Tk):
         self.humidity_dht_inicial = 0
         self.config(bg="white")
         self.overrideredirect(1)
-        # self.geometry("770x495")
-        self.geometry("%dx%d" % (self.winfo_screenwidth(), self.winfo_screenheight()))
+        self.geometry("770x495")
+        # self.geometry("%dx%d" % (self.winfo_screenwidth(), self.winfo_screenheight()))
         self.myFont = ("Verdana", 12)
         self.myFont_bold = ("Verdana", 12, "bold")
         self.usernames = []

@@ -10,24 +10,47 @@ class User_menu():
 
     def create_widgets(self):
         self.main_container = Frame(self.root_frame, bg="white")
-        self.main_container.grid(column=0, row=1)
+        self.main_container.grid(column=0, row=1, sticky="nw")
         path = "images/"
         # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-
+        # imágenes usadas en ésta ventana
         self.images = {
-            "admin": PhotoImage(file=path+"Admin.png"),
-            "operador": PhotoImage(file=path+"User.png"),
-            "service": PhotoImage(file=path+"Service.png")
+            "admin": PhotoImage(file=path+"Admin.png").subsample(4),
+            "operador": PhotoImage(file=path+"User.png").subsample(4),
+            "service": PhotoImage(file=path+"Service.png").subsample(4),
+            "derecha": PhotoImage(file=path+"der.png").subsample(6),
+            "izquierda": PhotoImage(file=path+"izq.png").subsample(6)
             }
-
+        # Primera fila de la ventana llamada row a
         self.rowa = Frame(self.main_container, bg="white")
         self.rowa.grid(column=0, row=0)
-
+        # Frame para título de la ventana
         self.frm_title = Frame(self.rowa, bg="white", relief=RIDGE,
             bd=5)
-        self.frm_title.pack(pady=40)
-
+        self.frm_title.pack(pady=40, padx=130)
+        # Título de la ventana en una label
         self.title = Label(self.frm_title, bg="white",
             font=("Verdana", 15, "bold"),
             text="Cambiar nombre de usuario y contraseña")
         self.title.pack(padx=20, pady=10)
+        # Fila para poner flechas y los tres campos para cambiar configuraciones
+        self.rowb = Frame(self.main_container, bg="white")
+        self.rowb.grid(column=0,  row=1, sticky="w")
+        #Imagen de flecha izquierda
+        self.flecha_izquierda = Label(self.rowb, bg="white",
+                            image=self.images["izquierda"])
+        self.flecha_izquierda.image = image=self.images["izquierda"]
+        self.flecha_izquierda.pack(pady=50, padx=10, side=LEFT)
+        # Frame para campos intermedios
+        self.frm_campos_usuario = Frame(self.rowb, bg="white")
+        self.frm_campos_usuario.pack(side=LEFT, padx=210)
+        # Imagen del Usuario
+        self.imagen_usuario_actual = Label(self.frm_campos_usuario, bg="white",
+                                image=self.images["admin"])
+        self.imagen_usuario_actual.image = self.images["admin"]
+        self.imagen_usuario_actual.grid(column=0, row=0, pady=10)
+        # Imagen de flecha derecha
+        self.flecha_derecha = Label(self.rowb, bg="white",
+                        image=self.images["derecha"])
+        self.flecha_derecha.image = self.images["derecha"]
+        self.flecha_derecha.pack(side=LEFT, pady=50)

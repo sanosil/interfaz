@@ -31,7 +31,6 @@ class Interfaz(Tk):
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
         self.config(bg="white", cursor="dot")
-        # self.geometry("770x495")
         self.geometry("%dx%d" % (self.winfo_screenwidth(),
                           self.winfo_screenheight()))
         self.actualizar_temp_humedad()
@@ -39,8 +38,8 @@ class Interfaz(Tk):
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
-        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-        self.path="images/"
+        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        #self.path="images/"
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.fecha_inicio = None
         self.hora_inicio = None
