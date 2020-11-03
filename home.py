@@ -43,8 +43,8 @@ class Home(Frame):
         # Valor alternativo de la condicional
         else:
             # Se borran los elementos del frame
-            self.grid_forget()
-            self.version.grid_forget()
+            self.destroy()
+            self.version.destroy()
             #----------------------------------
             # Se añade un nuevo elemento al frame
             self.welcome.grid(column=0, row=0, padx=200, pady=180)
@@ -69,10 +69,10 @@ class Home(Frame):
             self.welcome.config(fg=self.colores[self.count])
             self.count = self.count + 1
             if self.count == 8:
-                    self.welcome.grid_forget()
+                    self.welcome.destroy()
             self.after(100, self.animacion_tres)
         else:
-            self.grid_forget()
+            self.destroy()
             inicio.Inicio(self.root).tkraise()
 # -----------------------------------------------------------------------------
 

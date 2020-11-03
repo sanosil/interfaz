@@ -95,7 +95,7 @@ class Teclado(Frame):
         self.entry_pass.insert(END, " ")
 
     def volver(self):
-        self.grid_forget()
+        self.destroy()
         inicio.Inicio(self.root).tkraise()
 
     def tecla(self, cont, contenedor, width=4):
@@ -131,10 +131,10 @@ class Teclado(Frame):
 
     def normal(self):
         self.espacio.config(bg="black")
-        self.mensaje.pack_forget()
+        self.mensaje.destroy()
 
     def acceso(self):
-        self.grid_forget()
+        self.destroy()
         menu_principal.Menu_principal(self.root, "START/STOP").tkraise()
 
     def salir(self, event=None):

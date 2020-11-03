@@ -76,23 +76,23 @@ class Conf_menu():
         dia.bind("<Button-1>", self.edit_timer)
 
     def user_settings(self):
-        self.frame_inferior.grid_forget()
-        self.root_frame.main_container.grid_forget()
+        self.frame_inferior.destroy()
+        self.root_frame.main_container.destroy()
         user_menu.User_menu(self.root, self.root_frame)
 
     def language_settings(self):
-        self.frame_inferior.grid_forget()
-        self.root_frame.main_container.grid_forget()
+        self.frame_inferior.destroy()
+        self.root_frame.main_container.destroy()
         language_menu.Language_menu(self.root, self.root_frame)
 
     def wifi_settings(self):
-        self.frame_inferior.grid_forget()
-        self.root_frame.main_container.grid_forget()
+        self.frame_inferior.destroy()
+        self.root_frame.main_container.destroy()
         wifi_menu.Wifi_menu(self.root, self.root_frame)
 
     def program_settings(self, event=None):
-        self.frame_inferior.grid_forget()
-        self.root_frame.main_container.grid_forget()
+        self.frame_inferior.destroy()
+        self.root_frame.main_container.destroy()
         program_menu.Program_menu(self.root, self.root_frame)
 
     def edit_timer(self, event=None):
