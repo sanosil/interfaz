@@ -103,6 +103,7 @@ class Root(Tk):
         super().__init__()
         #self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         self.path="images/"
+        self.teclado = None
         self.timer = 0
         self.sesion = "ADMIN"
         self.database = sqlite3.connect("program_database.db")

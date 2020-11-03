@@ -95,5 +95,5 @@ class Inicio(Frame):
 
     def teclado(self, event):
         self.grid_forget()
-        teclado.Teclado(self.root, self.usuario, "Inicio de Sesión").tkraise()
+        self.root.teclado = teclado.Teclado(self.root, self.usuario, "Inicio de Sesión", 0).tkraise()
 # --------------------- Termina ventana de inicio -----------------------------

@@ -1,9 +1,9 @@
 from tkinter import *
-import menu_principal, inicio
+#import menu_principal, inicio
 
 # ---------------------- Teclado númerico password ----------------------------
 class Teclado(Frame):
-    def __init__(self, root, titulo=None, titulo_teclado=None):
+    def __init__(self, root, titulo=None, titulo_teclado=None, opcion=None):
         super().__init__(root)
         self.root = root  # Ventana principal
         self.color = "ivory3"
