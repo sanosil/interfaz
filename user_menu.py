@@ -4,7 +4,7 @@ class User_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-        self.current = 0
+        self.current_user = 0
 
         self.create_widgets()
 
@@ -21,6 +21,9 @@ class User_menu():
             "derecha": PhotoImage(file=path+"der.png").subsample(6),
             "izquierda": PhotoImage(file=path+"izq.png").subsample(6)
             }
+        self.user_images = [self.images["admin"], self.images["operador"],
+                            self.images["operador"], self.images["operador"],
+                            self.images["service"]]
         # Primera fila de la ventana llamada row a
         self.rowa = Frame(self.main_container, bg="white")
         self.rowa.grid(column=0, row=0)
@@ -58,9 +61,18 @@ class User_menu():
         self.flecha_derecha.bind("<Button-1>", lambda e, d=1:self.cambiar_imagen_usuario(e, d))
 
     def cambiar_imagen_usuario(self, event, direccion):
+
         if direccion:
-            self.imagen_usuario_actual.config(image=self.images["operador"])
-            self.imagen_usuario_actual.imagen=self.images["operador"]
+            if(self.current_user == 4):
+                self.current_user = 0
+            else:
+                self.current_user = self.current_user + 1
+            self.imagen_usuario_actual.config(image=self.user_images[self.current_user])
+            self.imagen_usuario_actual.imagen=self.user_images[self.current_user]
         else:
-            self.imagen_usuario_actual.config(image=self.images["service"])
-            self.imagen_usuario_actual.imagen=self.images["service"]            
+            if(not(self.current_user)):
+                self.current_user = 4
+            else:
+                 self.current_user = self.current_user - 1
+            self.imagen_usuario_actual.config(image=self.user_images[self.current_user])
+            self.imagen_usuario_actual.imagen=self.user_images[self.current_user]
