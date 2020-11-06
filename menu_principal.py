@@ -138,6 +138,7 @@ class Root(Tk):
         self.overrideredirect(1)
         self.geometry("770x495")
         # self.geometry("%dx%d" % (self.winfo_screenwidth(), self.winfo_screenheight()))
+        print(str(self.winfo_screenwidth()) + " " + str(self.winfo_screenheight()))
         self.myFont = ("Verdana", 12)
         self.myFont_bold = ("Verdana", 12, "bold")
         self.usernames = []
@@ -149,7 +150,7 @@ class Root(Tk):
         self.passwords = []
         for row in passwords:
             self.passwords.append(row[0])
-        print(self.passwords)
+
         idioma = self.database.execute("SELECT language FROM user_settings " \
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
