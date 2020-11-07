@@ -1,12 +1,12 @@
 from tkinter import *
-#import menu_principal
-import inicio
+import menu_principal
 
 # ---------------------- Teclado númerico password ----------------------------
 class Teclado(Frame):
-    def __init__(self, root, titulo=None, titulo_teclado=None, opcion=None, root_frame=None):
+    def __init__(self, root, titulo=None, titulo_teclado=None, menu_anterior=None, opcion=None):
         super().__init__(root)
         self.root = root  # Ventana principal
+        self.menu_anterior = menu_anterior
         self.opcion = opcion
         self.color = "ivory3"
         self.title = titulo
@@ -97,8 +97,8 @@ class Teclado(Frame):
         self.entry_pass.insert(END, " ")
 
     def volver(self):
-        self.destroy()
-        inicio.Inicio(self.root).tkraise()
+        self.grid_forget()
+        self.root.frames[self.menu_anterior].grid()
 
     def tecla(self, cont, contenedor, width=4):
         contenedor_tecla = Frame(contenedor, bg="white")
@@ -123,9 +123,12 @@ class Teclado(Frame):
 
     def enter(self):
         if self.opcion:
-            pass
-        else:
-            if self.root.passwords[self.title] == self.pass_try:
+            self.root.database.execute("UPDATE user_settings SET username="
+            f"{self.pass_try} WHERE id = {self.root.id[self.root.sesion]};")
+            self.grid_forget()
+            self.root.frames[3].grid()
+        elif not(self.opcion):
+            if self.root.passwords[self.root.id[self.title]] == self.pass_try:
                 self.espacio.config(bg="blue")
                 self.root.sesion = self.title
                 self.after(50, self.acceso)
@@ -139,8 +142,8 @@ class Teclado(Frame):
         self.mensaje.destroy()
 
     def acceso(self):
-        self.destroy()
-        menu_principal.Menu_principal(self.root, "START/STOP").tkraise()
+        self.grid_forget()
+        self.root.frames.append(menu_principal.Menu_principal(self.root, "START/STOP"))
 
     def salir(self, event=None):
         if self.title == "SERVICE":

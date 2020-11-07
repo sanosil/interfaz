@@ -6,6 +6,7 @@ import inicio
 class Menu_principal(Frame):
     def __init__(self, root, menu):
         super().__init__(root)
+        print(root.frames)
         # Variables
         self.root = root
         self.current_menu  = menu
@@ -164,4 +165,4 @@ class Root(Tk):
     def pin_on(self, ch, s):
         print("channel " + str(ch) + str(s))
 
-Root().mainloop()
+#Root().mainloop()

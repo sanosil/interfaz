@@ -12,11 +12,11 @@
 # --------- Paquetes necesarios para el funcionamiento ------------------------
 from tkinter import *
 import home, inicio
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import datetime as dt
-import board
+# import board
 import os
-import adafruit_dht
+# import adafruit_dht
 import sqlite3
 # -----------------------------------------------------------------------------
 
@@ -25,36 +25,42 @@ import sqlite3
 class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
-        self.rasp_variables()
+        # self.rasp_variables()
         self.variables()
         self.teclado = None
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
         self.config(bg="white", cursor="dot")
-        self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                          self.winfo_screenheight()))
-        self.actualizar_temp_humedad()
-        home.Home(self).tkraise()
+        #self.geometry("%dx%d" % (self.winfo_screenwidth(),
+        #                  self.winfo_screenheight()))
+        self.geometry("%dx%d" % (self.width, self.height))
+        #self.actualizar_temp_humedad()
+        self.frames.append(home.Home(self))
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.width = 800
         self.height = 480
-        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-        #self.path="images/"
+        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.path="images/"
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.fecha_inicio = None
         self.hora_inicio = None
         self.fecha_termino = None
         self.hora_termino = None
-        self.sesion = "ADMIN"
-        self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
-        # self.database = sqlite3.connect("program_database.db")
+
+        # self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
+        self.database = sqlite3.connect("program_database.db")
+        sesion = self.database.execute("SELECT last FROM last_session;")
+        for row in sesion:
+            self.sesion = row[0]
+        print(self.sesion)
         idioma = self.database.execute("SELECT language FROM user_settings " \
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
             self.language = row[0]
 
+        self.frames = []
         self.usernames = []
         self.program_object = None
         self.vol = 0
@@ -73,6 +79,9 @@ class Interfaz(Tk):
         usernames = self.database.execute("SELECT username FROM user_settings;")
         for row in usernames:
             self.usernames.append(row[0])
+        self.id = {self.usernames[0]:0, self.usernames[1]:1,
+                    self.usernames[2]:2, self.usernames[3]:3,
+                    self.usernames[4]:4}
         # Passwords
         passwords = self.database.execute("SELECT password FROM user_settings;")
         self.passwords = []
@@ -125,4 +134,4 @@ class Interfaz(Tk):
 
 # ------------------------ Inicia aplicación ----------------------------------
 Interfaz().mainloop()
-GPIO.cleanup()
+# GPIO.cleanup()

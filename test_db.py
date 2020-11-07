@@ -3,10 +3,11 @@ import sqlite3
 database = sqlite3.connect("program_database.db")
 print("connection succsessfull")
 
-cmd = input("Introduzca comando sql\n")
+
 a = 0
 
 while a != 1:
+    cmd = input("Introduzca comando sql\n")
     datos = database.execute(cmd)
     for dato in datos:
         print(dato)

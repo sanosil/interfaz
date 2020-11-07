@@ -43,7 +43,7 @@ class Home(Frame):
         # Valor alternativo de la condicional
         else:
             # Se borran los elementos del frame
-            self.destroy()
+            self.logo.destroy()
             self.version.destroy()
             #----------------------------------
             # Se añade un nuevo elemento al frame
@@ -73,7 +73,7 @@ class Home(Frame):
             self.after(100, self.animacion_tres)
         else:
             self.destroy()
-            inicio.Inicio(self.root).tkraise()
+            self.root.frames.append(inicio.Inicio(self.root))            
 # -----------------------------------------------------------------------------
 
 # --------------------- Termina la ventana home -------------------------------
