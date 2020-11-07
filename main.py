@@ -38,6 +38,8 @@ class Interfaz(Tk):
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
+        self.width = 800
+        self.height = 480
         self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         #self.path="images/"
         self.mensaje = "STATUS: LISTO PARA OPERAR"

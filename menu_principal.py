@@ -55,6 +55,9 @@ class Menu_principal(Frame):
         elif menu == "LOG":
             log_menu.Log_menu(self.root, self)
 
+    def quit(self, event):
+        self.root.destroy()
+
     def clear(self, frame):
         for l in frame.grid_slaves():
             l.destroy()

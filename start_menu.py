@@ -48,7 +48,8 @@ class Start_menu():
         self.timer_icon = Label(self.timerFrame, bg="white",
             image=self.timer_image)
         self.timer_icon.grid(column=0, row=0)
-        self.timer_icon.bind("<Button-1>", self.activate_timer)
+        # self.timer_icon.bind("<Button-1>", self.activate_timer)
+        self.timer_icon.bind("<Button-1>", self.root_frame.quit)
         self.timer_label = Label(self.timerFrame, bg="white",
             font=("Verdana", 12, "bold"))
         self.timer_label.grid(column=0, row=1)
