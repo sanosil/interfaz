@@ -6,8 +6,8 @@ import inicio
 class Menu_principal(Frame):
     def __init__(self, root, menu):
         super().__init__(root)
-        print(root.frames)
         # Variables
+        print(self)
         self.root = root
         self.current_menu  = menu
         self.timer_valores = [
@@ -56,6 +56,9 @@ class Menu_principal(Frame):
         elif menu == "LOG":
             log_menu.Log_menu(self.root, self)
 
+    def actualizar_variables(self):
+        pass
+
     def quit(self, event):
         self.root.destroy()
 
@@ -98,10 +101,14 @@ class Menu_principal(Frame):
 
     def cambiar_sesion(self):
         if self.root.program_object == None:
-            self.destroy()
             self.clear(self.root)
-            self.root.sesion = ""
-            inicio.Inicio(self.root).tkraise()
+            self.root.frames[3].destroy()
+            self.root.frames[2].destroy()
+            self.root.frames.pop(3)
+            self.root.frames.pop(2)
+            print(self.root.frames)
+            self.root.frames[1].grid()
+            self.root.frames[1].enfoque()
 
 class Root(Tk):
     def __init__(self):

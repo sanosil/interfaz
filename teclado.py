@@ -30,10 +30,10 @@ class Teclado(Frame):
         self.rowa.pack(side=TOP, expand=YES, fill=BOTH)
 
         # Boton regresar
-        self.volver = Button(self.rowa, text="Regresar",
+        self.btn_volver = Button(self.rowa, text="Regresar",
                 font=self.myFont, activebackground="white", bg="gray",
                 command=self.volver)
-        self.volver.pack(side=LEFT, fill=BOTH, expand=YES)
+        self.btn_volver.pack(side=LEFT, fill=BOTH, expand=YES)
 
         # --------------------------- titulo teclado --------------------------
         self.frame_titulo_entry = Frame(self.rowa, relief=RIDGE, bd=4)
@@ -96,10 +96,6 @@ class Teclado(Frame):
         self.pass_try = self.pass_try + " "
         self.entry_pass.insert(END, " ")
 
-    def volver(self):
-        self.grid_forget()
-        self.root.frames[self.menu_anterior].grid()
-
     def tecla(self, cont, contenedor, width=4):
         contenedor_tecla = Frame(contenedor, bg="white")
         if cont == "Enter":
@@ -122,30 +118,61 @@ class Teclado(Frame):
         self.pass_try = self.pass_try[:-1]
 
     def enter(self):
-        if self.opcion:
+        if self.opcion == "username":
             self.root.database.execute("UPDATE user_settings SET username="
-            f"{self.pass_try} WHERE id = {self.root.id[self.root.sesion]};")
-            self.grid_forget()
-            self.root.frames[3].grid()
-        elif not(self.opcion):
+            f"'{self.pass_try}' WHERE id = {self.root.id[self.root.sesion]};")
+            self.root.database.commit()
+            self.change_session(self.pass_try)
+            self.espacio.config(bg="green")
+            self.mensaje.config(text="Usuario cambiado", bg="green")
+            self.mensaje.pack(expand=YES, fill=BOTH)
+            self.after(1000, self.volver)
+        elif self.opcion == "change_password":
+            self.root.database.execute("UPDATE user_settings SET password="
+            f"'{self.pass_try}' WHERE id = {self.root.id[self.root.sesion]};")
+            self.root.database.commit()
+            self.espacio.config(bg="green")
+            self.mensaje.config(bg="green", text="Contraseña cambiada")
+            self.mensaje.pack(expand=YES, fill=BOTH)
+            self.after(1000, self.volver)
+        elif self.opcion == "password":
             if self.root.passwords[self.root.id[self.title]] == self.pass_try:
                 self.espacio.config(bg="blue")
-                self.root.sesion = self.title
+                self.change_session(self.title)
                 self.after(50, self.acceso)
             else:
                 self.espacio.config(bg="red")
                 self.mensaje.pack(expand=YES, fill=BOTH)
                 self.after(1000, self.normal)
 
+    def change_session(self, sesion):
+        self.root.database.execute("UPDATE last_session SET last="
+        f"'{sesion}';")
+        self.root.sesion = sesion
+        self.root.database.commit()
+
     def normal(self):
         self.espacio.config(bg="black")
-        self.mensaje.destroy()
+        self.mensaje.pack_forget()
 
     def acceso(self):
+        self.espacio.config(bg="black")
+        self.mensaje.config(bg="black")
         self.grid_forget()
         self.root.frames.append(menu_principal.Menu_principal(self.root, "START/STOP"))
+        print(self.root.frames)
 
     def salir(self, event=None):
         if self.title == "SERVICE":
             self.root.destroy()
+
+    def volver(self):
+        self.espacio.config(bg="black")
+        self.mensaje.config(text="", bg="black")
+        self.grid_forget()
+        self.root.frames[self.menu_anterior].grid()
+        if self.menu_anterior == 1:
+            self.root.frames[self.menu_anterior].enfoque()
+            self.destroy()
+            self.root.frames[2].destroy()
 # ---------------- Termina ventana de teclado numérico ------------------------

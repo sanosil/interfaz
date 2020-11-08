@@ -107,16 +107,23 @@ class User_menu():
         self.nombre_usuario.config(text=self.root.usernames[self.current_user])
 
     def cambiar_username(self):
-        self.root_frame.grid_forget()
-        self.root.frames[2].grid()
-        self.root.frames[2].titulo.config(text="Nuevo nombre de usuario")
-        self.root.frames[2].titulo_teclado.config(text=self.root.usernames[self.current_user])
-        self.root.frames[2].entry_pass.delete(0, END)
-        self.root.frames[2].pass_try = ""
-        self.root.frames[2].opcion = 1
+        self.teclado("Nuevo nombre de usuario", self.root.usernames[self.current_user],
+                "username")
 
     def cambiar_password(self):
-        self.widgets_unpack()
+        self.teclado("Nueva contraseña ",  self.root.usernames[self.current_user],
+                    "change_password")
+
+    def teclado(self, text, titulo_teclado, opcion):
+        self.root_frame.grid_forget()
+        print(self.root.frames)
+        self.root.frames[2].menu_anterior = 3
+        self.root.frames[2].grid()
+        self.root.frames[2].titulo.config(text=text)
+        self.root.frames[2].titulo_teclado.config(text=titulo_teclado)
+        self.root.frames[2].entry_pass.delete(0, END)
+        self.root.frames[2].pass_try = ""
+        self.root.frames[2].opcion = opcion
 
     def widgets_unpack(self):
         self.flecha_derecha.pack_forget()

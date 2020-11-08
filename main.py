@@ -26,6 +26,8 @@ class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
         # self.rasp_variables()
+        self.temp_dht = 25
+        self.humidity_dht = 50
         self.variables()
         self.teclado = None
         self.title("Sanosil 1.0.0")  # Título de la interfaz
@@ -54,7 +56,6 @@ class Interfaz(Tk):
         sesion = self.database.execute("SELECT last FROM last_session;")
         for row in sesion:
             self.sesion = row[0]
-        print(self.sesion)
         idioma = self.database.execute("SELECT language FROM user_settings " \
             f"WHERE username = '{self.sesion}';")
         for row in idioma:
@@ -79,6 +80,7 @@ class Interfaz(Tk):
         usernames = self.database.execute("SELECT username FROM user_settings;")
         for row in usernames:
             self.usernames.append(row[0])
+        print(self.usernames)
         self.id = {self.usernames[0]:0, self.usernames[1]:1,
                     self.usernames[2]:2, self.usernames[3]:3,
                     self.usernames[4]:4}

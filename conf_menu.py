@@ -51,7 +51,7 @@ class Conf_menu():
                         ]
         count = 0
         for text, command in self.settings:
-            if self.root.sesion == "ADMIN":
+            if self.root.id[self.root.sesion] == 0:
                 self.settings_buttons(text, command)
             elif count != 0:
                 self.settings_buttons(text,command)

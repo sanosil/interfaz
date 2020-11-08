@@ -7,7 +7,7 @@ class Inicio(Frame):
         super().__init__(root)
         self.config(bg="white")
         self.root = root
-        self.usuario = "ADMIN"
+        self.usuario = self.root.sesion
         self.grid(column=0, row=0)
         self.user_container = Frame(self, bg="white")
         self.user_container.grid(column=0, row=0)
@@ -24,7 +24,6 @@ class Inicio(Frame):
         self.frame_admin = Frame(self.user_container, bg="white", takefocus=1,
                         highlightthickness=2, highlightcolor=root.color,
                         highlightbackground="white")
-        self.frame_admin.focus_set()
         self.admin = Label(self.frame_admin, bg="white",
                     image=self.user_images["admin"])
         self.admin.bind("<Button-1>",
@@ -43,6 +42,7 @@ class Inicio(Frame):
                         image=self.user_images["service"])
         self.service_label = Label(self.frame_service, bg="white",
                         font=self.root.myFont, text=root.usernames[4])
+
         self.frame_service.grid(column=2, row=0)
         self.service.grid(column=0, row=0)
         self.service.bind("<Button-1>",
@@ -71,6 +71,7 @@ class Inicio(Frame):
                         self.evento(e, f, u))
             self.labels_operador[i].grid(column=0, row=1)
 
+        self.enfoque()
 
         # Contenedor de la contraseña
         self.container_pass = Frame(self, bg="white")
@@ -80,12 +81,22 @@ class Inicio(Frame):
         self.pass_label.grid(column=0, row=0, padx=(0, 30))
         self.password = Entry(self.container_pass, fg="gray",
             font=("Verdana", 18), width=32)
-        self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
+        self.password.insert(0, "Escriba la contraseña de %s" % self.root.sesion)
         self.password.bind("<Button-1>", self.teclado)
         self.password.grid(column=1, row=0)
         self.apagar = Button(self.container_pass, text="Apagar", bg="red",
             font=self.root.myFont, fg="white", command=self.root.shutdown)
         self.apagar.grid(column=2, row=0)
+
+    def enfoque(self):
+        if self.root.id[self.root.sesion]==0:
+            self.frame_admin.focus_set()
+        elif self.root.id[self.root.sesion]==4:
+            self.frame_service.focus_set()
+        else:
+            for i in range(3):
+                if self.root.id[self.root.sesion]==(i+1):
+                    self.frame_operador[i].focus_set()
 
     def evento(self, event, frame, user):
         self.usuario = user
@@ -95,5 +106,5 @@ class Inicio(Frame):
 
     def teclado(self, event):
         self.grid_forget()
-        self.root.frames.append(teclado.Teclado(self.root, self.usuario, "Inicio de Sesión", 1, 0))                
+        self.root.frames.append(teclado.Teclado(self.root, self.usuario, "Inicio de Sesión", 1, "password"))
 # --------------------- Termina ventana de inicio -----------------------------
