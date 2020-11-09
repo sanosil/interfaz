@@ -93,7 +93,7 @@ class Start_menu():
         self.alertas_frame.pack(side=TOP, anchor="w", expand=YES, fill=BOTH)
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color_alertas,
             fg="white", font=self.root.myFont, text=self.root.mensaje)
-        self.alertas_label.pack(padx=(20, 20), pady=5)
+        self.alertas_label.pack(side=LEFT, padx=(20, 20), pady=5)
         if self.root.program_object != None:
             self.root.program_object.set_previous_frame(self)
             # ************************************************************

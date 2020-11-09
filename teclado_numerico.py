@@ -9,9 +9,7 @@ class Teclado(Frame):
         self.root = root
         self.root.config(bg=self.color)
         self.nuevo_volumen = ""
-        print("Se intenta empacar")
         self.pack(side=LEFT, fill=BOTH, expand=YES)
-        print("Ya deberia estar empacado")
         self.crear_teclado()
 
     def crear_teclado(self):

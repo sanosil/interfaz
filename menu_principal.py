@@ -7,7 +7,6 @@ class Menu_principal(Frame):
     def __init__(self, root, menu):
         super().__init__(root)
         # Variables
-        print(self)
         self.root = root
         self.current_menu  = menu
         self.timer_valores = [
@@ -19,7 +18,7 @@ class Menu_principal(Frame):
         self.menu_buttons = []
         # Metodos
         self.config(bg="white")
-        self.pack(side = LEFT, expand=YES, fill=BOTH)
+        self.pack(side = TOP, expand=YES, fill=X, anchor=NW)
 
         self.create_widgets(self.current_menu)
 
@@ -108,7 +107,6 @@ class Menu_principal(Frame):
             self.root.frames[2].destroy()
             self.root.frames.pop(3)
             self.root.frames.pop(2)
-            print(self.root.frames)
             self.root.frames[1].pack()
             self.root.frames[1].enfoque()
 

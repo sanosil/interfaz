@@ -11,7 +11,7 @@ class User_menu():
 
     def create_widgets(self):
         self.main_container = Frame(self.root_frame, bg="white")
-        self.main_container.pack(side=TOP, expand=YES, fill=BOTH)
+        self.main_container.pack(side=TOP, expand=YES, fill=BOTH, anchor=NW)
         path = "images/"
         # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         # imágenes usadas en ésta ventana
