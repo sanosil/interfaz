@@ -19,7 +19,7 @@ class Menu_principal(Frame):
         self.menu_buttons = []
         # Metodos
         self.config(bg="white")
-        self.grid(column=0, row=0)
+        self.pack(side = LEFT, expand=YES, fill=BOTH)
 
         self.create_widgets(self.current_menu)
 
@@ -36,13 +36,13 @@ class Menu_principal(Frame):
         self.root.time = (self.root.vol * self.root.concentracion) * 2
         # Barra de menús
         self.menu = Frame(self, bg="white")
-        self.menu.grid(column=0, row=0)
+        self.menu.pack(side=TOP, expand=YES, fill=X, anchor=NW)
         # Se crean los botones de menús
         for func, command in self.funcs:
             self.menu_button_principal(func, command)
         # Contenedor principal del menú seleccionado
         self.main_container = Frame(self, bg="white")
-        self.main_container.grid(column=0, row=1, sticky="w")
+        self.main_container.pack(side=TOP, fill=BOTH, expand=YES)
         # --------------------------- Menu START/STOP ------------------------
         if menu == "START/STOP":
             start_menu.Start_menu(self.root, self)
@@ -63,6 +63,8 @@ class Menu_principal(Frame):
         self.root.destroy()
 
     def clear(self, frame):
+        for l in frame.pack_slaves():
+            l.destroy()
         for l in frame.grid_slaves():
             l.destroy()
 
@@ -107,7 +109,7 @@ class Menu_principal(Frame):
             self.root.frames.pop(3)
             self.root.frames.pop(2)
             print(self.root.frames)
-            self.root.frames[1].grid()
+            self.root.frames[1].pack()
             self.root.frames[1].enfoque()
 
 class Root(Tk):

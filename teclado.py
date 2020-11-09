@@ -12,16 +12,17 @@ class Teclado(Frame):
         self.title = titulo
         self.config(bg="white")  # Fondo del frame del teclado
         self.pass_try = ""
-        self.grid(column=0, row=0)  # Se pone el teclado en pantalla
+        self.pack(side=LEFT, expand=YES, fill=BOTH)  # Se pone el teclado en pantalla
         self.myFont = ("Verdana", 22)  # Fuente de letra
         self.contenedor = Frame(self, bg="white")  # color de fondo contenedor
-        self.contenedor.grid(column=0, row=0, padx=(3,0))  # Se pone en fame teclado
+        self.contenedor.pack(side=LEFT, expand=YES, fill=BOTH)  # Se pone en fame teclado
 
         # Frame de espacio
         self.espacio_2 = Frame(self.contenedor, height=70, bg="white")
         self.espacio_2.pack(side=TOP, expand=YES, fill=BOTH)
 
-        self.titulo_teclado = Label(self.espacio_2, bg="white", font=("Verdana", 25), text=titulo_teclado)
+        self.titulo_teclado = Label(self.espacio_2, bg="white",
+                font=("Verdana", 25), text=titulo_teclado)
         self.titulo_teclado.pack()
         self.titulo_teclado.bind("<Button-1>", self.salir)
 
@@ -158,9 +159,8 @@ class Teclado(Frame):
     def acceso(self):
         self.espacio.config(bg="black")
         self.mensaje.config(bg="black")
-        self.grid_forget()
+        self.pack_forget()
         self.root.frames.append(menu_principal.Menu_principal(self.root, "START/STOP"))
-        print(self.root.frames)
 
     def salir(self, event=None):
         if self.title == "SERVICE":
@@ -169,8 +169,8 @@ class Teclado(Frame):
     def volver(self):
         self.espacio.config(bg="black")
         self.mensaje.config(text="", bg="black")
-        self.grid_forget()
-        self.root.frames[self.menu_anterior].grid()
+        self.pack_forget()
+        self.root.frames[self.menu_anterior].pack()
         if self.menu_anterior == 1:
             self.root.frames[self.menu_anterior].enfoque()
             self.destroy()

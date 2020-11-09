@@ -18,7 +18,7 @@ class Program_menu():
         self.radiounselect = PhotoImage(file=self.root.path+"radiounselect.png")
 
         self.main = Frame(self.root_frame, bg="white")
-        self.main.grid(sticky=W, column=0, row=1)
+        self.main.pack(side=TOP, fill=BOTH, expand=YES)
 
         self.frame_programa = Frame(self.main, bg="white")
         self.frame_programa.grid(column=0, row=0, sticky="nw", padx=50, pady=5)
@@ -92,7 +92,7 @@ class Program_menu():
         self.valor_volumen.bind("<Button-1>", self.cambiar_volumen)
 
     def cambiar_volumen(self, event):
-        self.root_frame.grid_forget()
+        self.root_frame.pack_forget()
         teclado_numerico.Teclado(self.root, "Nuevo Volumen", self.root_frame)
 
     def opcion_concentracion(self, valor, i):

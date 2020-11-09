@@ -60,7 +60,7 @@ class Start_menu():
         # -----------------------------------------------------------------
 
         # ----------------------- Seccion central -------------------------
-        self.centro = Frame(root_frame.main_container, bg="white", width=560)
+        self.centro = Frame(root_frame.main_container, bg="white", width=480)
         self.centro.pack(side=LEFT, expand=YES)
         # -----------------------------------------------------------------
 
@@ -85,15 +85,15 @@ class Start_menu():
 
         # ------------------ Barra inferior -------------------------------
         self.barra_inferior = Frame(root_frame, bg="white")
-        self.barra_inferior.grid(column=0, row=2, sticky="NW")
+        self.barra_inferior.pack(side=BOTTOM, expand=YES, fill=BOTH)
 
             # ************* Mensaje de alertas ***************************
         self.alertas_frame = Frame(self.barra_inferior, bg=self.root.color_alertas,
         bd=2, relief=SOLID)
-        self.alertas_frame.pack(side=TOP, anchor="w")
+        self.alertas_frame.pack(side=TOP, anchor="w", expand=YES, fill=BOTH)
         self.alertas_label = Label(self.alertas_frame, bg=self.root.color_alertas,
             fg="white", font=self.root.myFont, text=self.root.mensaje)
-        self.alertas_label.pack(padx=(20, 20), pady=10)
+        self.alertas_label.pack(padx=(20, 20), pady=5)
         if self.root.program_object != None:
             self.root.program_object.set_previous_frame(self)
             # ************************************************************
@@ -109,7 +109,7 @@ class Start_menu():
             # ************* Sesión **************************************
         self.sesion_frame = Frame(self.barra_inferior, bd=2, bg="gray",
             relief=SOLID)
-        self.sesion_frame.pack(side=LEFT)
+        self.sesion_frame.pack(side=LEFT, expand=YES, fill=BOTH)
         self.sesion = Label(self.sesion_frame, bg="gray", fg="white",
             font=self.root.myFont, text=self.root.sesion).pack(side=LEFT,
             padx=(30, 200), pady=10)
@@ -123,14 +123,14 @@ class Start_menu():
             bg="red", bd=2, relief=SOLID, font=self.root.myFont,
             text="Cerrar sesión", command=lambda: self.confirmacion(
             "Seguro que desea cerrar sesión", lambda: self.root_frame.cambiar_sesion()))
-        self.boton_cerrar_sesion.pack(side=LEFT, ipady=7, ipadx=4)
+        self.boton_cerrar_sesion.pack(side=LEFT, expand=YES, fill=BOTH)
             # ***********************************************************
 
         # -----------------------------------------------------------------
     # --------------------------- Funciones --------------------------------
     def visual_menus(self, text, image, func):
         frame_button = Frame(self.visual_menus_frame, bg="white")
-        frame_button.pack(side=TOP, pady=10)
+        frame_button.pack(side=TOP, pady=8)
         button = Label(frame_button, bg="white",
             image=image)
         button.bind("<Button-1>", func)
@@ -156,7 +156,8 @@ class Start_menu():
 
     def confirmacion(self, text, command=None):
         self.frame_confirmacion = Frame(self.root, bg="white", bd=3, relief=RIDGE)
-        self.frame_confirmacion.grid(column=0, row=0, padx=(150,0), sticky=W)
+        self.root_frame.pack_forget()
+        self.frame_confirmacion.pack(side=LEFT, padx=(150,0))
         self.confirmacion_label = Label(self.frame_confirmacion, bg="white",
             font=("Verdana", 18), text=text)
         self.confirmacion_label.pack(side=TOP, padx=50, pady=(80, 20))
@@ -176,10 +177,10 @@ class Start_menu():
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
 
     def no(self):
-        self.root_frame.grid_forget()
+        self.root_frame.pack_forget()
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
         self.root_frame.create_widgets(self.root_frame.current_menu)
-        self.frame_confirmacion.grid_forget()
+        self.frame_confirmacion.pack_forget()
 
     def activate_timer(self, event=None):
         if self.root.timer == 0:
@@ -196,7 +197,7 @@ class Start_menu():
         self.root.database.commit()
 
     def set_volumen(self, event):
-        self.root_frame.grid_forget()
+        self.root_frame.pack_forget()
         teclado_numerico.Teclado(self.root, "Nuevo volumen", self.root_frame)
 
 # ------------------ Termina menu START/STOP --------------------------

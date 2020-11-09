@@ -79,8 +79,7 @@ class Interfaz(Tk):
         # Usernames
         usernames = self.database.execute("SELECT username FROM user_settings;")
         for row in usernames:
-            self.usernames.append(row[0])
-        print(self.usernames)
+            self.usernames.append(row[0])        
         self.id = {self.usernames[0]:0, self.usernames[1]:1,
                     self.usernames[2]:2, self.usernames[3]:3,
                     self.usernames[4]:4}

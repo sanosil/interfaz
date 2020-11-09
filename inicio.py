@@ -8,7 +8,7 @@ class Inicio(Frame):
         self.config(bg="white")
         self.root = root
         self.usuario = self.root.sesion
-        self.grid(column=0, row=0)
+        self.pack()
         self.user_container = Frame(self, bg="white")
         self.user_container.grid(column=0, row=0)
         self.user_images = {
@@ -105,6 +105,6 @@ class Inicio(Frame):
         frame.focus_set()
 
     def teclado(self, event):
-        self.grid_forget()
+        self.pack_forget()
         self.root.frames.append(teclado.Teclado(self.root, self.usuario, "Inicio de Sesión", 1, "password"))
 # --------------------- Termina ventana de inicio -----------------------------

@@ -11,7 +11,7 @@ class User_menu():
 
     def create_widgets(self):
         self.main_container = Frame(self.root_frame, bg="white")
-        self.main_container.grid(column=0, row=1, sticky="nw")
+        self.main_container.pack(side=TOP, expand=YES, fill=BOTH)
         path = "images/"
         # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         # imágenes usadas en ésta ventana
@@ -115,10 +115,10 @@ class User_menu():
                     "change_password")
 
     def teclado(self, text, titulo_teclado, opcion):
-        self.root_frame.grid_forget()
+        self.root_frame.pack_forget()
         print(self.root.frames)
         self.root.frames[2].menu_anterior = 3
-        self.root.frames[2].grid()
+        self.root.frames[2].pack()
         self.root.frames[2].titulo.config(text=text)
         self.root.frames[2].titulo_teclado.config(text=titulo_teclado)
         self.root.frames[2].entry_pass.delete(0, END)

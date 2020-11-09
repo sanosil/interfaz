@@ -10,7 +10,7 @@ class Language_menu():
 
     def create_widgets(self):
         self.main_frm = Frame(self.root_frame, bg="white")
-        self.main_frm.grid(column=0, row=1, sticky=W)
+        self.main_frm.pack(side=LEFT, expand=YES, fill=BOTH)
 
         self.rowa = Frame(self.main_frm, bg="white")
         self.rowa.grid(column=0, row=0, sticky=W)
