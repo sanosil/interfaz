@@ -67,7 +67,7 @@ class Start_menu():
         # ------------------ Menus visuales -------------------------------
         # Frame para las imagenes de los menus
         self.visual_menus_frame = Frame(root_frame.main_container, bg="white")
-        self.visual_menus_frame.pack(side=RIGHT)
+        self.visual_menus_frame.pack(side=RIGHT, padx=10)
 
         self.conf_icon = PhotoImage(file=self.root.path+"conf.png")
         self.diag_icon = PhotoImage(file=self.root.path+"diag.png").subsample(7)

@@ -116,7 +116,6 @@ class User_menu():
 
     def teclado(self, text, titulo_teclado, opcion):
         self.root_frame.pack_forget()
-        print(self.root.frames)
         self.root.frames[2].menu_anterior = 3
         self.root.frames[2].pack()
         self.root.frames[2].titulo.config(text=text)
