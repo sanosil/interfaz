@@ -127,6 +127,10 @@ class Teclado(Frame):
             else:
                 self.root.database.commit()
             self.root.actualizar_valores()
+            self.root.user_menu.nombre_usuario.config(text=
+                self.root.usernames[
+                self.root.frames[self.menu_anterior].current_user
+                ])
             self.espacio.config(bg="green")
             self.mensaje.config(text="Usuario cambiado", bg="green")
             self.mensaje.pack(expand=YES, fill=BOTH)
@@ -174,11 +178,13 @@ class Teclado(Frame):
         self.espacio.config(bg="black")
         self.mensaje.config(text="", bg="black")
         self.pack_forget()
-        self.root.frames[self.menu_anterior].pack(side=TOP, fill=X, expand=YES, anchor=NW)
         if self.menu_anterior == 1:
             self.root.frames[self.menu_anterior].actualizar_valores()
             self.root.frames[self.menu_anterior].enfoque()
             self.destroy()
             self.root.frames[2].destroy()
             self.root.frames.pop(2)
+        else:
+            self.root.frames[self.menu_anterior].pack(side=TOP, fill=X,
+                expand=YES, anchor=NW)
 # ---------------- Termina ventana de teclado numérico ------------------------

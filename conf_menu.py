@@ -43,7 +43,7 @@ class Conf_menu():
 
         # Botón de usuario
         self.frame_inferior = Frame(self.root_frame, bg="white")
-        self.frame_inferior.pack(side=LEFT, ipady=78)
+        self.frame_inferior.pack(side=LEFT, ipady=78, expand=YES, fill=X)
         self.settings = [("USUARIO", self.user_settings),
                          ("PROGRAMA", self.program_settings),
                          ("IDIOMA", self.language_settings),
