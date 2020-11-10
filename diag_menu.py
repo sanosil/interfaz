@@ -11,7 +11,7 @@ class Diag_menu():
         self.bg_color = "white"
         self.frame_termometro = Frame(self.root_frame.main_container,
             bg=self.root.selected_color, relief=SUNKEN, bd=5)
-        self.frame_termometro.pack(side=LEFT)
+        self.frame_termometro.pack(side=LEFT, expand=YES, fill=BOTH)
         # ---------------------------- Termometro -----------------------------
         self.termometro = Canvas(self.frame_termometro, bg="white",
             width=width, height=height)
@@ -65,7 +65,7 @@ class Diag_menu():
         self.angulo_humedad = (self.root.humidity_dht * 180) / 100
         self.frame_humedad = Frame(self.root_frame.main_container, bg="gray",
             bd=5, relief=SUNKEN)
-        self.frame_humedad.pack(side=LEFT)
+        self.frame_humedad.pack(side=LEFT, expand=YES, fill=BOTH)
         self.canvas_humedad = Canvas(self.frame_humedad, width=width,
             height=height, bg="white")
         self.canvas_humedad.pack()
