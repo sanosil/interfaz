@@ -114,11 +114,12 @@ class User_menu():
         self.teclado("Nueva contraseña ",  self.root.usernames[self.current_user],
                     "change_password")
 
-    def teclado(self, text, titulo_teclado, opcion):
+    def teclado(self, text, titulo_teclado, opcion):        
         self.root_frame.pack_forget()
         self.root.frames[2].menu_anterior = 3
-        self.root.frames[2].pack()
+        self.root.frames[2].pack(side=LEFT, expand=YES, fill=BOTH)
         self.root.frames[2].titulo.config(text=text)
+        self.root.frames[2].title = titulo_teclado
         self.root.frames[2].titulo_teclado.config(text=titulo_teclado)
         self.root.frames[2].entry_pass.delete(0, END)
         self.root.frames[2].pass_try = ""

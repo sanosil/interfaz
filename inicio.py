@@ -26,11 +26,8 @@ class Inicio(Frame):
                         highlightbackground="white")
         self.admin = Label(self.frame_admin, bg="white",
                     image=self.user_images["admin"])
-        self.admin.bind("<Button-1>",
-                    lambda e, f=self.frame_admin, u=root.usernames[0]:
-                    self.evento(e, f, u))
         self.admin_label = Label(self.frame_admin, bg="white",
-                    font=self.root.myFont, text=root.usernames[0])
+                    font=self.root.myFont)
         self.frame_admin.grid(column=0, row=0)
         self.admin.grid(column=0, row=0)
         self.admin_label.grid(column=0, row=1)
@@ -41,13 +38,10 @@ class Inicio(Frame):
         self.service = Label(self.frame_service, bg="white",
                         image=self.user_images["service"])
         self.service_label = Label(self.frame_service, bg="white",
-                        font=self.root.myFont, text=root.usernames[4])
+                        font=self.root.myFont)
 
         self.frame_service.grid(column=2, row=0)
         self.service.grid(column=0, row=0)
-        self.service.bind("<Button-1>",
-                    lambda e, f=self.frame_service, u=root.usernames[4]:
-                    self.evento(e, f, u))
         self.service_label.grid(column=0, row=1)
         # Operadores
         self.frame_operador = []
@@ -60,15 +54,12 @@ class Inicio(Frame):
             self.operador.append(Label(self.frame_operador[i], bg="white",
                             image=self.user_images["user"]))
             self.labels_operador.append(Label(self.frame_operador[i],
-                        bg="white", font=self.root.myFont, text=root.usernames[i+1]))
+                        bg="white", font=self.root.myFont))
             if i == 0:
                 self.frame_operador[i].grid(column=i, row=1, padx=(70, 0))
             else:
                 self.frame_operador[i].grid(column=i, row=1)
             self.operador[i].grid(column=0, row=0)
-            self.operador[i].bind("<Button-1>",
-                        lambda e, f=self.frame_operador[i], u=root.usernames[i+1]:
-                        self.evento(e, f, u))
             self.labels_operador[i].grid(column=0, row=1)
 
         self.enfoque()
@@ -87,6 +78,26 @@ class Inicio(Frame):
         self.apagar = Button(self.container_pass, text="Apagar", bg="red",
             font=self.root.myFont, fg="white", command=self.root.shutdown)
         self.apagar.grid(column=2, row=0)
+        self.actualizar_valores()
+
+    def actualizar_valores(self):
+        self.usuario = self.root.sesion
+        self.admin_label.config(text=self.root.usernames[0])
+
+        self.admin.bind("<Button-1>",
+                lambda e, f=self.frame_admin, u=self.root.usernames[0]:
+                self.evento(e, f, u))
+        self.service_label.config(text=self.root.usernames[4])
+        self.service.bind("<Button-1>",
+                    lambda e, f=self.frame_service, u=self.root.usernames[4]:
+                    self.evento(e, f, u))
+        for i in range(3):
+            self.labels_operador[i].config(text=self.root.usernames[i+1])
+            self.operador[i].bind("<Button-1>",
+                        lambda e, f=self.frame_operador[i], u=self.root.usernames[i+1]:
+                        self.evento(e, f, u))
+        self.password.delete(0, END)
+        self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
 
     def enfoque(self):
         if self.root.id[self.root.sesion]==0:
@@ -100,7 +111,7 @@ class Inicio(Frame):
 
     def evento(self, event, frame, user):
         self.usuario = user
-        self.password.delete(0, 100)
+        self.password.delete(0, END)
         self.password.insert(0, "Escriba la contraseña de %s" % self.usuario)
         frame.focus_set()
 

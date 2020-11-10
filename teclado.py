@@ -121,17 +121,21 @@ class Teclado(Frame):
     def enter(self):
         if self.opcion == "username":
             self.root.database.execute("UPDATE user_settings SET username="
-            f"'{self.pass_try}' WHERE id = {self.root.id[self.root.sesion]};")
-            self.root.database.commit()
-            self.change_session(self.pass_try)
+            f"'{self.pass_try}' WHERE id = {self.root.id[self.title]};")
+            if self.root.sesion == self.title:
+                self.change_session(self.pass_try)
+            else:
+                self.root.database.commit()
+            self.root.actualizar_valores()
             self.espacio.config(bg="green")
             self.mensaje.config(text="Usuario cambiado", bg="green")
             self.mensaje.pack(expand=YES, fill=BOTH)
             self.after(1000, self.volver)
         elif self.opcion == "change_password":
             self.root.database.execute("UPDATE user_settings SET password="
-            f"'{self.pass_try}' WHERE id = {self.root.id[self.root.sesion]};")
+            f"'{self.pass_try}' WHERE id = {self.root.id[self.title]};")
             self.root.database.commit()
+            self.root.actualizar_valores()
             self.espacio.config(bg="green")
             self.mensaje.config(bg="green", text="Contraseña cambiada")
             self.mensaje.pack(expand=YES, fill=BOTH)
@@ -170,9 +174,11 @@ class Teclado(Frame):
         self.espacio.config(bg="black")
         self.mensaje.config(text="", bg="black")
         self.pack_forget()
-        self.root.frames[self.menu_anterior].pack()
+        self.root.frames[self.menu_anterior].pack(side=TOP, fill=X, expand=YES, anchor=NW)
         if self.menu_anterior == 1:
+            self.root.frames[self.menu_anterior].actualizar_valores()
             self.root.frames[self.menu_anterior].enfoque()
             self.destroy()
             self.root.frames[2].destroy()
+            self.root.frames.pop(2)
 # ---------------- Termina ventana de teclado numérico ------------------------

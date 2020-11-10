@@ -23,16 +23,7 @@ class Menu_principal(Frame):
         self.create_widgets(self.current_menu)
 
     def create_widgets(self, menu):
-        data = self.root.database.execute("SELECT * FROM user_settings " \
-            f"WHERE username = '{self.root.sesion}';")
-        for row in data:
-            self.user_data = row
-        self.root.timer = self.user_data[7]
-        self.current_button_state = self.root.current_button_state
-        self.current_program = self.user_data[4]
-        self.root.concentracion = self.user_data[6]
-        self.root.vol = self.user_data[5]
-        self.root.time = (self.root.vol * self.root.concentracion) * 2
+        self.actualizar_variables()
         # Barra de menús
         self.menu = Frame(self, bg="white")
         self.menu.pack(side=TOP, expand=YES, fill=X, anchor=NW)
@@ -56,7 +47,16 @@ class Menu_principal(Frame):
             log_menu.Log_menu(self.root, self)
 
     def actualizar_variables(self):
-        pass
+        data = self.root.database.execute("SELECT * FROM user_settings " \
+            f"WHERE username = '{self.root.sesion}';")
+        for row in data:
+            self.user_data = row
+        self.root.timer = self.user_data[7]
+        self.current_button_state = self.root.current_button_state
+        self.current_program = self.user_data[4]
+        self.root.concentracion = self.user_data[6]
+        self.root.vol = self.user_data[5]
+        self.root.time = (self.root.vol * self.root.concentracion) * 2
 
     def quit(self, event):
         self.root.destroy()
@@ -107,7 +107,8 @@ class Menu_principal(Frame):
             self.root.frames[2].destroy()
             self.root.frames.pop(3)
             self.root.frames.pop(2)
-            self.root.frames[1].pack()
+            self.root.frames[1].pack(side=LEFT, expand=YES, fill=BOTH)
+            self.root.frames[1].actualizar_valores()
             self.root.frames[1].enfoque()
 
 class Root(Tk):
