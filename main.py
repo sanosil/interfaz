@@ -140,4 +140,4 @@ class Interfaz(Tk):
 
 # ------------------------ Inicia aplicación ----------------------------------
 Interfaz().mainloop()
-GPIO.cleanup()
+#GPIO.cleanup()

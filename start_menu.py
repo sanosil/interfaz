@@ -177,10 +177,8 @@ class Start_menu():
         self.root_frame.__init__(self.root, self.root_frame.current_menu)
 
     def no(self):
-        self.root_frame.pack_forget()
-        self.root_frame.__init__(self.root, self.root_frame.current_menu)
-        self.root_frame.create_widgets(self.root_frame.current_menu)
         self.frame_confirmacion.pack_forget()
+        self.root.frames[3].pack(side=LEFT, expand=YES, fill=BOTH)                
 
     def activate_timer(self, event=None):
         if self.root.timer == 0:
