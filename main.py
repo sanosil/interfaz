@@ -12,11 +12,12 @@
 # --------- Paquetes necesarios para el funcionamiento ------------------------
 from tkinter import *
 import home, inicio
-# import datetime as dt
-# import board
+import datetime as dt
+import board
 import os
-# import adafruit_dht
+import adafruit_dht
 import sqlite3
+import RPi.GPIO as GPIO
 # -----------------------------------------------------------------------------
 
 
@@ -24,7 +25,7 @@ import sqlite3
 class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
-        # self.rasp_variables()
+        self.rasp_variables()
         self.variables()
         self.teclado = None
         self.title("Sanosil 1.0.0")  # Título de la interfaz
@@ -33,7 +34,7 @@ class Interfaz(Tk):
         # self.geometry("%dx%d" % (self.winfo_screenwidth(),
         #                  self.winfo_screenheight()))
         self.geometry("%dx%d" % (self.width, self.height))
-        # self.actualizar_temp_humedad()
+        self.actualizar_temp_humedad()
         self.frames.append(home.Home(self))
         # inicio.Inicio(self).tkraise()
 
@@ -43,16 +44,16 @@ class Interfaz(Tk):
         self.temp_dht = 25
         self.humidity_dht = 50
         self.concentracion = 0
-        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-        self.path="images/"
+        self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        #self.path="images/"
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.fecha_inicio = None
         self.hora_inicio = None
         self.fecha_termino = None
         self.hora_termino = None
 
-        # self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
-        self.database = sqlite3.connect("program_database.db")
+        self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
+        # self.database = sqlite3.connect("program_database.db")
         self.frames = []
         self.program_object = None
         self.vol = 0
@@ -139,4 +140,4 @@ class Interfaz(Tk):
 
 # ------------------------ Inicia aplicación ----------------------------------
 Interfaz().mainloop()
-# GPIO.cleanup()
+GPIO.cleanup()
