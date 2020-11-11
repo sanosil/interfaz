@@ -8,4 +8,4 @@ class Wifi_menu():
         self.create_widgets()
 
     def create_widgets(self):
-        pass
+        self.root_frame.main_container.pack(side=LEFT, expand=YES, fill=BOTH)
