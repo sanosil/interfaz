@@ -63,7 +63,7 @@ class Diag_menu():
 
         # ----------------------- Velocímetro ------------------------------
         self.angulo_humedad = (self.root.humidity_dht * 180) / 100
-        self.frame_humedad = Frame(self.root_frame.main_container, bg="gray",
+        self.frame_humedad = Frame(self.root_frame.main_container, bg="white",
             bd=5, relief=SUNKEN)
         self.frame_humedad.pack(side=LEFT, expand=YES, fill=BOTH)
         self.canvas_humedad = Canvas(self.frame_humedad, width=width,

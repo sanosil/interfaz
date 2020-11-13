@@ -113,8 +113,9 @@ class Interfaz(Tk):
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
         self.bomba_entrada = 26
         self.bomba_salida = 20
-        self.ch = (self.bomba_entrada, self.bomba_salida, 21)
+        self.ventilador = 21
         self.sensor_flujo = 23
+        self.ch = (self.bomba_entrada, self.bomba_salida, 21)
         self.ml = 0
         self.flotador = 12
         GPIO.setmode(GPIO.BCM)
@@ -130,8 +131,8 @@ class Interfaz(Tk):
 
     # Prender y apagar pines en la raspberry
     def pin_on(self, ch, s):
-        # print(str(ch) + str(s))
-        GPIO.output(ch, s)
+        print(str(ch) + str(s))
+        # GPIO.output(ch, s)
 
     # Medir sensor_flujo
     def count_pulses(self, event=None):

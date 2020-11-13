@@ -43,7 +43,7 @@ class Conf_menu():
 
         # Botón de usuario
         self.frame_inferior = Frame(self.root_frame, bg="white")
-        self.frame_inferior.pack(side=LEFT, ipady=78, expand=YES, fill=X)
+        self.frame_inferior.pack(ipady=78, expand=YES, fill=X)
         self.settings = [("USUARIO", self.user_settings),
                          ("PROGRAMA", self.program_settings),
                          ("IDIOMA", self.language_settings),
@@ -65,8 +65,8 @@ class Conf_menu():
 
     def settings_buttons(self, text, command):
         Button(self.frame_inferior, fg="white", command=command,
-            font=("Verdana", 18), text=text, bg="red", bd=5).pack(
-            side=LEFT, padx=28)
+            font=("Verdana", 18), text=text, bg="red", bd=5).pack(side=LEFT,
+                                padx=30)
 
 
     def dias(self, frame, text, bg):
