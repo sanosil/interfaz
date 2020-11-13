@@ -1,6 +1,6 @@
 from tkinter import *
 from datetime import datetime, date
-import user_menu, language_menu, wifi_menu, program_menu
+import user_menu, language_menu, wifi_menu, program_menu, test
 
 class Conf_menu():
     def __init__(self, root, root_frame):
@@ -47,17 +47,17 @@ class Conf_menu():
         self.settings = [("USUARIO", self.user_settings),
                          ("PROGRAMA", self.program_settings),
                          ("IDIOMA", self.language_settings),
-                         ("WI-FI", self.wifi_settings)
+                         ("WI-FI", self.wifi_settings),
+                         ("TEST", self.test)
                         ]
-        count = 0
+
         for text, command in self.settings:
-            if self.root.id[self.root.sesion] == 0:
+            if self.root.id[self.root.sesion] == 0 and text != "TEST":
                 self.settings_buttons(text, command)
-            elif count != 0:
+            elif self.root.id[self.root.sesion] == 4 and text == "TEST":
+                self.settings_buttons(text, command)
+            elif text != "USUARIO" and text != "TEST":
                 self.settings_buttons(text,command)
-            count = 1
-
-
 
         self.actualizar_hora()
 
@@ -79,6 +79,11 @@ class Conf_menu():
         self.frame_inferior.destroy()
         self.root_frame.main_container.destroy()
         user_menu.User_menu(self.root, self.root_frame)
+
+    def test(self):
+        self.frame_inferior.destroy()
+        self.root_frame.main_container.destroy()
+        test.Test(self.root, self.root_frame)
 
     def language_settings(self):
         self.frame_inferior.destroy()

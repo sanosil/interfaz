@@ -177,14 +177,15 @@ class Teclado(Frame):
     def volver(self):
         self.espacio.config(bg="black")
         self.mensaje.config(text="", bg="black")
-        self.pack_forget()
         if self.menu_anterior == 1:
             self.root.frames[self.menu_anterior].actualizar_valores()
             self.root.frames[self.menu_anterior].enfoque()
             self.destroy()
             self.root.frames[2].destroy()
             self.root.frames.pop(2)
+            self.root.frames[self.menu_anterior].pack()
         else:
+            self.pack_forget()            
             self.root.frames[self.menu_anterior].pack(side=TOP, fill=X,
                 expand=YES, anchor=NW)
 # ---------------- Termina ventana de teclado numérico ------------------------
