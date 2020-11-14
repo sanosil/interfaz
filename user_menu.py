@@ -11,16 +11,14 @@ class User_menu():
 
     def create_widgets(self):
         self.container = Frame(self.root_frame, bg="white")
-        self.container.pack(side=TOP, expand=YES, fill=BOTH, anchor=NW)
-        path = "images/"
-        # self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
+        self.container.pack(side=TOP, expand=YES, fill=BOTH, anchor=NW)        
         # imágenes usadas en ésta ventana
         self.images = {
-            "admin": PhotoImage(file=path+"Admin.png").subsample(4),
-            "operador": PhotoImage(file=path+"User.png").subsample(4),
-            "service": PhotoImage(file=path+"Service.png").subsample(4),
-            "derecha": PhotoImage(file=path+"der.png").subsample(6),
-            "izquierda": PhotoImage(file=path+"izq.png").subsample(6)
+            "admin": PhotoImage(file=self.root.path+"Admin.png").subsample(4),
+            "operador": PhotoImage(file=self.root.path+"User.png").subsample(4),
+            "service": PhotoImage(file=self.root.path+"Service.png").subsample(4),
+            "derecha": PhotoImage(file=self.root.path+"der.png").subsample(6),
+            "izquierda": PhotoImage(file=self.root.path+"izq.png").subsample(6)
             }
         self.user_images = [self.images["admin"], self.images["operador"],
                             self.images["operador"], self.images["operador"],
@@ -63,7 +61,7 @@ class User_menu():
         # Nombre del Usuario a editar
         self.nombre_usuario = Label(self.frm_campos_usuario, bg="white",
                         text=self.root.usernames[self.root_frame.current_user],
-                        font=self.root.myFont)        
+                        font=self.root.myFont)
         self.nombre_usuario.grid(column=0, row=1, pady=5)
         # Imagen de flecha derecha
         self.flecha_derecha = Label(self.rowb, bg="white",
