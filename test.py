@@ -26,11 +26,11 @@ class Test():
         self.titulo_outputs = Label(self.frame_outputs, text="OUTPUTS",
                 font=self.root.myFont, bg="white")
         self.titulo_outputs.pack(side=TOP, fill=X)
-        self.botones = [("Sanitizador 1", lambda ch=self.root.s1:self.toogle(ch), 0),
-            ("Sanitizador 2", lambda ch=self.root.s2:self.toogle(ch), 1),
-            ("Bomba entrada", lambda ch=self.root.be:self.toogle(ch), 2),
-            ("Bomba salida", lambda ch=self.root.bs:self.toogle(ch), 3),
-            ("Ventilador", lambda ch=self.root.ven:self.toogle(ch), 4)]
+        self.botones = [("Sanitizador 1", lambda ch=self.root.s1:self.toogle(ch, 0), 0),
+            ("Sanitizador 2", lambda ch=self.root.s2:self.toogle(ch, 1), 1),
+            ("Bomba entrada", lambda ch=self.root.be:self.toogle(ch, 2), 2),
+            ("Bomba salida", lambda ch=self.root.bs:self.toogle(ch, 3), 3),
+            ("Ventilador", lambda ch=self.root.ven:self.toogle(ch, 4), 4)]
         self.buttons = []
         for nombre_boton, comando, row in self.botones:
             self.boton(nombre_boton, comando, row)
@@ -40,11 +40,11 @@ class Test():
                 font=self.root.myFont, command=comando))
         self.buttons[row].pack(padx=200, pady=10, ipady=10, side=TOP, fill=X)
 
-    def toogle(self, canal):
-        if canal[1] == 0:
-            canal[1] = 1
-            self.buttons[canal[0]].config(bg="green")
-        else:
+    def toogle(self, canal, boton):
+        if canal[1] == 1:
             canal[1] = 0
-            self.buttons[canal[0]].config(bg="red")
+            self.buttons[boton].config(bg="green", activebackground="green")
+        else:
+            canal[1] = 1
+            self.buttons[boton].config(bg="red", activebackground="red")
         self.root.pin_on(canal[0], canal[1])

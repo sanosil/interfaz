@@ -61,7 +61,6 @@ class Inicio(Frame):
                 self.frame_operador[i].grid(column=i, row=1)
             self.operador[i].grid(column=0, row=0)
             self.labels_operador[i].grid(column=0, row=1)
-
         self.enfoque()
 
         # Contenedor de la contraseña

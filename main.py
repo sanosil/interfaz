@@ -34,16 +34,15 @@ class Interfaz(Tk):
         self.geometry("%dx%d" % (self.winfo_screenwidth(),
                         self.winfo_screenheight()))
         # self.geometry("%dx%d" % (self.width, self.height))
-        # self.actualizar_temp_humedad()
+        self.actualizar_temp_humedad()
         self.frames.append(home.Home(self))
+
         # inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.width = 800
         self.height = 480
         # Inputs
-        self.temp_dht = 25
-        self.humidity_dht = 50
         self.concentracion = 0
         self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
         # self.path="images/"
@@ -111,12 +110,13 @@ class Interfaz(Tk):
         self.temp_dht = 25
         self.temp_dht_inicial = 0
         # outputs
-        self.s1 = [0,0]
-        self.s2 = [1,0]
-        self.be = [2,0]
-        self.bs = [3,0]
-        self.ven = [4,0]
-        self.outputs = (0, 1, 2, 3, 4)
+        self.s1 = [0,1]
+        self.s2 = [1,1]
+        self.be = [5,1]
+        self.bs = [6,1]
+        self.ven = [13,1]
+        self.voltaje = (20)
+        self.outputs = (0, 1, 5, 6, 13)
         self.humidity_dht = 50
         self.humidity_dht_inicial = 0
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
@@ -129,7 +129,9 @@ class Interfaz(Tk):
         GPIO.add_event_callback(self.sensor_flujo, self.count_pulses)
         GPIO.setup(self.flotador, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.outputs, GPIO.OUT)
-        # self.pin_on(self.ch, 1)
+        GPIO.setup(self.voltaje, GPIO.OUT)
+        self.pin_on(self.outputs, 1)
+        self.pin_on(self.voltaje, 1)
 
     def shutdown(self):
          GPIO.cleanup()
@@ -146,4 +148,4 @@ class Interfaz(Tk):
 
 # ------------------------ Inicia aplicación ----------------------------------
 Interfaz().mainloop()
-#GPIO.cleanup()
+GPIO.cleanup()
