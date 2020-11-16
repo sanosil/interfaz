@@ -34,6 +34,13 @@ class Test():
         self.valor_humedad = Label(self.frm_valor_humedad, bg="white",
                     font=self.root.myFont, text=self.root.humidity_dht)
         self.valor_humedad.pack(side=RIGHT)
+        # Frame temperatura
+        self.frm_temp_LyV = Frame(self.frame_inputs, bg="white")
+        self.frm_temp_LyV.pack(side=TOP, pady=15)
+        # Label temperatura
+        self.label_temperatura = Label(self.frm_temp_LyV, bg="white",
+                font=self.root.myFont, text="TEMPERATURA")
+        self.label_temperatura.pack(side=LEFT, padx=15)
         # Frame para los outputs
         self.frame_outputs = Frame(self.container, bg="white")
         self.frame_outputs.pack(side=LEFT, fill=Y, expand=YES)
