@@ -104,6 +104,9 @@ class Teclado(Frame):
             dig = "."
             if dig in self.nuevo_volumen:
                 w = 0
+        elif dig == "0" and len(self.nuevo_volumen) == 0:
+            w = 0
+
 
         if w == 1:
             self.nuevo_volumen = self.nuevo_volumen + str(dig)
