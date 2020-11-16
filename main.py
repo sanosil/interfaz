@@ -45,20 +45,20 @@ class Interfaz(Tk):
         self.height = 480
         # Inputs
         self.concentracion = 0
+        self.temp_dht = 25
+        self.humidity_dht = 50
         self.mode = "rasp"
         if self.mode == "pc":
             self.path="images/"
             self.database = sqlite3.connect("program_database.db")
-            self.temp_dht = 25
-            self.humidity_dht = 50
             self.s1 = [0,1]
             self.s2 = [1,1]
             self.be = [5,1]
             self.bs = [6,1]
             self.ven = [13,1]
         else:
-            self.path="/home/pi/Desktop/Interfaz-Sanosil/images/"
-            self.database = sqlite3.connect("/home/pi/Desktop/Interfaz-Sanosil/program_database.db")
+            self.path="/home/pi/Desktop/interfaz/images/"
+            self.database = sqlite3.connect("/home/pi/Desktop/interfaz/program_database.db")
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.fecha_inicio = None
         self.hora_inicio = None
