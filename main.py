@@ -25,8 +25,9 @@ import RPi.GPIO as GPIO
 class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
-        self.rasp_variables()
         self.variables()
+        self.rasp_variables()
+
         self.teclado = None
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
