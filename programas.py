@@ -80,10 +80,10 @@ class Programas():
 	def measure_ml(self):
             if self.root.current_button_state == 1:
                 # flujo en ml/s
-                # self.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
-                self.flujo = 30
+                # self.root.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
+                self.root.flujo = 30
                 self.root.pulsos = 0
-                self.root.ml = self.root.ml + (self.flujo * .1)
+                self.root.ml = self.root.ml + (self.root.flujo * .1)
                 self.root.mensaje = "STATUS: LLENANDO; " + str(int(self.root.ml)) + \
 					" ml UTILIZADOS"
 
