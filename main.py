@@ -57,7 +57,7 @@ class Interfaz(Tk):
             self.ven = [13,1]
         else:
             self.path="/home/pi/Desktop/interfaz/images/"
-            self.database = sqlite3.connect("/home/pi/Desktop/interfaz/program_database.db")
+            self.database = sqlite3.connect("/home/pi/Documents/program_database.db")
         self.mensaje = "STATUS: LISTO PARA OPERAR"
         self.fecha_inicio = None
         self.hora_inicio = None
