@@ -13,11 +13,11 @@
 from tkinter import *
 import home
 import datetime as dt
-import board
-import os
-import adafruit_dht
 import sqlite3
-import RPi.GPIO as GPIO
+import os
+# import board
+# import adafruit_dht
+# import RPi.GPIO as GPIO
 # -----------------------------------------------------------------------------
 
 
@@ -25,20 +25,20 @@ import RPi.GPIO as GPIO
 class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
+        self.mode = "rasp"
         self.variables()
-        self.rasp_variables()
-
+        if self.mode == "rasp":
+            self.rasp_variables()
+            self.actualizar_temp_humedad()
+            self.geometry("%dx%d" % (self.winfo_screenwidth(),
+                            self.winfo_screenheight()))
+        else:
+            self.geometry("%dx%d" % (self.width, self.height))
         self.teclado = None
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
         self.config(bg="white", cursor="dot")
-        self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                        self.winfo_screenheight()))
-        # self.geometry("%dx%d" % (self.width, self.height))
-        self.actualizar_temp_humedad()
         self.frames.append(home.Home(self))
-
-        # inicio.Inicio(self).tkraise()
 
     def variables(self):
         self.width = 800
@@ -47,7 +47,6 @@ class Interfaz(Tk):
         self.concentracion = 0
         self.temp_dht = 25
         self.humidity_dht = 50
-        self.mode = "rasp"
         if self.mode == "pc":
             self.path="images/"
             self.database = sqlite3.connect("program_database.db")

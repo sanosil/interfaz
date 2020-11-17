@@ -185,7 +185,7 @@ class Teclado(Frame):
             self.root.frames.pop(2)
             self.root.frames[self.menu_anterior].pack()
         else:
-            self.pack_forget()            
-            self.root.frames[self.menu_anterior].pack(side=TOP, fill=X,
+            self.pack_forget()
+            self.root.frames[self.menu_anterior].pack(side=TOP, fill=BOTH,
                 expand=YES, anchor=NW)
 # ---------------- Termina ventana de teclado numérico ------------------------

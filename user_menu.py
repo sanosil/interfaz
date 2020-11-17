@@ -11,7 +11,7 @@ class User_menu():
 
     def create_widgets(self):
         self.container = Frame(self.root_frame, bg="white")
-        self.container.pack(side=TOP, expand=YES, fill=BOTH, anchor=NW)        
+        self.container.pack(side=TOP, expand=YES, fill=BOTH, pady=(0,50))        
         # imágenes usadas en ésta ventana
         self.images = {
             "admin": PhotoImage(file=self.root.path+"Admin.png").subsample(4),

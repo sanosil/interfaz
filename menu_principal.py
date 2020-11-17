@@ -18,7 +18,7 @@ class Menu_principal(Frame):
         self.menu_buttons = []
         # Metodos
         self.config(bg="white")
-        self.pack(side = TOP, expand=YES, fill=X, anchor=NW)
+        self.pack(side = TOP, expand=YES, fill=BOTH, anchor=NW)
 
         self.create_widgets(self.current_menu)
 

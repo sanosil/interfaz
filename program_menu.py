@@ -18,7 +18,7 @@ class Program_menu():
         self.radiounselect = PhotoImage(file=self.root.path+"radiounselect.png")
 
         self.main = Frame(self.root_frame, bg="white")
-        self.main.pack(side=TOP, fill=BOTH, expand=YES)
+        self.main.pack(side=TOP, fill=BOTH, expand=YES,pady=(0,100))
 
         self.frame_programa = Frame(self.main, bg="white")
         self.frame_programa.grid(column=0, row=0, sticky="nw", padx=50, pady=5)

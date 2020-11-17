@@ -9,7 +9,7 @@ class Test():
     def create_widgets(self):
         # Contenedor de los widgets
         self.container = Frame(self.root_frame, bg="white")
-        self.container.pack(side=LEFT, expand=YES, fill=BOTH)
+        self.container.pack(side=LEFT, expand=YES, fill=BOTH, pady=(0,20))
         # Frame para las inputs
         self.frame_inputs = Frame(self.container, bg="white")
         self.frame_inputs.pack(side=LEFT, expand=YES, fill=BOTH, padx=20)
@@ -29,11 +29,11 @@ class Test():
         # Frame para mostrar la humedad
         self.frm_valor_humedad = Frame(self.frm_humedad_LyV, bg="white",
                     relief=SUNKEN, bd=3)
-        self.frm_valor_humedad.pack(side=LEFT, fill=X)
+        self.frm_valor_humedad.pack(side=LEFT)
         # Label valor HUMEDAD
         self.valor_humedad = Label(self.frm_valor_humedad, bg="white",
                     font=self.root.myFont, text=self.root.humidity_dht)
-        self.valor_humedad.pack(side=RIGHT)
+        self.valor_humedad.pack(side=RIGHT, padx=(10,0))
         # Frame temperatura
         self.frm_temp_LyV = Frame(self.frame_inputs, bg="white")
         self.frm_temp_LyV.pack(side=TOP, pady=15)
@@ -41,6 +41,12 @@ class Test():
         self.label_temperatura = Label(self.frm_temp_LyV, bg="white",
                 font=self.root.myFont, text="TEMPERATURA")
         self.label_temperatura.pack(side=LEFT, padx=15)
+        self.frm_valor_temperatura = Frame(self.frm_temp_LyV, bg="white",
+                relief=SUNKEN, bd=3)
+        self.frm_valor_temperatura.pack(side=LEFT)
+        self.label_valor_temperatura = Label(self.frm_valor_temperatura,
+                bg="white", font=self.root.myFont, text=self.root.temp_dht)
+        self.label_valor_temperatura.pack(side=RIGHT, padx=(10,0))
         # Frame para los outputs
         self.frame_outputs = Frame(self.container, bg="white")
         self.frame_outputs.pack(side=LEFT, fill=Y, expand=YES)
