@@ -47,6 +47,12 @@ class Test():
         self.label_valor_temperatura = Label(self.frm_valor_temperatura,
                 bg="white", font=self.root.myFont, text=self.root.temp_dht)
         self.label_valor_temperatura.pack(side=RIGHT, padx=(10,0))
+        # Flujo
+        self.frm_flujo_LyV = Frame(self.frame_inputs, bg="white")
+        self.frm_flujo_LyV.pack(side=TOP, pady=15)
+        self.label_flujo = Label(self.frm_flujo_LyV, bg="white",
+                font=self.root.myFont, text="FLUJO")
+        self.label_flujo.pack(side=LEFT, padx=15)
         # Frame para los outputs
         self.frame_outputs = Frame(self.container, bg="white")
         self.frame_outputs.pack(side=LEFT, fill=Y, expand=YES)
