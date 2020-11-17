@@ -29,11 +29,14 @@ class Interfaz(Tk):
         self.variables()
         if self.mode == "rasp":
             self.rasp_variables()
+            self.flujo = 0
             self.actualizar_temp_humedad()
             self.geometry("%dx%d" % (self.winfo_screenwidth(),
                             self.winfo_screenheight()))
         else:
+            self.flujo = 12
             self.geometry("%dx%d" % (self.width, self.height))
+
         self.teclado = None
         self.title("Sanosil 1.0.0")  # Título de la interfaz
         self.overrideredirect(True)  # Se elimina la barra superior
