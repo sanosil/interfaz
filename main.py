@@ -116,7 +116,6 @@ class Interfaz(Tk):
         self.pulsos = 0
         self.tanque_lleno = 0
         # inputs
-        self.temp_dht = 25
         self.temp_dht_inicial = 0
         # outputs
         self.s1 = [0,1]
@@ -126,7 +125,6 @@ class Interfaz(Tk):
         self.ven = [13,1]
         self.voltaje = (20)
         self.outputs = (0, 1, 5, 6, 13)
-        self.humidity_dht = 50
         self.humidity_dht_inicial = 0
         self.dhtDevice = adafruit_dht.DHT11(board.D16)
         self.sensor_flujo = 23
