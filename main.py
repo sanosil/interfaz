@@ -15,9 +15,9 @@ import home
 import datetime as dt
 import sqlite3
 import os
-# import board
-# import adafruit_dht
-# import RPi.GPIO as GPIO
+import board
+import adafruit_dht
+import RPi.GPIO as GPIO
 # -----------------------------------------------------------------------------
 
 
