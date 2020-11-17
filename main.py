@@ -15,9 +15,9 @@ import home
 import datetime as dt
 import sqlite3
 import os
-import board
-import adafruit_dht
-import RPi.GPIO as GPIO
+# import board
+# import adafruit_dht
+# import RPi.GPIO as GPIO
 # -----------------------------------------------------------------------------
 
 
@@ -25,7 +25,7 @@ import RPi.GPIO as GPIO
 class Interfaz(Tk):
     def __init__(self):
         super().__init__()  # Se inicia la ventana
-        self.mode = "rasp"
+        self.mode = "pc"
         self.variables()
         if self.mode == "rasp":
             self.rasp_variables()
