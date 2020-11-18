@@ -58,7 +58,8 @@ class Test():
         self.label_valor_flujo.pack(side=RIGHT, padx=(10,0))
         # Boton para probar el flujo
         self.boton_prueba_flujo = Button(self.frame_inputs, bg="red", fg="white",
-                font=self.root.myFont, text="PROBAR FLUJO", command=self.prueba)
+                font=self.root.myFont, text="PROBAR FLUJO", command=self.prueba,
+		activebackground="red")
         self.boton_prueba_flujo.pack(side=TOP, ipadx=15, ipady=5)
         # Frame para los outputs
         self.frame_outputs = Frame(self.container, bg="white")
@@ -69,20 +70,24 @@ class Test():
         self.titulo_outputs = Label(self.frm_titulo_outputs, text="OUTPUTS",
                 font=self.root.myFont, bg="white")
         self.titulo_outputs.pack(padx=20, pady=10)
-        self.botones = [("Sanitizador 1", lambda ch=self.root.s1:self.toogle(ch, 0), 0),
-            ("Sanitizador 2", lambda ch=self.root.s2:self.toogle(ch, 1), 1),
-            ("Bomba entrada", lambda ch=self.root.be:self.toogle(ch, 2), 2),
-            ("Bomba salida", lambda ch=self.root.bs:self.toogle(ch, 3), 3),
-            ("Ventilador", lambda ch=self.root.ven:self.toogle(ch, 4), 4)]
+        self.botones = [("Sanitizador 1", lambda ch=self.root.s1:self.toogle(ch, 0), 0, self.root.s1),
+            ("Sanitizador 2", lambda ch=self.root.s2:self.toogle(ch, 1), 1, self.root.s2),
+            ("Bomba entrada", lambda ch=self.root.be:self.toogle(ch, 2), 2, self.root.be),
+            ("Bomba salida", lambda ch=self.root.bs:self.toogle(ch, 3), 3, self.root.bs),
+            ("Ventilador", lambda ch=self.root.ven:self.toogle(ch, 4), 4, self.root.ven)]
         self.buttons = []
-        for nombre_boton, comando, row in self.botones:
-            self.boton(nombre_boton, comando, row)
+        for nombre_boton, comando, row, ch in self.botones:
+            self.boton(nombre_boton, comando, row, ch)
 
         self.root.after(2000, self.actualizar_valores)
 
-    def boton(self, nombre_boton, comando, row):
-        self.buttons.append(Button(self.frame_outputs, bg="red", fg="white", text=nombre_boton,
-                font=self.root.myFont, command=comando))
+    def boton(self, nombre_boton, comando, row, ch):
+        if ch[1] == 1:
+            self.buttons.append(Button(self.frame_outputs, bg="red", fg="white", text=nombre_boton,
+                    font=self.root.myFont, command=comando, activebackground="red"))
+        else:
+            self.buttons.append(Button(self.frame_outputs, bg="green", fg="white", text=nombre_boton,
+                    font=self.root.myFont, command=comando, activebackground="green"))
         self.buttons[row].pack(padx=100, pady=10, ipady=5, side=TOP, fill=X)
 
     def toogle(self, canal, boton):
