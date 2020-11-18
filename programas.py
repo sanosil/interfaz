@@ -136,7 +136,7 @@ class Programas():
 			self.previous_frame.alertas_label.config(
 				text=self.root.mensaje, bg="orange")
 		self.root.bs[1] = 0
-		self.root.pin_on(self.root.root.bs[0], self.root.bs[1])
+		self.root.pin_on(self.root.bs[0], self.root.bs[1])
 		self.root.after(80000, self.apagar_bomba)
 
 	def terminar_normal(self):
