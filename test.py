@@ -79,7 +79,7 @@ class Test():
         for nombre_boton, comando, row, ch in self.botones:
             self.boton(nombre_boton, comando, row, ch)
 
-        self.root.after(2000, self.actualizar_valores)
+        self.root.after(1000, self.actualizar_valores)
 
     def boton(self, nombre_boton, comando, row, ch):
         if ch[1] == 1:
@@ -103,7 +103,7 @@ class Test():
         if self.root_frame.current_menu == "TEST":
             self.label_valor_humedad.config(text=self.root.humidity_dht)
             self.label_valor_temperatura.config(text=self.root.temp_dht)
-            self.root.after(2000, self.actualizar_valores)
+            self.root.after(1000, self.actualizar_valores)
 
     def prueba(self):
         pass
