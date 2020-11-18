@@ -15,6 +15,9 @@ import home
 import datetime as dt
 import sqlite3
 import os
+import board
+import adafruit_dht
+import RPi.GPIO as GPIO
 # # -----------------------------------------------------------------------------
 
 
@@ -29,10 +32,7 @@ class Interfaz(Tk):
             self.flujo = 0
             self.actualizar_temp_humedad()
             self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                            self.winfo_screenheight()))            
-            import board
-            import adafruit_dht
-            import RPi.GPIO as GPIO
+                            self.winfo_screenheight()))
         else:
             self.flujo = 12
             self.geometry("%dx%d" % (self.width, self.height))
@@ -80,8 +80,6 @@ class Interfaz(Tk):
         self.selected_color = "white"
         self.color_alertas = self.color
         self.actualizar_valores()
-
-
 
     def actualizar_valores(self):
         # Usernames

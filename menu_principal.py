@@ -20,7 +20,7 @@ class Menu_principal(Frame):
         self.config(bg="white")
         self.pack(side = TOP, expand=YES, fill=BOTH, anchor=NW)
         if self.root.mode == "rasp":
-			import RPi.GPIO as GPIO
+            import RPi.GPIO as GPIO
         self.create_widgets(self.current_menu)
 
     def create_widgets(self, menu):
