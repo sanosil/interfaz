@@ -76,7 +76,7 @@ class Inicio(Frame):
         self.password.grid(column=1, row=0)
         self.apagar = Button(self.container_pass, text="Apagar", bg="red",
             font=self.root.myFont, fg="white", command=self.root.shutdown)
-        self.apagar.grid(column=2, row=0)
+        self.apagar.grid(column=2, row=0, padx=5)
         self.actualizar_valores()
 
     def actualizar_valores(self):

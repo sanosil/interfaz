@@ -19,7 +19,8 @@ class Menu_principal(Frame):
         # Metodos
         self.config(bg="white")
         self.pack(side = TOP, expand=YES, fill=BOTH, anchor=NW)
-
+        if self.root.mode == "rasp":
+			import RPi.GPIO as GPIO
         self.create_widgets(self.current_menu)
 
     def create_widgets(self, menu):
@@ -52,7 +53,6 @@ class Menu_principal(Frame):
         for row in data:
             self.user_data = row
         self.root.timer = self.user_data[7]
-        self.current_button_state = self.root.current_button_state
         self.current_program = self.user_data[4]
         self.root.concentracion = self.user_data[6]
         self.root.vol = self.user_data[5]
@@ -102,6 +102,8 @@ class Menu_principal(Frame):
 
     def cambiar_sesion(self):
         if self.root.program_object == None:
+            if self.root.mode == "rasp":
+                GPIO.cleanup()
             self.clear(self.root)
             self.root.frames[3].destroy()
             self.root.frames[2].destroy()

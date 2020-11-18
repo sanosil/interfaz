@@ -5,7 +5,7 @@ class Start_menu():
     def __init__(self, root, root_frame):
         self.root = root
         self.root_frame = root_frame
-
+        self.root.start_menu = self
         # ----------- Boton de inicio de secuencia y timer --------------------
         self.frame_timer_y_encendido = Frame(root_frame.main_container,
             bg="white")
@@ -26,7 +26,7 @@ class Start_menu():
             font=("Verdana", 12, "bold"))
         self.start_button_label.pack(side=BOTTOM)
         # Dependiendo del estado actual del botón es la imagen que se pone
-        if root_frame.current_button_state == 0:
+        if self.root.current_button_state == 0:
             self.start_button_label.config(fg="red")
             self.start_button = Label(self.start_button_frame, bg="white",
                 image=self.start_button_pause)
@@ -128,6 +128,17 @@ class Start_menu():
 
         # -----------------------------------------------------------------
     # --------------------------- Funciones --------------------------------
+    def actualizar_valores(self, color):
+        self.alertas_label.config(text=self.root.mensaje, bg=color)
+        self.alertas_frame.config(bg=color)
+        if self.root.current_button_state == 0:
+            self.start_button_label.config(fg="red")
+            self.start_button.config(image=self.start_button_pause)
+            self.start_button["image"] = self.start_button_pause
+        else:
+            self.start_button.config(image=self.start_button_active)
+            self.start_button["image"] = self.start_button_active
+
     def visual_menus(self, text, image, func):
         frame_button = Frame(self.visual_menus_frame, bg="white")
         frame_button.pack(side=TOP, pady=8)
@@ -145,7 +156,6 @@ class Start_menu():
             self.start_button.config(image=self.start_button_active)
             self.start_button_label.config(fg=self.root.color)
             self.root.current_button_state = 1
-            self.root_frame.current_button_state = self.root.current_button_state
             self.root.program_object = programas.Programas(self.root,
                 self.root_frame, self,
                 self.root_frame.current_program)
@@ -178,7 +188,7 @@ class Start_menu():
 
     def no(self):
         self.frame_confirmacion.pack_forget()
-        self.root.frames[3].pack(side=LEFT, expand=YES, fill=BOTH)                
+        self.root.frames[3].pack(side=LEFT, expand=YES, fill=BOTH)
 
     def activate_timer(self, event=None):
         if self.root.timer == 0:

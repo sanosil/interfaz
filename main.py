@@ -15,10 +15,7 @@ import home
 import datetime as dt
 import sqlite3
 import os
-import board
-import adafruit_dht
-import RPi.GPIO as GPIO
-# -----------------------------------------------------------------------------
+# # -----------------------------------------------------------------------------
 
 
 # -------------------------- Clase principal ----------------------------------
@@ -32,7 +29,10 @@ class Interfaz(Tk):
             self.flujo = 0
             self.actualizar_temp_humedad()
             self.geometry("%dx%d" % (self.winfo_screenwidth(),
-                            self.winfo_screenheight()))
+                            self.winfo_screenheight()))            
+            import board
+            import adafruit_dht
+            import RPi.GPIO as GPIO
         else:
             self.flujo = 12
             self.geometry("%dx%d" % (self.width, self.height))

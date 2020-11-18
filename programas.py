@@ -1,8 +1,8 @@
 from tkinter import *
-import RPi.GPIO as GPIO
 from datetime import date, datetime
 import log_menu
 import sqlite3
+
 
 class Programas():
 	def __init__(self, root, root_frame, previous_frame, programa):
@@ -12,6 +12,8 @@ class Programas():
 		self.program = programa
 		self.root.fecha_inicio = date.today()
 		self.root.hora_inicio = datetime.now().strftime("%H:%M:%S")
+		if self.root.mode == "rasp":
+			import RPi.GPIO as GPIO
 		if self.program == "NORMAL":
 			self.normal()
 		elif self.program == "MANUAL":
@@ -73,60 +75,62 @@ class Programas():
 
 
 	def measure_ml(self):
-            if self.root.current_button_state == 1:
-                # flujo en ml/s
-                if self.root.mode == "rasp":
-                    # self.root.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
-                    self.root.flujo = 30
-                else:
-                    self.root.flujo = 30
-                self.root.pulsos = 0
-                self.root.ml = self.root.ml + (self.root.flujo * .1)
-                self.root.mensaje = "STATUS: LLENANDO; " + str(int(self.root.ml)) + \
+		if self.root.current_button_state == 1:
+        	# flujo en ml/s
+			if self.root.mode == "rasp":
+                # self.root.flujo = ((self.root.pulsos/0.1)/70)*(1000/60)
+				self.root.flujo = 30
+			else:
+				self.root.flujo = 30
+			self.root.pulsos = 0
+			self.root.ml = self.root.ml + (self.root.flujo * .1)
+			self.root.mensaje = "STATUS: LLENANDO; " + str(int(self.root.ml)) + \
 					" ml UTILIZADOS"
 
-                if self.root_frame.current_menu == "START/STOP":
-                    self.previous_frame.alertas_label.config(text=self.root.mensaje)
-                    self.previous_frame.alertas_label.config(bg="blue")
-                    self.previous_frame.alertas_frame.config(bg="blue")
+			if self.root_frame.current_menu == "START/STOP":
+				self.previous_frame.alertas_label.config(text=self.root.mensaje)
+				self.previous_frame.alertas_label.config(bg="blue")
+				self.previous_frame.alertas_frame.config(bg="blue")
 
-                if GPIO.input(self.root.flotador) == 0:
-                    self.root.be[1] = 1
-                    self.root.pin_on(self.root.be[0], self.root.be[1])
-                    self.root.after(120000, self.llenar_tanque)
-                    self.root.tanque_lleno = 1
-                if self.root.ml >= 320 and self.inicio == 0:
-                    self.inicio = 1
-                    self.root.ml = 0
-                    self.root.after(100, self.measure_ml)
-                    self.root.tanque_lleno = 1
-                elif self.root.ml >= self.total_ml and self.inicio == 1:
-                    # Fin de programa
-                    self.root.be[1] = 1
-                    self.root.pin_on(self.root.be[0], self.root.be[1])
-                    self.root.color_alertas = "orange"
-                    self.root.mensaje = "STATUS: SANITIZANDO "
-                    if self.root_frame.current_menu == "START/STOP":
-                        self.previous_frame.alertas_label.config(text=self.root.mensaje)
-                    self.root.after(1000, self.terminar_normal)
-                else:
-                    # Después de 100 ms se vuelven a medir los ml
-                    self.root.after(100, self.measure_ml)
-            else:
-                self.root.pulses = 0
-                self.root.ml = 0
-                self.root.be[1] = 1
-                self.root.pin_on(self.root.be[0], self.root.be[1])
-                if self.root.tanque_lleno == 1:
-                    self.vaciar_tanque()
-                else:
-                    self.root.mensaje = "STATUS: LISTO PARA OPERAR"
-                    if self.root_frame.current_menu == "START/STOP":
-                        self.previous_frame.alertas_frame.config(
-                            bg=self.root.color)
-                        self.previous_frame.alertas_label.config(
-                            text=self.root.mensaje, bg=self.root.color)
-                    self.root.program_object = None
+			if self.root.mode == "rasp":
+				if GPIO.input(self.root.flotador) == 0:
+					self.root.be[1] = 1
+					self.root.pin_on(self.root.be[0], self.root.be[1])
+					self.root.after(120000, self.llenar_tanque)
+					self.root.tanque_lleno = 1
+
+			if self.root.ml >= 320 and self.inicio == 0:
+				self.inicio = 1
+				self.root.ml = 0
+				self.root.after(100, self.measure_ml)
+				self.root.tanque_lleno = 1
+			elif self.root.ml >= self.total_ml and self.inicio == 1:
+				# Fin de programa
+				self.root.be[1] = 1
+				self.root.pin_on(self.root.be[0], self.root.be[1])
+				self.root.color_alertas = "orange"
+				self.root.mensaje = "STATUS: SANITIZANDO "
+				if self.root_frame.current_menu == "START/STOP":
+					self.previous_frame.alertas_label.config(text=self.root.mensaje)
+					self.root.after(1000, self.terminar_normal)
+			else:
+                # Después de 100 ms se vuelven a medir los ml
+				self.root.after(100, self.measure_ml)
+		else:
+			self.root.pulses = 0
+			self.root.ml = 0
+			self.root.be[1] = 1
+			self.root.pin_on(self.root.be[0], self.root.be[1])
+			if self.root.tanque_lleno == 1:
+				self.vaciar_tanque()
+			else:
+				self.root.mensaje = "STATUS: LISTO PARA OPERAR"
+				if self.root_frame.current_menu == "START/STOP":
+					self.previous_frame.alertas_frame.config(
+						bg=self.root.color)
+					self.previous_frame.alertas_label.config(
+						text=self.root.mensaje, bg=self.root.color)
+					self.root.program_object = None
 
 	def vaciar_tanque(self):
 		self.root.mensaje = "STATUS: VACIANDO EL TANQUE"
@@ -137,7 +141,7 @@ class Programas():
 				text=self.root.mensaje, bg="orange")
 		self.root.bs[1] = 0
 		self.root.pin_on(self.root.bs[0], self.root.bs[1])
-		self.root.after(80000, self.apagar_bomba)
+		self.root.after(800, self.apagar_bomba)
 
 	def terminar_normal(self):
 		if self.root.current_button_state == 1:
@@ -176,5 +180,4 @@ class Programas():
 		self.root.current_button_state = 0
 		self.root.mensaje = "STATUS: LISTO PARA OPERAR"
 		if self.root_frame.current_menu == "START/STOP":
-			self.root_frame.grid_forget()
-			self.root_frame.__init__(self.root, self.root_frame.current_menu)
+			self.root.start_menu.actualizar_valores("green")

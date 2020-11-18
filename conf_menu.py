@@ -24,7 +24,6 @@ class Conf_menu():
         self.FyH_valores = Label(self.FyH_frame, font=self.root.myFont,
             bg="yellow")
         self.FyH_valores.pack(padx=70, pady=10)
-        self.FyH_valores.bind("<Button-1>", self.set_date_time)
         # frame segunda segunda mitad
         self.segunda_mitad = Frame(self.root_frame.main_container, bg="white")
         self.segunda_mitad.pack(fill=BOTH, expand=YES, side=LEFT)
@@ -102,9 +101,6 @@ class Conf_menu():
 
     def edit_timer(self, event=None):
         print("edit timer")
-
-    def set_date_time(self, event=None):
-        print("set date and time")
 
     def actualizar_hora(self):
         try:
